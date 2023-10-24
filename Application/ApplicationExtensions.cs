@@ -14,6 +14,7 @@ namespace Application
                 services.AddScoped<IPopulateSentenceService, PopulateSentenceService>();
                 services.AddScoped<IVerbService, VerbService>();
                 services.AddScoped<INounService, NounService>();
+                services.AddScoped<IVerbTenseService, VerbTenseService>();
                
 
                 return services;
