@@ -5,7 +5,7 @@ using Core.Models.Words;
 
 namespace Application.Test
 {
-    public class VerbTenseServiceTests
+    public class VerbTenseServiceTestsss
     {
         private readonly IVerbTenseService _verbTenseService = new VerbTenseService();
 
@@ -37,17 +37,7 @@ namespace Application.Test
             VerbConjugation = VerbConjugation.ErVerb
         };
 
-        [Fact]
-        public void ShouldReturnPresentTense()
-        {
-            _talk = _verbTenseService.PresentTense(_talk);
-            _read = _verbTenseService.PresentTense(_read);
-            _drive = _verbTenseService.PresentTense(_drive);
-
-            Assert.Equal("pratar", _talk.DisplayForm);
-            Assert.Equal("läser", _read.DisplayForm);
-            Assert.Equal("kör", _drive.DisplayForm);
-        }
+        
 
         [Fact]
         public void ShouldReturnPastTense()

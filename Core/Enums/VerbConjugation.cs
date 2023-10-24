@@ -5,6 +5,6 @@
         ArVerb,
         ErVerb,
         StrongErVerb,
-        StemVerb
+        RVerb
     }
 }

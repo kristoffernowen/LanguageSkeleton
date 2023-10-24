@@ -15,7 +15,7 @@ public static class CreateVerbInputDtoExtensions
                 "ArVerb" => VerbConjugation.ArVerb,
                 "ErVerb" => VerbConjugation.ErVerb,
                 "StrongErVerb" => VerbConjugation.StrongErVerb,
-                "StemVerb" => VerbConjugation.StemVerb,
+                "RVerb" => VerbConjugation.RVerb,
                 _ => throw new InvalidEnumArgumentException()
             }
         };

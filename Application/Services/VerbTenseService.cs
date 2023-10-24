@@ -13,7 +13,7 @@ namespace Application.Services
             {
                 VerbConjugation.ArVerb => verb.Infinitive.Remove(verb.Infinitive.Length - 1, 1) + "ar",
                 VerbConjugation.ErVerb => ErVerbPresentTense(verb),
-                VerbConjugation.StemVerb => verb.Infinitive + "r",
+                VerbConjugation.RVerb => verb.Infinitive + "r",
                 VerbConjugation.StrongErVerb => throw new NotImplementedException(),
                 _ => throw new InvalidEnumArgumentException()
             };
@@ -27,7 +27,7 @@ namespace Application.Services
             {
                 VerbConjugation.ArVerb => verb.Infinitive.Remove(verb.Infinitive.Length - 1, 1) + "ade",
                 VerbConjugation.ErVerb => ErVerbPastTense(verb),
-                VerbConjugation.StemVerb => verb.Infinitive + "r",
+                VerbConjugation.RVerb => verb.Infinitive + "r",
                 VerbConjugation.StrongErVerb => throw new NotImplementedException(),
                 _ => throw new InvalidEnumArgumentException()
             };
