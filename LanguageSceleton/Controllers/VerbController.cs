@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Contracts.Services.Verb;
 using LanguageSceleton.Api.Dtos.Verb;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

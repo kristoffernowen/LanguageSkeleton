@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Contracts.Services.Sentence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Contracts.Services.Noun;
 using Core.Models.Words;
 using LanguageSceleton.Api.Dtos.Noun;
 using Microsoft.AspNetCore.Http;

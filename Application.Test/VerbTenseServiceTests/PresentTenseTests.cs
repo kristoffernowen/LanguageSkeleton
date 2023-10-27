@@ -1,5 +1,5 @@
 ﻿using Application.Services.VerbTenses;
-using Core.Contracts.Services;
+using Core.Contracts.Services.Verb;
 using Core.Enums;
 using Core.Models.Words;
 

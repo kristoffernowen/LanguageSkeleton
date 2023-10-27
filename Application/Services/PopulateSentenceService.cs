@@ -1,4 +1,4 @@
-﻿using Core.Contracts.Services;
+﻿using Core.Contracts.Services.Sentence;
 using Core.Models.Sentence;
 
 namespace Application.Services

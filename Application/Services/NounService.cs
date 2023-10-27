@@ -1,5 +1,5 @@
 ﻿using Core.Contracts.Repos;
-using Core.Contracts.Services;
+using Core.Contracts.Services.Noun;
 using Core.Models.Words;
 
 namespace Application.Services
