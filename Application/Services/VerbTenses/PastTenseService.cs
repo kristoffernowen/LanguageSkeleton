@@ -5,9 +5,9 @@ using System.ComponentModel;
 
 namespace Application.Services.VerbTenses
 {
-    public class PresentTenseService : TenseService, IPresentTenseService
+    public class PastTenseService : TenseService, IPastTenseService
     {
-        public Verb PresentTense(Verb verb)
+        public Verb PastTense(Verb verb)
         {
             verb.DisplayForm = verb.VerbConjugation switch
             {
@@ -23,22 +23,24 @@ namespace Application.Services.VerbTenses
 
         private string ArVerb(Verb verb)
         {
-            return InfinitiveWithoutA(verb) + "ar";
+            return InfinitiveWithoutA(verb) + "ade";
         }
 
         private string ErVerb(Verb verb)
         {
-            if (verb.Infinitive.EndsWith("ra"))
+            if (verb.Infinitive.EndsWith("sa") || verb.Infinitive.EndsWith("pa")
+                                               || verb.Infinitive.EndsWith("ta") || verb.Infinitive.EndsWith("ka")
+                                               || verb.Infinitive.EndsWith("xa"))
             {
-                return InfinitiveWithoutA(verb);
-            }
+                return InfinitiveWithoutA(verb) + "te";
 
-            return InfinitiveWithoutA(verb) + "er";
+            }
+            return InfinitiveWithoutA(verb) + "de";
         }
 
         private string RVerb(Verb verb)
         {
-            return verb.Infinitive + "r";
+            return verb.Infinitive + "dde";
         }
     }
 }
