@@ -21,7 +21,7 @@ namespace Data.Repos
 
         public Verb GetVerb(string id)
         {
-            throw new NotImplementedException();
+            return _sqlContext.Verbs.FirstOrDefault(x => x.Id == id) ?? throw new InvalidOperationException();
         }
 
         public List<Verb> GetAllVerb()

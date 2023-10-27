@@ -1,23 +1,25 @@
 ﻿using Application.Services.VerbTenses;
+using Application.Test.Mock;
+using Core.Contracts.Repos;
 using Core.Contracts.Services.Verb;
-using Core.Enums;
-using Core.Models.Words;
+using Moq;
 
 namespace Application.Test.VerbTenseServiceTests;
 
 public class PastTenseServiceTests
 {
+    private readonly Mock<IVerbRepo> _mockRepo;
     private readonly IPastTenseService _pastTenseService = new PastTenseService();
+
+    public PastTenseServiceTests()
+    {
+        _mockRepo = MockVerbRepo.GetVerbMockVerbRepo();
+    }
 
     [Fact]
     public void ShouldReturnAr()
     {
-        Verb talk = new()
-        {
-            BaseForm = "prata",
-            Id = Guid.NewGuid().ToString(),
-            VerbConjugation = VerbConjugation.ArVerb
-        };
+        var talk = _mockRepo.Object.GetVerb("9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad");
 
         talk = _pastTenseService.PastTense(talk);
 
@@ -27,12 +29,7 @@ public class PastTenseServiceTests
     [Fact]
     public void ShouldReturnEr()
     {
-        Verb read = new()
-        {
-            BaseForm = "läsa",
-            Id = Guid.NewGuid().ToString(),
-            VerbConjugation = VerbConjugation.ErVerb
-        };
+        var read = _mockRepo.Object.GetVerb("8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f");
 
         read = _pastTenseService.PastTense(read);
 
@@ -42,12 +39,7 @@ public class PastTenseServiceTests
     [Fact]
     public void ShouldReturnStem()
     {
-        Verb drive = new()
-        {
-            BaseForm = "köra",
-            Id = Guid.NewGuid().ToString(),
-            VerbConjugation = VerbConjugation.ErVerb
-        };
+        var drive = _mockRepo.Object.GetVerb("f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e");
 
         drive = _pastTenseService.PastTense(drive);
 
@@ -57,12 +49,7 @@ public class PastTenseServiceTests
     [Fact]
     public void ShouldReturnR()
     {
-        Verb live = new()
-        {
-            BaseForm = "bo",
-            Id = Guid.NewGuid().ToString(),
-            VerbConjugation = VerbConjugation.RVerb
-        };
+        var live = _mockRepo.Object.GetVerb("b86e5e92 - 960c - 42bf - bda8 - 9339529dd951");
 
         live = _pastTenseService.PastTense(live);
 
