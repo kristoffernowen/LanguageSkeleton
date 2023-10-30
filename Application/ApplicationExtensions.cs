@@ -1,6 +1,5 @@
 ﻿using Application.Services;
-using Core.Contracts;
-using Core.Contracts.Repos;
+using Application.Services.NounForms;
 using Core.Contracts.Services.Noun;
 using Core.Contracts.Services.Sentence;
 using Core.Contracts.Services.Verb;
@@ -17,6 +16,8 @@ namespace Application
                 services.AddScoped<IVerbService, VerbService>();
                 services.AddScoped<INounService, NounService>();
                 services.AddScoped<IVerbTenseService, VerbTenseService>();
+                services.AddScoped<IGrammaticalNumberService, GrammaticalNumberService>();
+                services.AddScoped<IDefinitenessService, DefinitenessService>();
                
 
                 return services;

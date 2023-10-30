@@ -9,7 +9,7 @@ namespace Application.Test.Mock
     {
         public static Mock<IVerbRepo> GetVerbMockVerbRepo()
         {
-            var id = "";
+           // var id = "";
             var verbs = new List<Verb>()
             {
                 new()
@@ -42,7 +42,7 @@ namespace Application.Test.Mock
 
             mockRepo.Setup(r => r.GetAllVerb()).Returns(verbs);
 
-            mockRepo.Setup(r => r.GetVerb(It.IsAny<string>())).Returns((string id) => verbs.FirstOrDefault(x => x.Id == id));
+            mockRepo.Setup(r => r.GetVerb(It.IsAny<string>())).Returns((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
 
             return mockRepo;
         }

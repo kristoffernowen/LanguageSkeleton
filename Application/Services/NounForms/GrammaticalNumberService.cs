@@ -22,7 +22,5 @@ namespace Application.Services.NounForms
 
             return noun;
         }
-
-       
     }
 }
