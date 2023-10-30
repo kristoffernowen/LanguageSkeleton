@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Core.Contracts.Services.Noun;
+﻿using Core.Contracts.Services.Noun;
 using Core.Enums;
 using Core.Models.Words;
 

@@ -16,6 +16,7 @@ namespace Application.Test.NounServiceTests
         {
             _mockRepo = MockNounRepo.GetMockNounRepo();
         }
+
         [Fact]
         public void ShouldReturnDeclensionOneDefinitiveSingular()
         {
@@ -24,6 +25,16 @@ namespace Application.Test.NounServiceTests
             girl = _definitenessService.Definite(girl);
 
             Assert.Equal("flickan", girl.DisplayForm);
+        }
+        
+        [Fact]
+        public void ShouldReturnDeclensionOneIndefiniteSingular()
+        {
+            var girl = _mockRepo.Object.GetNoun("495a642f-c518-4b31-a91f-5586a0221694");
+            girl.GrammaticalNumber = GrammaticalNumber.Singular;
+            girl = _definitenessService.Indefinite(girl);
+
+            Assert.Equal("flicka", girl.DisplayForm);
         }
 
         [Fact]
