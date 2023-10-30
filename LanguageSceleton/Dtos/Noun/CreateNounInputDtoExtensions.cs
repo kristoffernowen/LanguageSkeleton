@@ -10,10 +10,12 @@ public static class CreateNounInputDtoExtensions
         var noun = new Core.Models.Words.Noun
         {
             BaseForm = dto.BaseForm,
+            PluralForm = dto.PluralForm,
             NounArticle = dto.NounArticle switch
             {
                 "en" => NounArticle.en,
-                "ett" => NounArticle.ett
+                "ett" => NounArticle.ett,
+                _ => throw new InvalidEnumArgumentException()
             },
             NounDeclension = dto.NounDeclension switch
             {

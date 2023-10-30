@@ -5,7 +5,7 @@
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class baseFormandDisplayForm : Migration
+    public partial class verbAndNounEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,27 +16,18 @@ namespace Data.Migrations
                 newName: "BaseForm");
 
             migrationBuilder.AddColumn<string>(
-                name: "DisplayForm",
-                table: "Verbs",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "DisplayForm",
+                name: "PluralForm",
                 table: "Nouns",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DisplayForm",
-                table: "Verbs");
-
-            migrationBuilder.DropColumn(
-                name: "DisplayForm",
+                name: "PluralForm",
                 table: "Nouns");
 
             migrationBuilder.RenameColumn(

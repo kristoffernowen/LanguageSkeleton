@@ -1,4 +1,5 @@
 ﻿using Core.Models.Words;
+using Data.PersistenceEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
@@ -10,7 +11,7 @@ namespace Data
             
         }
 
-        public DbSet<Verb> Verbs { get; set; }
-        public DbSet<Noun> Nouns { get; set; }
+        public DbSet<VerbEntity> Verbs { get; set; }
+        public DbSet<NounEntity> Nouns { get; set; }
     }
 }

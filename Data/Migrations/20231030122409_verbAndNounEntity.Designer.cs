@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20231020142529_baseForm and DisplayForm")]
-    partial class baseFormandDisplayForm
+    [Migration("20231030122409_verbAndNounEntity")]
+    partial class verbAndNounEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,16 +24,13 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Models.Words.Noun", b =>
+            modelBuilder.Entity("Data.PersistenceEntities.NounEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BaseForm")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DisplayForm")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NounArticle")
@@ -42,21 +39,22 @@ namespace Data.Migrations
                     b.Property<int>("NounDeclension")
                         .HasColumnType("int");
 
+                    b.Property<string>("PluralForm")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Nouns");
                 });
 
-            modelBuilder.Entity("Core.Models.Words.Verb", b =>
+            modelBuilder.Entity("Data.PersistenceEntities.VerbEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BaseForm")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DisplayForm")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VerbConjugation")

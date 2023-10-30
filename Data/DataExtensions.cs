@@ -1,4 +1,5 @@
-﻿using Core.Contracts.Repos;
+﻿using System.Reflection;
+using Core.Contracts.Repos;
 using Data.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ namespace Data
             services.AddDbContext<SqlContext>(x => x.UseSqlServer(builder.GetConnectionString("Sql")));
             services.AddScoped<IVerbRepo, VerbRepo>();
             services.AddScoped<INounRepo, NounRepo>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }

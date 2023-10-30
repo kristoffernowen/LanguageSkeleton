@@ -4,7 +4,7 @@
     {
         ArVerb,
         ErVerb,
-        StrongErVerb,
-        RVerb
+        RVerb,
+        StrongErVerb
     }
 }
