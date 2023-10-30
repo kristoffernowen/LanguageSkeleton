@@ -10,5 +10,6 @@ namespace Core.Models.Sentence
         public Noun ObjectNoun { get; set; } = null!;
         public Tense Tense { get; set; }
         public StatementOrQuestion StatementOrQuestion { get; set; }
+        public string DisplaySentence { get; set; } = null!;
     }
 }

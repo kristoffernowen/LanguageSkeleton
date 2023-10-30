@@ -1,5 +1,5 @@
 ﻿using Core.Contracts.Services.Sentence;
-using Microsoft.AspNetCore.Http;
+using LanguageSceleton.Api.Dtos.Sentence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageSceleton.Api.Controllers
@@ -8,6 +8,19 @@ namespace LanguageSceleton.Api.Controllers
     [ApiController]
     public class SentenceContentController : ControllerBase
     {
-        private readonly IPopulateSentenceService populateSentenceService;
+        private readonly IPopulateSentenceService _populateSentenceService;
+
+        public SentenceContentController(IPopulateSentenceService populateSentenceService)
+        {
+            _populateSentenceService = populateSentenceService;
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateSentenceInputDto dto)
+        {
+            var result = _populateSentenceService.CreateSentence(dto.ToModel());
+
+            return Ok(result);
+        }
     }
 }
