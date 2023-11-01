@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Core.Models.Words;
-using LanguageSceleton.Api.Dtos.Verb;
+using Domain.Models.Words;
+using LanguageSkeleton.Api.Dtos.Verb;
 
-namespace LanguageSceleton.Api.MapperProfiles
+namespace LanguageSkeleton.Api.MapperProfiles
 {
     public class MapperConfig : Profile
     {

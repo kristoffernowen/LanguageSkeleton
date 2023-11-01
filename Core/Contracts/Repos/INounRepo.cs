@@ -1,6 +1,6 @@
-﻿using Core.Models.Words;
+﻿using Domain.Models.Words;
 
-namespace Core.Contracts.Repos;
+namespace Domain.Contracts.Repos;
 
 public interface INounRepo
 {

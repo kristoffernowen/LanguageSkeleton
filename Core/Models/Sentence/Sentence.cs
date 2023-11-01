@@ -1,7 +1,7 @@
-﻿using Core.Enums;
-using Core.Models.Words;
+﻿using Domain.Enums;
+using Domain.Models.Words;
 
-namespace Core.Models.Sentence
+namespace Domain.Models.Sentence
 {
     public class Sentence
     {

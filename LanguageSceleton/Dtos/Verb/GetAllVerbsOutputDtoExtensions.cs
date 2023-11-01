@@ -1,8 +1,8 @@
-﻿namespace LanguageSceleton.Api.Dtos.Verb;
+﻿namespace LanguageSkeleton.Api.Dtos.Verb;
 
 public static class GetAllVerbsOutputDtoExtensions
 {
-    public static GetAllVerbsOutputDto ToDto(this Core.Models.Words.Verb verb)
+    public static GetAllVerbsOutputDto ToDto(this Domain.Models.Words.Verb verb)
     {
         return new GetAllVerbsOutputDto()
         {

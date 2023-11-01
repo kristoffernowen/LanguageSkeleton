@@ -1,6 +1,6 @@
-﻿using Core.Contracts.Repos;
-using Core.Contracts.Services.Noun;
-using Core.Models.Words;
+﻿using Domain.Contracts.Repos;
+using Domain.Contracts.Services.Noun;
+using Domain.Models.Words;
 
 namespace Application.Services
 {
@@ -20,6 +20,11 @@ namespace Application.Services
         public List<Noun> GetAll()
         {
             return _nounRepo.GetAllNouns();
+        }
+
+        public Noun Get(string id)
+        {
+            return _nounRepo.GetNoun(id);
         }
     }
 }

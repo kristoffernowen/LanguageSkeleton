@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
-using Core.Enums;
+using Domain.Enums;
 
-namespace LanguageSceleton.Api.Dtos.Verb;
+namespace LanguageSkeleton.Api.Dtos.Verb;
 
 public static class CreateVerbInputDtoExtensions
 {
-    public static Core.Models.Words.Verb ToModel(this CreateVerbInputDto dto)
+    public static Domain.Models.Words.Verb ToModel(this CreateVerbInputDto dto)
     {
-        var verb = new Core.Models.Words.Verb
+        var verb = new Domain.Models.Words.Verb
         {
             BaseForm = dto.BaseForm,
             VerbConjugation = dto.VerbConjugation switch

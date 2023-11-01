@@ -1,5 +1,5 @@
-﻿using Core.Contracts.Services.Sentence;
-using Core.Models.Sentence;
+﻿using Domain.Contracts.Services.Sentence;
+using Domain.Models.Sentence;
 
 namespace Application.Services
 {

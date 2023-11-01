@@ -1,10 +1,9 @@
-﻿using Core.Contracts.Services.Noun;
-using Core.Models.Words;
-using LanguageSceleton.Api.Dtos.Noun;
-using Microsoft.AspNetCore.Http;
+﻿
+using Domain.Contracts.Services.Noun;
+using LanguageSkeleton.Api.Dtos.Noun;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LanguageSceleton.Api.Controllers
+namespace LanguageSkeleton.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,6 +26,12 @@ namespace LanguageSceleton.Api.Controllers
         public List<GetAllNounsOutputDto> GetNouns()
         {
             return _nounService.GetAll().Select(n => n.ToDto()).ToList();
+        }
+
+        [HttpGet("{id}")]
+        public GetNounOutputDto GetNoun(string id)
+        {
+            return _nounService.Get(id).ToNounOutputDto();
         }
     }
 }

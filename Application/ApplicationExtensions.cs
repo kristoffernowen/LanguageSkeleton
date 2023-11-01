@@ -1,8 +1,8 @@
 ﻿using Application.Services;
 using Application.Services.NounForms;
-using Core.Contracts.Services.Noun;
-using Core.Contracts.Services.Sentence;
-using Core.Contracts.Services.Verb;
+using Domain.Contracts.Services.Noun;
+using Domain.Contracts.Services.Sentence;
+using Domain.Contracts.Services.Verb;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application

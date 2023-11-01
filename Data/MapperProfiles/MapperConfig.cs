@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Models.Words;
 using Data.PersistenceEntities;
+using Domain.Models.Words;
 
 namespace Data.MapperProfiles
 {

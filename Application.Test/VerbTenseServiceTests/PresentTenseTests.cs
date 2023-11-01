@@ -1,9 +1,9 @@
 ﻿using Application.Services.VerbTenses;
 using Application.Test.Mock;
-using Core.Contracts.Repos;
-using Core.Contracts.Services.Verb;
 using Core.Enums;
 using Core.Models.Words;
+using Domain.Contracts.Repos;
+using Domain.Contracts.Services.Verb;
 using Moq;
 
 namespace Application.Test.VerbTenseServiceTests

@@ -1,6 +1,6 @@
-﻿using Core.Contracts.Repos;
-using Core.Enums;
-using Core.Models.Words;
+﻿using Domain.Contracts.Repos;
+using Domain.Enums;
+using Domain.Models.Words;
 using Moq;
 
 namespace Application.Test.Mock;

@@ -1,8 +1,8 @@
-﻿using Core.Contracts.Services.Sentence;
-using LanguageSceleton.Api.Dtos.Sentence;
+﻿using Domain.Contracts.Services.Sentence;
+using LanguageSkeleton.Api.Dtos.Sentence;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LanguageSceleton.Api.Controllers
+namespace LanguageSkeleton.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

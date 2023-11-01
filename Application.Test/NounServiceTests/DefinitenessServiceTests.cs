@@ -1,8 +1,8 @@
 ﻿using Application.Services.NounForms;
 using Application.Test.Mock;
-using Core.Contracts.Repos;
-using Core.Contracts.Services.Noun;
-using Core.Enums;
+using Domain.Contracts.Repos;
+using Domain.Contracts.Services.Noun;
+using Domain.Enums;
 using Moq;
 
 namespace Application.Test.NounServiceTests

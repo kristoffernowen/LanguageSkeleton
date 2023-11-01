@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using Domain.Enums;
 
-namespace Core.Models.Words;
+namespace Domain.Models.Words;
 
 public class Verb : Word
 {

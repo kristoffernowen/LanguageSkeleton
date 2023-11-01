@@ -1,4 +1,4 @@
-﻿using Core.Models.Words;
+﻿using Domain.Models.Words;
 
 namespace Application.Services.VerbTenses
 {

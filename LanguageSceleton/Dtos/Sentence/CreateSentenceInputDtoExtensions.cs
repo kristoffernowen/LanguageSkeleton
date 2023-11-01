@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
-using Core.Enums;
+using Domain.Enums;
 
-namespace LanguageSceleton.Api.Dtos.Sentence;
+namespace LanguageSkeleton.Api.Dtos.Sentence;
 
 public static class CreateSentenceInputDtoExtensions
 {
-    public static Core.Models.Sentence.Sentence ToModel(this CreateSentenceInputDto dto)
+    public static Domain.Models.Sentence.Sentence ToModel(this CreateSentenceInputDto dto)
     {
-        return new Core.Models.Sentence.Sentence()
+        return new Domain.Models.Sentence.Sentence()
         {
             SubjectNoun = dto.SubjectNoun,
             Predicate = dto.Predicate,

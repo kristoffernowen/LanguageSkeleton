@@ -12,8 +12,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDataExtensions(builder.Configuration);
 builder.Services.AddApplicationExtensions();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +23,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+
+
+// !!!!!!!!!!!!!!!!!!!! fix cors
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());    
 app.UseAuthorization();
 
 app.MapControllers();

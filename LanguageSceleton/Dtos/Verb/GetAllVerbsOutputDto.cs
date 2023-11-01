@@ -1,4 +1,4 @@
-﻿namespace LanguageSceleton.Api.Dtos.Verb
+﻿namespace LanguageSkeleton.Api.Dtos.Verb
 {
     public class GetAllVerbsOutputDto
     {

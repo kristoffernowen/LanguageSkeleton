@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageSceleton.Api", "LanguageSceleton\LanguageSceleton.Api.csproj", "{B9A8910E-1AF0-498B-BA13-7FB8878CC39A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageSkeleton.Api", "LanguageSceleton\LanguageSkeleton.Api.csproj", "{B9A8910E-1AF0-498B-BA13-7FB8878CC39A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{25EDDC63-433B-436F-9B95-288021145441}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain.csproj", "{25EDDC63-433B-436F-9B95-288021145441}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{75FF39F2-6BC3-452B-916C-991F60D2B642}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.UI", "Blazor.UI\Blaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{521E37A8-7FBA-4895-97AB-627406BF429B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Test", "Application.Test\Application.Test.csproj", "{97EC9F8E-F3B4-43BC-BDDF-737541E89981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Test", "Application.Test\Application.Test.csproj", "{97EC9F8E-F3B4-43BC-BDDF-737541E89981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

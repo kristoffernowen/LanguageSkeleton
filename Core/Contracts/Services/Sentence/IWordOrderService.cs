@@ -1,6 +1,4 @@
-﻿using Core.Models.Sentence;
-
-namespace Core.Contracts.Services.Sentence;
+﻿namespace Domain.Contracts.Services.Sentence;
 
 public interface IWordOrderService
 {

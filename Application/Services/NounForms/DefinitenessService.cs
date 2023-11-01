@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Text.RegularExpressions;
-using Core.Contracts.Services.Noun;
-using Core.Enums;
-using Core.Models.Words;
+using Domain.Contracts.Services.Noun;
+using Domain.Enums;
+using Domain.Models.Words;
 
 namespace Application.Services.NounForms
 {

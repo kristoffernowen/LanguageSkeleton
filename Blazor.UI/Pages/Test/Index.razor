@@ -1,0 +1,33 @@
+﻿@page "/test/"
+@using Blazor.UI.Services.Base
+
+<h3>Index Test</h3>
+
+@* @foreach (var item in List) *@
+@* { *@
+@*     <p>@item.BaseForm</p> *@
+@* } *@
+
+<EditForm Model="@Noun" OnValidSubmit="HandleSubmit">
+    <div class="form-group">
+        <label for="noun">Noun</label>
+        <InputSelect class="form-control" id="noun" @bind-Value="Noun.Id">
+            <option>Select Noun</option>
+            @foreach(var item in List)
+            {
+                <option value="@item.Id">@item.BaseForm</option>
+            }
+        </InputSelect>
+    </div>
+    
+    <button class="btn btn-success" type="submit">Submit Request</button>
+</EditForm>
+
+<div class="mt-5">
+    @{
+        if (!string.IsNullOrEmpty(NewNoun.BaseForm))
+        {
+            <p>@NewNoun.BaseForm</p>
+        }
+    }
+</div>

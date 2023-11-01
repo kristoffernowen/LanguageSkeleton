@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
-using Core.Enums;
+using Domain.Enums;
 
-namespace LanguageSceleton.Api.Dtos.Noun;
+namespace LanguageSkeleton.Api.Dtos.Noun;
 
 public static class CreateNounInputDtoExtensions
 {
-    public static Core.Models.Words.Noun ToModel(this CreateNounInputDto dto)
+    public static Domain.Models.Words.Noun ToModel(this CreateNounInputDto dto)
     {
-        var noun = new Core.Models.Words.Noun
+        var noun = new Domain.Models.Words.Noun
         {
             BaseForm = dto.BaseForm,
             PluralForm = dto.PluralForm,

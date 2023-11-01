@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Core.Contracts.Repos;
-using Core.Models.Words;
 using Data.PersistenceEntities;
+using Domain.Contracts.Repos;
+using Domain.Models.Words;
 
 namespace Data.Repos
 {
@@ -25,7 +25,9 @@ namespace Data.Repos
 
         public Noun GetNoun(string id)
         {
-            throw new NotImplementedException();
+            var nounEntity = _sqlContext.Nouns.FirstOrDefault(x => x.Id == id);
+
+            return _mapper.Map<Noun>(nounEntity);
         }
 
         public List<Noun> GetAllNouns()

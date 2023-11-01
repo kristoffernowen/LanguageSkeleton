@@ -1,7 +1,7 @@
 ﻿using Application.Services.VerbTenses;
 using Application.Test.Mock;
-using Core.Contracts.Repos;
-using Core.Contracts.Services.Verb;
+using Domain.Contracts.Repos;
+using Domain.Contracts.Services.Verb;
 using Moq;
 
 namespace Application.Test.VerbTenseServiceTests;

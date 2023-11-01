@@ -1,6 +1,6 @@
-﻿using Core.Contracts.Services.Verb;
-using Core.Enums;
-using Core.Models.Words;
+﻿using Domain.Contracts.Services.Verb;
+using Domain.Enums;
+using Domain.Models.Words;
 using System.ComponentModel;
 
 namespace Application.Services.VerbTenses

@@ -1,4 +1,4 @@
-﻿namespace Core.Contracts.Services.Noun
+﻿namespace Domain.Contracts.Services.Noun
 {
     public interface IGrammaticalNumberService
     {

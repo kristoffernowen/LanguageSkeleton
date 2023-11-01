@@ -1,6 +1,6 @@
-﻿using Core.Contracts.Repos;
-using Core.Contracts.Services.Verb;
-using Core.Models.Words;
+﻿using Domain.Contracts.Repos;
+using Domain.Contracts.Services.Verb;
+using Domain.Models.Words;
 
 namespace Application.Services
 {

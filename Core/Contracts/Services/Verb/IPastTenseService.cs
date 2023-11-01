@@ -1,6 +1,4 @@
-﻿using Core.Models.Words;
-
-namespace Core.Contracts.Services.Verb;
+﻿namespace Domain.Contracts.Services.Verb;
 
 public interface IPastTenseService
 {

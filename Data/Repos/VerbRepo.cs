@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Core.Contracts.Repos;
-using Core.Models.Words;
 using Data.PersistenceEntities;
+using Domain.Contracts.Repos;
+using Domain.Models.Words;
 
 namespace Data.Repos
 {

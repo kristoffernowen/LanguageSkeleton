@@ -1,4 +1,4 @@
-﻿namespace LanguageSceleton.Api.Dtos.Noun
+﻿namespace LanguageSkeleton.Api.Dtos.Noun
 {
     public class CreateNounInputDto
     {

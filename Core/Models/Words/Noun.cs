@@ -1,10 +1,10 @@
-﻿using Core.Enums;
+﻿using Domain.Enums;
 
-namespace Core.Models.Words;
+namespace Domain.Models.Words;
 
 public class Noun : Word
 {
-    
+
     public NounDeclension NounDeclension { get; set; }
     public NounArticle NounArticle { get; set; }
     public string SingularForm => BaseForm;
