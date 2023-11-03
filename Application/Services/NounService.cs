@@ -1,5 +1,6 @@
-﻿using Domain.Contracts.Repos;
-using Domain.Contracts.Services.Noun;
+﻿using System.ComponentModel;
+using Application.Contracts.Repos;
+using Application.Contracts.Services.Noun;
 using Domain.Models.Words;
 
 namespace Application.Services
@@ -12,19 +13,31 @@ namespace Application.Services
         {
             _nounRepo = nounRepo;
         }
-        public void CreateNoun(Noun noun)
+        public async Task CreateNounAsync(Noun noun)
         {
-            _nounRepo.CreateNoun(noun);
+            await  _nounRepo.CreateNounAsync(noun);
         }
 
-        public List<Noun> GetAll()
+        public async Task<List<Noun>> GetAllAsync()
         {
-            return _nounRepo.GetAllNouns();
+            return await _nounRepo.GetAllNounsAsync();
         }
 
-        public Noun Get(string id)
+        public async Task<Noun> GetAsync(string id)
         {
-            return _nounRepo.GetNoun(id);
+            return await _nounRepo.GetNounAsync(id);
+        }
+
+        public Noun GrammaticalNumberDisplayForm(Noun noun)
+        {
+            noun.DisplayForm = noun.GrammaticalNumber switch
+            {
+                Domain.Enums.GrammaticalNumber.Singular => noun.SingularForm,
+                Domain.Enums.GrammaticalNumber.Plural => noun.PluralForm,
+                _ => throw new InvalidEnumArgumentException()
+            };
+
+            return noun;
         }
     }
 }

@@ -60,7 +60,6 @@ namespace Blazor.UI.Pages.Test
         {
             SelectedPredicate = await VerbService.Get(CreateSentenceInput.Predicate.Id);
             CreateSentenceInput.Predicate.BaseForm = SelectedPredicate.BaseForm;
-            CreateSentenceInput.Predicate.VerbConjugation = "ArVerb";
             DisplayCreatedSentence = await SentenceService.Create(CreateSentenceInput);
         }
 

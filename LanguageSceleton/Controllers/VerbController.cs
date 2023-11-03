@@ -1,6 +1,5 @@
-﻿using Domain.Contracts.Services.Verb;
+﻿using Application.Contracts.Services.Verb;
 using LanguageSkeleton.Api.Dtos.Verb;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageSkeleton.Api.Controllers
@@ -19,19 +18,22 @@ namespace LanguageSkeleton.Api.Controllers
         [HttpPost]
         public void CreateVerb(CreateVerbInputDto dto)
         {
-            _verbService.CreateVerb(dto.ToModel());
+            _verbService.CreateVerbAsync(dto.ToModel());
         }
 
         [HttpGet]
-        public List<GetAllVerbsOutputDto> GetAllVerbs()
+        public async Task<List<GetAllVerbsOutputDto>> GetAllVerbs()
         {
-            return _verbService.GetAll().Select(v => v.ToDto()).ToList();
+            var verbs = await _verbService.GetAllAsync();
+
+            return verbs.Select(v => v.ToDto()).ToList();
         }
 
         [HttpGet("{id}")]
-        public GetVerbOutputDto GetNoun(string id)
+        public async Task<GetVerbOutputDto> GetNoun(string id)
         {
-            return _verbService.Get(id).ToGetVerbOutputDto();
+            var verb = await _verbService.GetAsync(id);
+            return verb.ToGetVerbOutputDto();
         }
     }
 }

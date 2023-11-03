@@ -1,4 +1,4 @@
-﻿using Domain.Contracts.Repos;
+﻿using Application.Contracts.Repos;
 using Domain.Enums;
 using Domain.Models.Words;
 using Moq;
@@ -40,9 +40,9 @@ namespace Application.Test.Mock
 
             var mockRepo = new Mock<IVerbRepo>();
 
-            mockRepo.Setup(r => r.GetAllVerb()).Returns(verbs);
+            mockRepo.Setup(r => r.GetAllVerbAsync()).Returns(verbs);
 
-            mockRepo.Setup(r => r.GetVerb(It.IsAny<string>())).Returns((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
+            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>())).Returns((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
 
             return mockRepo;
         }

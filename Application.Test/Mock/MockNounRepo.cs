@@ -1,4 +1,4 @@
-﻿using Domain.Contracts.Repos;
+﻿using Application.Contracts.Repos;
 using Domain.Enums;
 using Domain.Models.Words;
 using Moq;
@@ -30,8 +30,8 @@ public class MockNounRepo
         };
 
         var mockRepo = new Mock<INounRepo>();
-        mockRepo.Setup(r => r.GetAllNouns()).Returns(nouns);
-        mockRepo.Setup(r => r.GetNoun(It.IsAny<string>()))
+        mockRepo.Setup(r => r.GetAllNounsAsync()).Returns(nouns);
+        mockRepo.Setup(r => r.GetNounAsync(It.IsAny<string>()))
             .Returns((string id) => nouns.FirstOrDefault(x => x.Id == id)!);
 
         return mockRepo;

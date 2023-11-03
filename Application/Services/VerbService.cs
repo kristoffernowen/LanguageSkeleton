@@ -1,5 +1,5 @@
-﻿using Domain.Contracts.Repos;
-using Domain.Contracts.Services.Verb;
+﻿using Application.Contracts.Repos;
+using Application.Contracts.Services.Verb;
 using Domain.Models.Words;
 
 namespace Application.Services
@@ -12,19 +12,19 @@ namespace Application.Services
         {
             _verbRepo = verbRepo;
         }
-        public void CreateVerb(Verb verb)
+        public async Task CreateVerbAsync(Verb verb)
         {
-            _verbRepo.CreateVerb(verb);
+            await _verbRepo.CreateVerbAsync(verb);
         }
 
-        public List<Verb> GetAll()
+        public async Task<List<Verb>> GetAllAsync()
         {
-            return _verbRepo.GetAllVerb();
+            return await _verbRepo.GetAllVerbAsync();
         }
 
-        public Verb Get(string id)
+        public async Task<Verb> GetAsync(string id)
         {
-            return _verbRepo.GetVerb(id);
+            return await _verbRepo.GetVerbAsync(id);
         }
     }
 }

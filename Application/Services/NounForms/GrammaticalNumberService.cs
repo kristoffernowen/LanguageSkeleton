@@ -1,4 +1,4 @@
-﻿using Domain.Contracts.Services.Noun;
+﻿using Application.Contracts.Services.Noun;
 using Domain.Enums;
 using Domain.Models.Words;
 

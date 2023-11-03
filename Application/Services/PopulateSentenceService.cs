@@ -1,6 +1,9 @@
-﻿using Domain.Contracts.Services.Noun;
-using Domain.Contracts.Services.Sentence;
-using Domain.Contracts.Services.Verb;
+﻿using System.ComponentModel;
+using Application.Contracts.Services.Noun;
+using Application.Contracts.Services.Sentence;
+using Application.Contracts.Services.Verb;
+using Application.Dtos.Sentence.Input;
+using Application.Dtos.Sentence.Output;
 using Domain.Enums;
 using Domain.Models.Sentence;
 
@@ -10,70 +13,70 @@ namespace Application.Services
     {
         private readonly IDefinitenessService _definitenessService;
         private readonly IGrammaticalNumberService _grammaticalNumberService;
-        private readonly IVerbTenseService _verbTenseService;
         private readonly INounService _nounService;
+        private readonly IVerbService _verbService;
+        private readonly IQuestionOrStatementService _questionOrStatementService;
+        private readonly IPastTenseService _pastTenseService;
+        private readonly IPresentTenseService _presentTenseService;
 
         public PopulateSentenceService(IDefinitenessService definitenessService, IGrammaticalNumberService grammaticalNumberService,
-            IVerbTenseService verbTenseService, INounService nounService)
+            INounService nounService, IVerbService verbService, IQuestionOrStatementService questionOrStatementService,
+            IPastTenseService pastTenseService, IPresentTenseService presentTenseService)
         {
             _definitenessService = definitenessService;
             _grammaticalNumberService = grammaticalNumberService;
-            _verbTenseService = verbTenseService;
             _nounService = nounService;
+            _verbService = verbService;
+            _questionOrStatementService = questionOrStatementService;
+            _pastTenseService = pastTenseService;
+            _presentTenseService = presentTenseService;
         }
         
-        public Sentence CreateSentence(Sentence sentence)
+        public async Task<CreateSentenceOutputDto> CreateSentenceAsync(CreateSentenceInputDto sentence)
         {
-            var nounSubject = _nounService.Get(sentence.SubjectNoun.Id);
+            var sentenceModel = new Sentence();
+            sentenceModel.SubjectNoun = await _nounService.GetAsync(sentence.SubjectNounInput.Id);
+            sentenceModel.SubjectNoun.GrammaticalNumber = sentence.SubjectNounInput.GrammaticalNumber switch
+            {
+                "singular" => GrammaticalNumber.Singular,
+                "plural" => GrammaticalNumber.Plural,
+                _ => throw new InvalidEnumArgumentException()
+            };
+            sentenceModel.SubjectNoun.Definiteness = sentence.SubjectNounInput.Definiteness switch
+            {
+                "definite" => Definiteness.Definite,
+                "indefinite" => Definiteness.Indefinite,
+                _ => throw new InvalidEnumArgumentException()
+            };
+            sentenceModel.SubjectNoun = _nounService.GrammaticalNumberDisplayForm(sentenceModel.SubjectNoun);
+            sentenceModel.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentenceModel.SubjectNoun);
 
-            sentence.SubjectNoun.BaseForm = nounSubject.BaseForm;
+            sentenceModel.Predicate = await _verbService.GetAsync(sentence.Predicate.Id);
+            sentenceModel.Predicate = sentence.Tense switch
+            {
+                "present" => _presentTenseService.PresentTense(sentenceModel.Predicate),
+                "past" => _pastTenseService.PastTense(sentenceModel.Predicate),
+                _ => throw new InvalidEnumArgumentException()
+            };
+            sentenceModel.StatementOrQuestion = sentence.StatementOrQuestion switch
+            {
+                "statement" => StatementOrQuestion.Statement,
+                "question" => StatementOrQuestion.Question,
+                _ => throw new InvalidEnumArgumentException()
+            };
+            sentenceModel = await _questionOrStatementService.ToQuestionOrStatementAsync(sentenceModel);
+            sentenceModel.DisplaySentence = char.ToUpper(sentenceModel.DisplaySentence[0]) +
+                                            sentenceModel.DisplaySentence[1..];
 
-
-            if (sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Singular)
-            {
-                sentence.SubjectNoun = _grammaticalNumberService.Singular(sentence.SubjectNoun);
-            }
-            else
-            {
-                sentence.SubjectNoun = _grammaticalNumberService.Plural(sentence.SubjectNoun);
-            }
-
-            if (sentence.SubjectNoun.Definiteness == Definiteness.Definite)
-            {
-                sentence.SubjectNoun = _definitenessService.Definite(sentence.SubjectNoun);
-            }
-            else
-            {
-                sentence.SubjectNoun = _definitenessService.Indefinite(sentence.SubjectNoun);
-            }
-
-            if (sentence.Tense == Tense.Present)
-            {
-                sentence.Predicate = _verbTenseService.PresentTense(sentence.Predicate);
-            }
-            else if(sentence.Tense == Tense.Past)
-            {
-                sentence.Predicate = _verbTenseService.PastTense(sentence.Predicate);
-            }
-
-            if (sentence.StatementOrQuestion == StatementOrQuestion.Statement)
-            {
-                sentence.DisplaySentence = $"{sentence.SubjectNoun.DisplayForm} {sentence.Predicate.DisplayForm}.";
-            }
-            else
-            {
-                sentence.DisplaySentence = $"{sentence.Predicate.DisplayForm} {sentence.SubjectNoun.DisplayForm}?";
-
-            }
-            return sentence;
+            return sentenceModel.ToCreateOutputDto();
         }
 
-        public Sentence AddObjectToSentence(Sentence sentence)
+        public async Task<Sentence> AddObjectToSentence(Sentence sentence)
         {
             throw new NotImplementedException();
         }
 
-        public Sentence RemoveObjectFromSentence(Sentence sentence)
+        public async Task<Sentence> RemoveObjectFromSentence(Sentence sentence)
         {
             throw new NotImplementedException();
         }

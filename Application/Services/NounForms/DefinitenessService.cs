@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Text.RegularExpressions;
-using Domain.Contracts.Services.Noun;
+using Application.Contracts.Services.Noun;
 using Domain.Enums;
 using Domain.Models.Words;
 
@@ -8,6 +8,16 @@ namespace Application.Services.NounForms
 {
     public class DefinitenessService : IDefinitenessService
     {
+        public Noun SetDefinitenessDisplayForm(Noun noun)
+        {
+            noun = noun.Definiteness switch
+            {
+                Definiteness.Indefinite => Indefinite(noun),
+                Definiteness.Definite => Definite(noun),
+                _ => throw new InvalidEnumArgumentException()
+            };
+            return noun;
+        }
         public Noun Definite(Noun noun)
         {
             noun.Definiteness = Definiteness.Definite;
@@ -36,9 +46,8 @@ namespace Application.Services.NounForms
 
         private string Singular(Noun noun)
         {
-            var displayForm = "";
             const string vowels = "[aeiouyåäö]$";
-            displayForm = noun.NounArticle switch
+            var displayForm = noun.NounArticle switch
             {
                 NounArticle.en when Regex.IsMatch(noun.SingularForm, vowels) => noun.SingularForm + "n",
                 NounArticle.en => noun.SingularForm + "en",

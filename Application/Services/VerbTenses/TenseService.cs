@@ -1,4 +1,5 @@
-﻿using Domain.Models.Words;
+﻿using Application.Contracts.Services.Verb;
+using Domain.Models.Words;
 
 namespace Application.Services.VerbTenses
 {

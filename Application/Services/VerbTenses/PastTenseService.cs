@@ -1,7 +1,7 @@
-﻿using Domain.Contracts.Services.Verb;
-using Domain.Enums;
+﻿using Domain.Enums;
 using Domain.Models.Words;
 using System.ComponentModel;
+using Application.Contracts.Services.Verb;
 
 namespace Application.Services.VerbTenses
 {
@@ -20,7 +20,7 @@ namespace Application.Services.VerbTenses
 
             return verb;
         }
-
+       
         private string ArVerb(Verb verb)
         {
             return InfinitiveWithoutA(verb) + "ade";

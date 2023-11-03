@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
+using Application.Contracts.Repos;
 using Data.Repos;
-using Domain.Contracts.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

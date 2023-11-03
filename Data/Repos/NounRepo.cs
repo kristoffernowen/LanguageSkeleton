@@ -1,7 +1,8 @@
-﻿using AutoMapper;
+﻿using Application.Contracts.Repos;
+using AutoMapper;
 using Data.PersistenceEntities;
-using Domain.Contracts.Repos;
 using Domain.Models.Words;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repos
 {
@@ -15,24 +16,24 @@ namespace Data.Repos
             _sqlContext = sqlContext;
             _mapper = mapper;
         }
-        public void CreateNoun(Noun noun)
+        public async Task CreateNounAsync(Noun noun)
         {
             noun.Id = Guid.NewGuid().ToString();
 
-            _sqlContext.Nouns.Add(_mapper.Map<NounEntity>(noun));
-            _sqlContext.SaveChanges();
+            await _sqlContext.Nouns.AddAsync(_mapper.Map<NounEntity>(noun));
+            await _sqlContext.SaveChangesAsync();
         }
 
-        public Noun GetNoun(string id)
+        public async Task<Noun> GetNounAsync(string id)
         {
-            var nounEntity = _sqlContext.Nouns.FirstOrDefault(x => x.Id == id);
+            var nounEntity = await _sqlContext.Nouns.FirstOrDefaultAsync(x => x.Id == id);
 
             return _mapper.Map<Noun>(nounEntity);
         }
 
-        public List<Noun> GetAllNouns()
+        public async Task<List<Noun>> GetAllNounsAsync()
         {
-            return _sqlContext.Nouns.Select(n => _mapper.Map<Noun>(n)).ToList();
+            return await _sqlContext.Nouns.Select(n => _mapper.Map<Noun>(n)).ToListAsync();
         }
     }
 }

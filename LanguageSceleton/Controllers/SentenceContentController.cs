@@ -1,6 +1,6 @@
-﻿using Domain.Contracts.Services.Sentence;
-using LanguageSkeleton.Api.Dtos.Sentence.Input;
-using LanguageSkeleton.Api.Dtos.Sentence.Output;
+﻿using Application.Contracts.Services.Sentence;
+using Application.Dtos.Sentence.Input;
+using Application.Dtos.Sentence.Output;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageSkeleton.Api.Controllers
@@ -17,12 +17,11 @@ namespace LanguageSkeleton.Api.Controllers
         }
 
         [HttpPost]
-        public CreateSentenceOutputDto Create(CreateSentenceInputDto dto)
+        public async Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto)
         {
-            var result = _populateSentenceService.CreateSentence(dto.ToModel());
-            var outputDto = result.ToCreateOutputDto();
+            var result = await _populateSentenceService.CreateSentenceAsync(dto);
 
-            return outputDto;
+            return result;
         }
     }
 }

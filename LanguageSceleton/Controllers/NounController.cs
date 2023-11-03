@@ -1,5 +1,4 @@
-﻿
-using Domain.Contracts.Services.Noun;
+﻿using Application.Contracts.Services.Noun;
 using LanguageSkeleton.Api.Dtos.Noun;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,19 +18,23 @@ namespace LanguageSkeleton.Api.Controllers
         [HttpPost]
         public void Create(CreateNounInputDto dto)
         {
-            _nounService.CreateNoun(dto.ToModel());
+            _nounService.CreateNounAsync(dto.ToModel());
         }
 
         [HttpGet]
-        public List<GetAllNounsOutputDto> GetNouns()
+        public async Task<List<GetAllNounsOutputDto>> GetNouns()
         {
-            return _nounService.GetAll().Select(n => n.ToDto()).ToList();
+            var result = await _nounService.GetAllAsync();
+
+            return result.Select(n => n.ToDto()).ToList();
         }
 
         [HttpGet("{id}")]
-        public GetNounOutputDto GetNoun(string id)
+        public async Task<GetNounOutputDto> GetNoun(string id)
         {
-            return _nounService.Get(id).ToNounOutputDto();
+            var noun = await _nounService.GetAsync(id);
+
+            return noun.ToNounOutputDto();
         }
     }
 }
