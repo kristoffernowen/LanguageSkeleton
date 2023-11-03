@@ -1,5 +1,7 @@
 using Blazor.UI;
 using Blazor.UI.Services.Nouns;
+using Blazor.UI.Services.Sentence;
+using Blazor.UI.Services.Verbs;
 using LanguageSkeleton.Blazor.UI.Services.Base;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -15,5 +17,7 @@ builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = n
 ));
 
 builder.Services.AddScoped<INounService, NounService>();
+builder.Services.AddScoped<IVerbService, VerbService>();
+builder.Services.AddScoped<ISentenceService, SentenceService>();
 
 await builder.Build().RunAsync();

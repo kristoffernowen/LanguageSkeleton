@@ -1,7 +1,6 @@
 ﻿using Application.Services.VerbTenses;
 using Application.Test.Mock;
-using Core.Enums;
-using Core.Models.Words;
+
 using Domain.Contracts.Repos;
 using Domain.Contracts.Services.Verb;
 using Moq;

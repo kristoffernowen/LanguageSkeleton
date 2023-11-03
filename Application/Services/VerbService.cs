@@ -21,5 +21,10 @@ namespace Application.Services
         {
             return _verbRepo.GetAllVerb();
         }
+
+        public Verb Get(string id)
+        {
+            return _verbRepo.GetVerb(id);
+        }
     }
 }

@@ -1,33 +1,83 @@
 ﻿@page "/test/"
-@using Blazor.UI.Services.Base
 
 <h3>Index Test</h3>
 
-@* @foreach (var item in List) *@
-@* { *@
-@*     <p>@item.BaseForm</p> *@
-@* } *@
-
-<EditForm Model="@Noun" OnValidSubmit="HandleSubmit">
+<EditForm Model="@CreateSentenceInput" OnValidSubmit="HandleSubmit">
     <div class="form-group">
         <label for="noun">Noun</label>
-        <InputSelect class="form-control" id="noun" @bind-Value="Noun.Id">
+        <InputSelect class="form-control" id="noun" @bind-Value="CreateSentenceInput.SubjectNounInput.Id">
             <option>Select Noun</option>
-            @foreach(var item in List)
+            @foreach(var item in Nouns)
             {
                 <option value="@item.Id">@item.BaseForm</option>
             }
         </InputSelect>
     </div>
-    
+    <div class="form-group">
+        <label for="definiteness">Bestämdhet</label>
+        <InputSelect class="form-control" id="definiteness" @bind-Value="CreateSentenceInput.SubjectNounInput.Definiteness">
+            <option>Välj bestämdhet</option>
+            <option value="definite">bestämd</option>
+            <option value="indefinite">obestämd</option>
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label for="grammaticalNumber">Antal</label>
+        <InputSelect class="form-control" id="grammaticalNumber" @bind-Value="CreateSentenceInput.SubjectNounInput.GrammaticalNumber">
+            <option>Välj antal</option>
+            <option value="singular">singular</option>
+            <option value="plural">plural</option>
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label for="tense">Tense</label>
+        <InputSelect class="form-control" id="tense" @bind-Value="CreateSentenceInput.Tense">
+            <option>Select tense</option>
+            
+                <option value="past">past</option>
+                <option value="present">present</option>
+            
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label for="statementOrQuestion">Statement or Question?</label>
+        <InputSelect class="form-control" id="statementOrQuestion" @bind-Value="CreateSentenceInput.StatementOrQuestion">
+            <option>Select statement or question</option>
+                <option value="statement">Påstående</option>
+                <option value="question">Fråga</option>
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label for="verb">Verb</label>
+        <InputSelect class="form-control" id="verb" @bind-Value="CreateSentenceInput.Predicate.Id">
+            <option>Select verb</option>
+            @foreach (var item in Verbs)
+            {
+                <option value="@item.Id">@item.BaseForm</option>
+            }
+        </InputSelect>
+    </div>
     <button class="btn btn-success" type="submit">Submit Request</button>
 </EditForm>
 
+
+@* <div class="mt-5"> *@
+@*     @{ *@
+@*         if (!string.IsNullOrEmpty(SelectedSubjectNoun.BaseForm)) *@
+@*         { *@
+@*             <p>@SelectedSubjectNoun.BaseForm</p> *@
+@*         } *@
+@*         if (!string.IsNullOrEmpty(SelectedPredicate.BaseForm)) *@
+@*         { *@
+@*             <p>@SelectedPredicate.BaseForm</p> *@
+@*         } *@
+@*     } *@
+@* </div> *@
 <div class="mt-5">
     @{
-        if (!string.IsNullOrEmpty(NewNoun.BaseForm))
+        if (!string.IsNullOrEmpty(DisplayCreatedSentence.DisplaySentence))
         {
-            <p>@NewNoun.BaseForm</p>
+            <p>@DisplayCreatedSentence.DisplaySentence</p>
         }
     }
 </div>

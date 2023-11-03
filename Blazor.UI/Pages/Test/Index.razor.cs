@@ -1,5 +1,7 @@
 using global::Microsoft.AspNetCore.Components;
 using Blazor.UI.Services.Nouns;
+using Blazor.UI.Services.Sentence;
+using Blazor.UI.Services.Verbs;
 using LanguageSkeleton.Blazor.UI.Services.Base;
 
 namespace Blazor.UI.Pages.Test
@@ -7,21 +9,65 @@ namespace Blazor.UI.Pages.Test
     public partial class Index
     {
         [Inject] private INounService NounService { get; set; }
-        private List<GetAllNounsOutputDto> List { get; set; } = new List<GetAllNounsOutputDto>();
-        private GetAllNounsOutputDto Noun { get; set; } = new GetAllNounsOutputDto();
-        private GetNounOutputDto NewNoun { get; set; } = new GetNounOutputDto();
+        [Inject] private IVerbService VerbService { get; set; }
+        [Inject] private ISentenceService SentenceService { get; set; }
+        private List<GetAllNounsOutputDto> Nouns { get; set; } = new List<GetAllNounsOutputDto>();
+        private List<GetAllVerbsOutputDto> Verbs { get; set; } = new List<GetAllVerbsOutputDto>();
+        private CreateSentenceInputDto CreateSentenceInput { get; } = new CreateSentenceInputDto()
+        {
+            Predicate = new CreateSentenceVerbInputDto()
+            {
+                BaseForm = "",
+                Id = "",
+                VerbConjugation = ""
+            },
+            SubjectNounInput = new CreateSentenceNounInputDto()
+            {
+                Id = "",
+                Definiteness = "",
+                GrammaticalNumber = ""
+            }
+        };
+        private CreateSentenceOutputDto DisplayCreatedSentence { get; set; } = new CreateSentenceOutputDto()
+        {
+            SubjectNoun = new CreateSentenceNounOutputDto()
+            {
+                Definiteness = "definite",
+                GrammaticalNumber = "singular",
+                Id = "",
+                DisplayForm = ""
+            },
+            Predicate = new CreateSentenceVerbOutputDto()
+            {
+                DisplayForm = "",
+                Id = "",
+                BaseForm = "",
+                VerbConjugation = ""
+            } ,
+            StatementOrQuestion = "",
+            Tense = "",
+            DisplaySentence = ""
+        };
         
+        private GetNounOutputDto SelectedSubjectNoun { get; set; } = new GetNounOutputDto();
+        private GetVerbOutputDto SelectedPredicate { get; set; } = new GetVerbOutputDto();
+
+        
+
         
 
         private async Task HandleSubmit()
         {
-            NewNoun = await NounService.Get(Noun.Id);
-            var stopPoint = "";
+            SelectedPredicate = await VerbService.Get(CreateSentenceInput.Predicate.Id);
+            CreateSentenceInput.Predicate.BaseForm = SelectedPredicate.BaseForm;
+            CreateSentenceInput.Predicate.VerbConjugation = "ArVerb";
+            DisplayCreatedSentence = await SentenceService.Create(CreateSentenceInput);
         }
 
         protected override async Task OnInitializedAsync()
         {
-            List = await NounService.Get();
+            Nouns = await NounService.Get();
+            Verbs = await VerbService.Get();
         }
     }
 }

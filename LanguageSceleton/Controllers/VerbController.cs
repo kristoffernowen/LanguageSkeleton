@@ -27,5 +27,11 @@ namespace LanguageSkeleton.Api.Controllers
         {
             return _verbService.GetAll().Select(v => v.ToDto()).ToList();
         }
+
+        [HttpGet("{id}")]
+        public GetVerbOutputDto GetNoun(string id)
+        {
+            return _verbService.Get(id).ToGetVerbOutputDto();
+        }
     }
 }

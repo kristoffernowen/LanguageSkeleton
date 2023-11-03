@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
 
-namespace LanguageSkeleton.Api.Dtos.Sentence;
+namespace LanguageSkeleton.Api.Dtos.Sentence.Input;
 
 public static class CreateSentenceInputDtoExtensions
 {
@@ -9,9 +9,8 @@ public static class CreateSentenceInputDtoExtensions
     {
         return new Domain.Models.Sentence.Sentence()
         {
-            SubjectNoun = dto.SubjectNoun,
-            Predicate = dto.Predicate,
-            ObjectNoun = dto.ObjectNoun,
+            SubjectNoun = dto.SubjectNounInput.ToModel(),
+            Predicate = dto.Predicate.ToModel(),
             Tense = dto.Tense switch
             {
                 "past" => Tense.Past,
@@ -23,8 +22,7 @@ public static class CreateSentenceInputDtoExtensions
                 "statement" => StatementOrQuestion.Statement,
                 "question" => StatementOrQuestion.Question,
                 _ => throw new InvalidEnumArgumentException()
-            },
-            DisplaySentence = dto.DisplaySentence
+            }
         };
     }
 }
