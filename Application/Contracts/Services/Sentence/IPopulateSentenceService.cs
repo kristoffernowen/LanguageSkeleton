@@ -5,7 +5,7 @@ namespace Application.Contracts.Services.Sentence;
 
 public interface IPopulateSentenceService
 {
-    Task<CreateSentenceOutputDto> CreateSentenceAsync(CreateSentenceInputDto sentence);
+    Task<CreateSentenceOutputDto> CreateSentenceBaseAsync(CreateSentenceInputDto dto);
     Task<Domain.Models.Sentence.Sentence> AddObjectToSentence(Domain.Models.Sentence.Sentence sentence);
     Task<Domain.Models.Sentence.Sentence> RemoveObjectFromSentence(Domain.Models.Sentence.Sentence sentence);
 }

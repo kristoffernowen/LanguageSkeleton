@@ -19,7 +19,7 @@ namespace LanguageSkeleton.Api.Controllers
         [HttpPost]
         public async Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto)
         {
-            var result = await _populateSentenceService.CreateSentenceAsync(dto);
+            var result = await _populateSentenceService.CreateSentenceBaseAsync(dto);
 
             return result;
         }

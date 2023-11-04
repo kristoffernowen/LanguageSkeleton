@@ -14,7 +14,7 @@ namespace Application.Services.VerbTenses
                 VerbConjugation.ArVerb => ArVerb(verb),
                 VerbConjugation.ErVerb => ErVerb(verb),
                 VerbConjugation.RVerb => RVerb(verb),
-                VerbConjugation.StrongErVerb => throw new NotImplementedException(),
+                VerbConjugation.StrongErVerb => StrongErVerb(verb),
                 _ => throw new InvalidEnumArgumentException()
             };
 
@@ -39,6 +39,11 @@ namespace Application.Services.VerbTenses
         private string RVerb(Verb verb)
         {
             return verb.Infinitive + "r";
+        }
+
+        private string StrongErVerb(Verb verb)
+        {
+            return InfinitiveWithoutA(verb) + "er";
         }
     }
 }

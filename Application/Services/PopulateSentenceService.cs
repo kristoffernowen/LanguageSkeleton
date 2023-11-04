@@ -32,43 +32,43 @@ namespace Application.Services
             _presentTenseService = presentTenseService;
         }
         
-        public async Task<CreateSentenceOutputDto> CreateSentenceAsync(CreateSentenceInputDto sentence)
+        public async Task<CreateSentenceOutputDto> CreateSentenceBaseAsync(CreateSentenceInputDto dto)
         {
-            var sentenceModel = new Sentence();
-            sentenceModel.SubjectNoun = await _nounService.GetAsync(sentence.SubjectNounInput.Id);
-            sentenceModel.SubjectNoun.GrammaticalNumber = sentence.SubjectNounInput.GrammaticalNumber switch
+            var sentence = new Sentence();
+            sentence.SubjectNoun = await _nounService.GetAsync(dto.SubjectNounInput.Id);
+            sentence.SubjectNoun.GrammaticalNumber = dto.SubjectNounInput.GrammaticalNumber switch
             {
                 "singular" => GrammaticalNumber.Singular,
                 "plural" => GrammaticalNumber.Plural,
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentenceModel.SubjectNoun.Definiteness = sentence.SubjectNounInput.Definiteness switch
+            sentence.SubjectNoun.Definiteness = dto.SubjectNounInput.Definiteness switch
             {
                 "definite" => Definiteness.Definite,
                 "indefinite" => Definiteness.Indefinite,
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentenceModel.SubjectNoun = _nounService.GrammaticalNumberDisplayForm(sentenceModel.SubjectNoun);
-            sentenceModel.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentenceModel.SubjectNoun);
+            sentence.SubjectNoun = _nounService.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
 
-            sentenceModel.Predicate = await _verbService.GetAsync(sentence.Predicate.Id);
-            sentenceModel.Predicate = sentence.Tense switch
+            sentence.Predicate = await _verbService.GetAsync(dto.Predicate.Id);
+            sentence.Predicate = dto.Tense switch
             {
-                "present" => _presentTenseService.PresentTense(sentenceModel.Predicate),
-                "past" => _pastTenseService.PastTense(sentenceModel.Predicate),
+                "present" => _presentTenseService.PresentTense(sentence.Predicate),
+                "past" => _pastTenseService.PastTense(sentence.Predicate),
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentenceModel.StatementOrQuestion = sentence.StatementOrQuestion switch
+            sentence.StatementOrQuestion = dto.StatementOrQuestion switch
             {
                 "statement" => StatementOrQuestion.Statement,
                 "question" => StatementOrQuestion.Question,
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentenceModel = await _questionOrStatementService.ToQuestionOrStatementAsync(sentenceModel);
-            sentenceModel.DisplaySentence = char.ToUpper(sentenceModel.DisplaySentence[0]) +
-                                            sentenceModel.DisplaySentence[1..];
+            sentence = await _questionOrStatementService.ToQuestionOrStatementAsync(sentence);
+            sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
+                                            sentence.DisplaySentence[1..];
 
-            return sentenceModel.ToCreateOutputDto();
+            return sentence.ToCreateOutputDto();
         }
 
         public async Task<Sentence> AddObjectToSentence(Sentence sentence)
