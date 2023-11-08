@@ -1,6 +1,5 @@
 ﻿namespace Application.Contracts.Services.Verb;
 
-public interface IPastTenseService
+public interface IPastTenseService : ITenseService
 {
-    public Domain.Models.Words.Verb PastTense(Domain.Models.Words.Verb verb);
 }

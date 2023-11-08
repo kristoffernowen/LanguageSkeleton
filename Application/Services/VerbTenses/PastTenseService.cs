@@ -1,14 +1,13 @@
 ﻿using Domain.Enums;
 using Domain.Models.Words;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using Application.Contracts.Services.Verb;
 
 namespace Application.Services.VerbTenses
 {
-    public class PastTenseService : TenseService, IPastTenseService
+    public class PastTenseService : IPastTenseService
     {
-        public Verb PastTense(Verb verb)
+        public Verb SetDisplayForm(Verb verb)
         {
             verb.DisplayForm = verb.VerbConjugation switch
             {
@@ -16,6 +15,7 @@ namespace Application.Services.VerbTenses
                 VerbConjugation.ErVerb => ErVerb(verb),
                 VerbConjugation.RVerb => RVerb(verb),
                 VerbConjugation.StrongErVerb => StrongErVerb(verb),
+                VerbConjugation.IrregularVerb => verb.PastTense,
                 _ => throw new InvalidEnumArgumentException()
             };
 
@@ -24,24 +24,44 @@ namespace Application.Services.VerbTenses
 
         private string ArVerb(Verb verb)
         {
-            return InfinitiveWithoutA(verb) + "ade";
+            return verb.Imperative + "de";
         }
 
         private string ErVerb(Verb verb)
         {
-            if (verb.Infinitive.EndsWith("sa") || verb.Infinitive.EndsWith("pa")
-                                               || verb.Infinitive.EndsWith("ta") || verb.Infinitive.EndsWith("ka")
-                                               || verb.Infinitive.EndsWith("xa"))
+            if (verb.Imperative.EndsWith("s") || verb.Imperative.EndsWith("p")
+                                               || verb.Imperative.EndsWith("t") || verb.Imperative.EndsWith("k")
+                                               || verb.Imperative.EndsWith("x"))
             {
-                return InfinitiveWithoutA(verb) + "te";
+                return verb.Imperative + "te";
 
             }
-            return InfinitiveWithoutA(verb) + "de";
+            return verb.Imperative + "de";
         }
 
         private string RVerb(Verb verb)
         {
-            return verb.Infinitive + "dde";
+            return verb.Imperative + "dde";
+        }
+
+        private string StrongErVerb(Verb verb)
+        {
+            if (verb.Imperative[^3] is 'i' or 'ä')
+            {
+                verb.DisplayForm = ChangeShortStemVowelTo(verb.Imperative, "a");
+            }
+            else
+                verb.DisplayForm = verb.Imperative[^2] switch
+                {
+                    'i' => ChangeLongStemVowelTo(verb.Imperative, "e"),
+                    'u' => ChangeLongStemVowelTo(verb.Imperative, "ö"),
+                    'y' => ChangeLongStemVowelTo(verb.Imperative, "ö"),
+                    'a' => ChangeLongStemVowelTo(verb.Imperative, "o"),
+                    'å' => ChangeLongStemVowelTo(verb.Imperative, "ä"),
+                    _ => throw new ApplicationException("aktiverade ingen förväntad verbregel för starka er verb")
+                };
+
+            return verb.DisplayForm;
         }
 
         private string ChangeLongStemVowelTo(string displayForm, string newVowel)
@@ -53,32 +73,6 @@ namespace Application.Services.VerbTenses
         {
             return string.Concat(displayForm.Remove(displayForm.Length - 3), newVowel,
                 displayForm.AsSpan(displayForm.Length - 2, 2));
-        }
-
-        private string StrongErVerb(Verb verb)
-        {
-            const string matchEndingWithABeforeDoubleConsonantBeforeI = "([i][^aeiouyåäö]{2}[a])$";
-            if (Regex.IsMatch(verb.Infinitive, $"{matchEndingWithABeforeDoubleConsonantBeforeI}"))
-            {
-                verb.DisplayForm = InfinitiveWithoutA(verb);
-                verb.DisplayForm = ChangeShortStemVowelTo(verb.DisplayForm, "a");
-            }
-            else switch (verb.Infinitive[^3])
-            {
-                case 'i':
-                    verb.DisplayForm = InfinitiveWithoutA(verb);
-                    verb.DisplayForm = ChangeLongStemVowelTo(verb.DisplayForm, "e");
-                    break;
-                case 'u':
-                case 'y':
-                    verb.DisplayForm = InfinitiveWithoutA(verb);
-                    verb.DisplayForm = ChangeLongStemVowelTo(verb.DisplayForm, "ö"); 
-                    break;
-                default:
-                    throw new ApplicationException("aktiverade ingen förväntad verbregel för starka er verb");
-                }
-
-            return verb.DisplayForm;
         }
     }
 }

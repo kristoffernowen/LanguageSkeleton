@@ -54,8 +54,8 @@ namespace Application.Services
             sentence.Predicate = await _verbService.GetAsync(dto.Predicate.Id);
             sentence.Predicate = dto.Tense switch
             {
-                "present" => _presentTenseService.PresentTense(sentence.Predicate),
-                "past" => _pastTenseService.PastTense(sentence.Predicate),
+                "present" => _presentTenseService.SetDisplayForm(sentence.Predicate),
+                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),
                 _ => throw new InvalidEnumArgumentException()
             };
             sentence.StatementOrQuestion = dto.StatementOrQuestion switch

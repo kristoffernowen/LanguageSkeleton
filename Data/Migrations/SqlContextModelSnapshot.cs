@@ -71,7 +71,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PresentTense")
+                    b.Property<string>("SetDisplayForm")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -100,7 +100,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PastTense")
+                    b.Property<string>("SetDisplayForm")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

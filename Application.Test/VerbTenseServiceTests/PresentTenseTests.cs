@@ -21,7 +21,7 @@ namespace Application.Test.VerbTenseServiceTests
         {
             var talk = await _mockRepo.Object.GetVerbAsync("9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad");
 
-            talk = _presentTenseService.PresentTense(talk);
+            talk = _presentTenseService.SetDisplayForm(talk);
 
             Assert.Equal("pratar", talk.DisplayForm);
         }
@@ -31,7 +31,7 @@ namespace Application.Test.VerbTenseServiceTests
         {
             var read = await _mockRepo.Object.GetVerbAsync("8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f");
 
-            read = _presentTenseService.PresentTense(read);
+            read = _presentTenseService.SetDisplayForm(read);
 
             Assert.Equal("läser", read.DisplayForm);
         }
@@ -41,7 +41,7 @@ namespace Application.Test.VerbTenseServiceTests
         {
             var drive = await _mockRepo.Object.GetVerbAsync("f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e");
 
-            drive = _presentTenseService.PresentTense(drive);
+            drive = _presentTenseService.SetDisplayForm(drive);
 
             Assert.Equal("kör", drive.DisplayForm);
         }
@@ -51,7 +51,7 @@ namespace Application.Test.VerbTenseServiceTests
         {
             var live = await _mockRepo.Object.GetVerbAsync("b86e5e92 - 960c - 42bf - bda8 - 9339529dd951");
 
-            live = _presentTenseService.PresentTense(live);
+            live = _presentTenseService.SetDisplayForm(live);
 
             Assert.Equal("bor", live.DisplayForm);
         }

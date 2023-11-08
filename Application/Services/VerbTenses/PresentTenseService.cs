@@ -5,15 +5,13 @@ using Application.Contracts.Services.Verb;
 
 namespace Application.Services.VerbTenses
 {
-    public class PresentTenseService : TenseService, IPresentTenseService
+    public class PresentTenseService : IPresentTenseService
     {
-        public Verb PresentTense(Verb verb)
+        public Verb SetDisplayForm(Verb verb)
         {
             verb.DisplayForm = verb.PresentTense;
 
             return verb;
         }
-
-        
     }
 }
