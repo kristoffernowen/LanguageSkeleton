@@ -50,6 +50,7 @@ namespace Application.Services.NounForms
             var displayForm = noun.NounArticle switch
             {
                 NounArticle.en when Regex.IsMatch(noun.SingularForm, vowels) => noun.SingularForm + "n",
+                NounArticle.en when noun.SingularForm.EndsWith("el") => noun.SingularForm + "n",
                 NounArticle.en => noun.SingularForm + "en",
                 NounArticle.ett when Regex.IsMatch(noun.SingularForm, vowels) => noun.SingularForm + "t",
                 NounArticle.ett => noun.SingularForm + "et",
