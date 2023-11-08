@@ -941,6 +941,26 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string VerbConjugation { get; set; }
 
+        [System.Text.Json.Serialization.JsonPropertyName("imperative")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string Imperative { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PresentTense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("pastTense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PastTense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("supine")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string Supine { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]

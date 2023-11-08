@@ -18,9 +18,9 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public void ShouldReturnDeclensionOneDefinitiveSingular()
+        public async void ShouldReturnDeclensionOneDefinitiveSingular()
         {
-            var girl = _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
+            var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Singular;
             girl = _definitenessService.Definite(girl);
 
@@ -28,9 +28,9 @@ namespace Application.Test.NounServiceTests
         }
         
         [Fact]
-        public void ShouldReturnDeclensionOneIndefiniteSingular()
+        public async void ShouldReturnDeclensionOneIndefiniteSingular()
         {
-            var girl = _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
+            var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Singular;
             girl = _definitenessService.Indefinite(girl);
 
@@ -38,9 +38,9 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public void ShouldReturnDeclensionOneDefinitivePlural()
+        public async void ShouldReturnDeclensionOneDefinitivePlural()
         {
-            var girl = _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
+            var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Plural;
             girl = _definitenessService.Definite(girl);
 
@@ -48,18 +48,18 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public void ShouldReturnDeclensionFiveDefinitiveSingular()
+        public async void ShouldReturnDeclensionFiveDefinitiveSingular()
         {
-            var house = _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
+            var house = await _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
             house.GrammaticalNumber = GrammaticalNumber.Singular;
             house = _definitenessService.Definite(house);
 
             Assert.Equal("huset", house.DisplayForm);
         }
         [Fact]
-        public void ShouldReturnDeclensionFiveDefinitivePlural()
+        public async void ShouldReturnDeclensionFiveDefinitivePlural()
         {
-            var house = _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
+            var house = await _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
             house.GrammaticalNumber = GrammaticalNumber.Plural;
             house = _definitenessService.Definite(house);
 

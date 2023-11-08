@@ -16,9 +16,9 @@ namespace LanguageSkeleton.Api.Controllers
         }
 
         [HttpPost]
-        public void Create(CreateNounInputDto dto)
+        public async Task Create(CreateNounInputDto dto)
         {
-            _nounService.CreateNounAsync(dto.ToModel());
+            await _nounService.CreateNounAsync(dto.ToModel());
         }
 
         [HttpGet]

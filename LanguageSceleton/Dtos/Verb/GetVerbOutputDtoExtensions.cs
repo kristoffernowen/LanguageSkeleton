@@ -6,8 +6,8 @@ public static class GetVerbOutputDtoExtensions
     {
         return new GetVerbOutputDto()
         {
-            BaseForm = model.BaseForm,
-            DisplayForm = !string.IsNullOrEmpty(model.DisplayForm)  ? model.DisplayForm : model.BaseForm,
+            BaseForm = model.Infinitive,
+            DisplayForm = !string.IsNullOrEmpty(model.DisplayForm)  ? model.DisplayForm : model.Infinitive,
             Id = model.Id
         };
     }

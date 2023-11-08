@@ -5,6 +5,7 @@
         ArVerb,
         ErVerb,
         RVerb,
-        StrongErVerb
+        StrongErVerb,
+        IrregularVerb
     }
 }

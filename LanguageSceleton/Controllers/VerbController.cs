@@ -16,9 +16,9 @@ namespace LanguageSkeleton.Api.Controllers
         }
 
         [HttpPost]
-        public void CreateVerb(CreateVerbInputDto dto)
+        public async Task CreateVerb(CreateVerbInputDto dto)
         {
-            _verbService.CreateVerbAsync(dto.ToModel());
+            await _verbService.CreateVerbAsync(dto.ToModel());
         }
 
         [HttpGet]

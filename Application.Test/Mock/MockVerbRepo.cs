@@ -40,9 +40,9 @@ namespace Application.Test.Mock
 
             var mockRepo = new Mock<IVerbRepo>();
 
-            mockRepo.Setup(r => r.GetAllVerbAsync()).Returns(verbs);
+            mockRepo.Setup(r => r.GetAllVerbAsync()).ReturnsAsync(verbs);
 
-            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>())).Returns((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
+            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>())).ReturnsAsync((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
 
             return mockRepo;
         }

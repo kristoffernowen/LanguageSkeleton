@@ -17,6 +17,7 @@ public static class CreateSentenceVerbOutputDtoExtensions
                 VerbConjugation.ErVerb => "ErVerb",
                 VerbConjugation.RVerb => "RVerb",
                 VerbConjugation.StrongErVerb => "StrongErVerb",
+                VerbConjugation.IrregularVerb => "IrregularVerb",
                 _ => throw new InvalidEnumArgumentException()
             },
             DisplayForm = model.DisplayForm

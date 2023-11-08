@@ -6,7 +6,7 @@ public static class GetAllVerbsOutputDtoExtensions
     {
         return new GetAllVerbsOutputDto()
         {
-            BaseForm = verb.BaseForm,
+            BaseForm = verb.PresentTense,
             Id = verb.Id
         };
     }

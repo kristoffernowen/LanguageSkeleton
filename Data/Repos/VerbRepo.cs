@@ -31,6 +31,11 @@ namespace Data.Repos
             return _mapper.Map<Verb>(verb);
         }
 
+        public Task<Verb> GetVerbFromPresentTenseAsync(string presentTense)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Verb>> GetAllVerbAsync()
         {
             return await _sqlContext.Verbs.Select(v => _mapper.Map<Verb>(v)).ToListAsync();

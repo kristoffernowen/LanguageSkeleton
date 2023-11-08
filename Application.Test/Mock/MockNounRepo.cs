@@ -30,9 +30,9 @@ public class MockNounRepo
         };
 
         var mockRepo = new Mock<INounRepo>();
-        mockRepo.Setup(r => r.GetAllNounsAsync()).Returns(nouns);
+        mockRepo.Setup (r =>  r.GetAllNounsAsync()).ReturnsAsync(nouns);
         mockRepo.Setup(r => r.GetNounAsync(It.IsAny<string>()))
-            .Returns((string id) => nouns.FirstOrDefault(x => x.Id == id)!);
+            .ReturnsAsync((string id) => nouns.FirstOrDefault(x => x.Id == id)!);
 
         return mockRepo;
     }

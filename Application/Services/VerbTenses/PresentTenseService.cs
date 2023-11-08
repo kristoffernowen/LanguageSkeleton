@@ -9,41 +9,11 @@ namespace Application.Services.VerbTenses
     {
         public Verb PresentTense(Verb verb)
         {
-            verb.DisplayForm = verb.VerbConjugation switch
-            {
-                VerbConjugation.ArVerb => ArVerb(verb),
-                VerbConjugation.ErVerb => ErVerb(verb),
-                VerbConjugation.RVerb => RVerb(verb),
-                VerbConjugation.StrongErVerb => StrongErVerb(verb),
-                _ => throw new InvalidEnumArgumentException()
-            };
+            verb.DisplayForm = verb.PresentTense;
 
             return verb;
         }
 
-        private string ArVerb(Verb verb)
-        {
-            return InfinitiveWithoutA(verb) + "ar";
-        }
-
-        private string ErVerb(Verb verb)
-        {
-            if (verb.Infinitive.EndsWith("ra"))
-            {
-                return InfinitiveWithoutA(verb);
-            }
-
-            return InfinitiveWithoutA(verb) + "er";
-        }
-
-        private string RVerb(Verb verb)
-        {
-            return verb.Infinitive + "r";
-        }
-
-        private string StrongErVerb(Verb verb)
-        {
-            return InfinitiveWithoutA(verb) + "er";
-        }
+        
     }
 }
