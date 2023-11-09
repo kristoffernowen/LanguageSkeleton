@@ -7,7 +7,7 @@ namespace Application.Dtos.Sentence.Input
     {
 
         public string Id { get; set; } = null!;
-        public string BaseForm { get; set; } = null!;
+        public string PresentTense { get; set; } = null!;
 
         public string VerbConjugation { get; set; } = null!;
     }
@@ -19,7 +19,7 @@ namespace Application.Dtos.Sentence.Input
             return new Domain.Models.Words.Verb()
             {
                 Id = inputDto.Id,
-                BaseForm = inputDto.BaseForm,
+                PresentTense = inputDto.PresentTense,
                 VerbConjugation = inputDto.VerbConjugation switch
                 {
                     "ArVerb" => VerbConjugation.ArVerb,

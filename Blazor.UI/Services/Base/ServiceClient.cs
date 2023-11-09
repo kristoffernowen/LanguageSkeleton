@@ -889,10 +889,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string PresentTense { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("verbConjugation")]
 
@@ -910,10 +910,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string PresentTense { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("displayForm")]
 
@@ -931,15 +931,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     public partial class CreateVerbInputDto
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("infinitive")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("verbConjugation")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string VerbConjugation { get; set; }
+        public string Infinitive { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("imperative")]
 
@@ -960,6 +955,11 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string Supine { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("verbConjugation")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string VerbConjugation { get; set; }
 
     }
 
@@ -983,10 +983,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     public partial class GetAllVerbsOutputDto
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string PresentTense { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
 
@@ -1035,10 +1035,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string PresentTense { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("displayForm")]
 

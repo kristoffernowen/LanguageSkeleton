@@ -10,7 +10,7 @@ public static class CreateSentenceVerbOutputDtoExtensions
         return new CreateSentenceVerbOutputDto()
         {
             Id = model.Id,
-            BaseForm = model.BaseForm,
+            PresentTense = model.PresentTense,
             VerbConjugation = model.VerbConjugation switch
             {
                 VerbConjugation.ArVerb => "ArVerb",

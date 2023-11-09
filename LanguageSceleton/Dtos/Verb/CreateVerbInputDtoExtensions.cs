@@ -9,7 +9,7 @@ public static class CreateVerbInputDtoExtensions
     {
         var verb = new Domain.Models.Words.Verb
         {
-            BaseForm = dto.BaseForm,
+            Infinitive = dto.Infinitive,
             VerbConjugation = dto.VerbConjugation switch
             {
                 "ArVerb" => VerbConjugation.ArVerb,

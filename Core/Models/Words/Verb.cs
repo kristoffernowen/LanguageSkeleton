@@ -4,7 +4,7 @@ namespace Domain.Models.Words;
 
 public class Verb : Word
 {
-    public string Infinitive => BaseForm;
+    public string Infinitive { get; set; } = null!;
     public string Imperative { get; set; } = null!;
     public string PresentTense { get; set; } = null!;
     public string? PastTense { get; set; } = null!;

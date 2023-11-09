@@ -17,7 +17,7 @@ namespace Blazor.UI.Pages.Test
         {
             Predicate = new CreateSentenceVerbInputDto()
             {
-                BaseForm = "",
+                PresentTense = "",
                 Id = "",
                 VerbConjugation = ""
             },
@@ -41,7 +41,7 @@ namespace Blazor.UI.Pages.Test
             {
                 DisplayForm = "",
                 Id = "",
-                BaseForm = "",
+                PresentTense = "",
                 VerbConjugation = ""
             } ,
             StatementOrQuestion = "",
@@ -59,7 +59,7 @@ namespace Blazor.UI.Pages.Test
         private async Task HandleSubmit()
         {
             SelectedPredicate = await VerbService.Get(CreateSentenceInput.Predicate.Id);
-            CreateSentenceInput.Predicate.BaseForm = SelectedPredicate.BaseForm;
+            CreateSentenceInput.Predicate.PresentTense = SelectedPredicate.PresentTense;
             DisplayCreatedSentence = await SentenceService.Create(CreateSentenceInput);
         }
 

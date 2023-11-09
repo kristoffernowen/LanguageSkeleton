@@ -11,26 +11,10 @@ namespace Data.MapperProfiles
         {
             CreateMap<NounEntity, Noun>().ReverseMap();
             CreateMap<VerbEntity, Verb>().ReverseMap();
-            CreateMap<WeakVerb, Verb>()
-                .ForMember(dest => dest.BaseForm,
-                    opt =>
-                        opt.MapFrom(src => src.PresentTense));
-            CreateMap<Verb, WeakVerb>();
-            CreateMap<ShortVerb, Verb>()
-                .ForMember(dest => dest.BaseForm,
-                    opt =>
-                        opt.MapFrom(src => src.PresentTense));
-            CreateMap<Verb, ShortVerb>();
-            CreateMap<StrongVerb, Verb>()
-                .ForMember(dest => dest.BaseForm,
-                    opt =>
-                        opt.MapFrom(src => src.PresentTense));
-            CreateMap<Verb, StrongVerb>();
-            CreateMap<IrregularVerb, Verb>()
-                .ForMember(dest => dest.BaseForm,
-                    opt => 
-                        opt.MapFrom(src => src.PresentTense));
-            CreateMap<Verb, IrregularVerb>();
+            CreateMap<WeakVerb, Verb>().ReverseMap();
+            CreateMap<ShortVerb, Verb>().ReverseMap();
+            CreateMap<StrongVerb, Verb>().ReverseMap();
+            CreateMap<IrregularVerb, Verb>().ReverseMap();
         }
     }
 }
