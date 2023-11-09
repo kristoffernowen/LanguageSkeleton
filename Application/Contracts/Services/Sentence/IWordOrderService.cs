@@ -1,6 +1,6 @@
 ﻿namespace Application.Contracts.Services.Sentence
 {
-    public interface IQuestionOrStatementService
+    public interface IWordOrderService
     {
         public Task<Domain.Models.Sentence.Sentence> ToQuestionOrStatementAsync(Domain.Models.Sentence.Sentence sentence);
     }

@@ -6,7 +6,8 @@
     <div class="form-group">
         <label for="noun">Välj ditt subjekt</label>
         <InputSelect class="form-control" id="noun" @bind-Value="CreateSentenceInput.SubjectNounInput.Id">
-            @foreach(var item in Nouns)
+            <option>Vem eller vad agerar?</option>
+            @foreach (var item in Nouns)
             {
                 <option value="@item.Id">@item.SingularForm</option>
             }
@@ -43,6 +44,7 @@
     <div class="form-group mb-2">
         <label for="verb">Välj predikat</label>
         <InputSelect class="form-control" id="verb" @bind-Value="CreateSentenceInput.Predicate.Id">
+            <option>Vad görs eller händer?</option>
             @foreach (var item in Verbs)
             {
                 <option value="@item.Id">@item.PresentTense</option>

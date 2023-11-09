@@ -15,19 +15,19 @@ namespace Application.Services
         private readonly IGrammaticalNumberService _grammaticalNumberService;
         private readonly INounService _nounService;
         private readonly IVerbService _verbService;
-        private readonly IQuestionOrStatementService _questionOrStatementService;
+        private readonly IWordOrderService _wordOrderService;
         private readonly IPastTenseService _pastTenseService;
         private readonly IPresentTenseService _presentTenseService;
 
         public PopulateSentenceService(IDefinitenessService definitenessService, IGrammaticalNumberService grammaticalNumberService,
-            INounService nounService, IVerbService verbService, IQuestionOrStatementService questionOrStatementService,
+            INounService nounService, IVerbService verbService, IWordOrderService wordOrderService,
             IPastTenseService pastTenseService, IPresentTenseService presentTenseService)
         {
             _definitenessService = definitenessService;
             _grammaticalNumberService = grammaticalNumberService;
             _nounService = nounService;
             _verbService = verbService;
-            _questionOrStatementService = questionOrStatementService;
+            _wordOrderService = wordOrderService;
             _pastTenseService = pastTenseService;
             _presentTenseService = presentTenseService;
         }
@@ -64,7 +64,7 @@ namespace Application.Services
                 "question" => StatementOrQuestion.Question,
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentence = await _questionOrStatementService.ToQuestionOrStatementAsync(sentence);
+            sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
                                             sentence.DisplaySentence[1..];
 

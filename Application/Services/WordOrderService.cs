@@ -5,7 +5,7 @@ using Domain.Models.Sentence;
 
 namespace Application.Services
 {
-    public class QuestionOrStatementService : IQuestionOrStatementService
+    public class WordOrderService : IWordOrderService
     {
         public async Task<Sentence> ToQuestionOrStatementAsync(Sentence sentence)
         {

@@ -21,7 +21,7 @@ namespace Application
                 services.AddScoped<IPastTenseService, PastTenseService>();
                 services.AddScoped<IGrammaticalNumberService, GrammaticalNumberService>();
                 services.AddScoped<IDefinitenessService, DefinitenessService>();
-                services.AddScoped<IQuestionOrStatementService, QuestionOrStatementService>();
+                services.AddScoped<IWordOrderService, WordOrderService>();
 
                 return services;
             }
