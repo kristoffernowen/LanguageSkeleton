@@ -50,18 +50,9 @@ namespace Blazor.UI.Pages.Test
             Tense = "",
             DisplaySentence = ""
         };
-        
-        private GetNounOutputDto SelectedSubjectNoun { get; set; } = new GetNounOutputDto();
-        private GetVerbOutputDto SelectedPredicate { get; set; } = new GetVerbOutputDto();
-
-        
-
-        
 
         private async Task HandleSubmit()
         {
-            SelectedPredicate = await VerbService.Get(CreateSentenceInput.Predicate.Id);
-            CreateSentenceInput.Predicate.PresentTense = SelectedPredicate.PresentTense;
             DisplayCreatedSentence = await SentenceService.Create(CreateSentenceInput);
         }
 
