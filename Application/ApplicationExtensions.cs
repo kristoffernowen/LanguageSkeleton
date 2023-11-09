@@ -2,6 +2,7 @@
 using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
 using Application.Services;
+using Application.Services.Clause;
 using Application.Services.NounForms;
 using Application.Services.VerbTenses;
 using Domain.Enums;
@@ -22,6 +23,7 @@ namespace Application
                 services.AddScoped<IGrammaticalNumberService, GrammaticalNumberService>();
                 services.AddScoped<IDefinitenessService, DefinitenessService>();
                 services.AddScoped<IWordOrderService, WordOrderService>();
+                services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
 
                 return services;
             }

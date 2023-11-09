@@ -11,5 +11,6 @@ namespace Domain.Models.Sentence
         public Tense Tense { get; set; }
         public StatementOrQuestion StatementOrQuestion { get; set; }
         public string DisplaySentence { get; set; } = "";
+        public ClauseElement? SubjectElement { get; set; }
     }
 }
