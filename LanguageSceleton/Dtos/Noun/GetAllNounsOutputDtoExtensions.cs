@@ -6,7 +6,7 @@ public static class GetAllNounsOutputDtoExtensions
     {
         return new GetAllNounsOutputDto()
         {
-            BaseForm = noun.BaseForm,
+            SingularForm = noun.SingularForm,
             Id = noun.Id
         };
     }

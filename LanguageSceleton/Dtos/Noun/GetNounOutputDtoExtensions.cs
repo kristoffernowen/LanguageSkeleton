@@ -9,7 +9,7 @@ public static class GetNounOutputDtoExtensions
     {
         var dto = new GetNounOutputDto()
         {
-            BaseForm = model.BaseForm,
+            SingularForm = model.SingularForm,
             DisplayForm = model.DisplayForm!,
             Id = model.Id
         };

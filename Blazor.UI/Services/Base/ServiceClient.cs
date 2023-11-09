@@ -744,10 +744,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     public partial class CreateNounInputDto
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("singularForm")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string SingularForm { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("pluralForm")]
 
@@ -967,10 +967,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     public partial class GetAllNounsOutputDto
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("singularForm")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string SingularForm { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
 
@@ -1004,10 +1004,10 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("baseForm")]
+        [System.Text.Json.Serialization.JsonPropertyName("singularForm")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string BaseForm { get; set; }
+        public string SingularForm { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("displayForm")]
 

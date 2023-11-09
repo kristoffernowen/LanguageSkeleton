@@ -2,7 +2,7 @@
 {
     public class GetAllNounsOutputDto
     {
-        public string BaseForm { get; set; } = null!;
+        public string SingularForm { get; set; } = null!;
         public string Id { get; set; } = null!;
     }
 }

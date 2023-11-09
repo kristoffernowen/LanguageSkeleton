@@ -9,7 +9,7 @@ public static class CreateNounInputDtoExtensions
     {
         var noun = new Domain.Models.Words.Noun
         {
-            BaseForm = dto.BaseForm,
+            SingularForm = dto.SingularForm,
             PluralForm = dto.PluralForm,
             NounArticle = dto.NounArticle switch
             {
