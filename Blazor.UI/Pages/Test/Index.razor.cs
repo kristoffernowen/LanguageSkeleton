@@ -26,7 +26,9 @@ namespace Blazor.UI.Pages.Test
                 Id = "",
                 Definiteness = "",
                 GrammaticalNumber = ""
-            }
+            },
+            StatementOrQuestion = "",
+            Tense = ""
         };
         private CreateSentenceOutputDto DisplayCreatedSentence { get; set; } = new CreateSentenceOutputDto()
         {

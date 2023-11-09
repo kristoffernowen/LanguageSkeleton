@@ -1,12 +1,11 @@
-﻿@page "/test/"
+﻿@page "/basic-sentence/"
 
-<h3>Index Test</h3>
+<h3>Skapa ett enkelt påstående eller fråga</h3>
 
 <EditForm Model="@CreateSentenceInput" OnValidSubmit="HandleSubmit">
     <div class="form-group">
-        <label for="noun">Noun</label>
+        <label for="noun">Välj ditt subjekt</label>
         <InputSelect class="form-control" id="noun" @bind-Value="CreateSentenceInput.SubjectNounInput.Id">
-            <option>Select Noun</option>
             @foreach(var item in Nouns)
             {
                 <option value="@item.Id">@item.SingularForm</option>
@@ -14,50 +13,43 @@
         </InputSelect>
     </div>
     <div class="form-group">
-        <label for="definiteness">Bestämdhet</label>
+        <label for="definiteness">Välj bestämdhet</label>
         <InputSelect class="form-control" id="definiteness" @bind-Value="CreateSentenceInput.SubjectNounInput.Definiteness">
-            <option>Välj bestämdhet</option>
             <option value="definite">bestämd</option>
             <option value="indefinite">obestämd</option>
         </InputSelect>
     </div>
     <div class="form-group">
-        <label for="grammaticalNumber">Antal</label>
+        <label for="grammaticalNumber">Välj antal</label>
         <InputSelect class="form-control" id="grammaticalNumber" @bind-Value="CreateSentenceInput.SubjectNounInput.GrammaticalNumber">
-            <option>Välj antal</option>
             <option value="singular">singular</option>
             <option value="plural">plural</option>
         </InputSelect>
     </div>
     <div class="form-group">
-        <label for="tense">Tense</label>
+        <label for="tense">Välj tempus</label>
         <InputSelect class="form-control" id="tense" @bind-Value="CreateSentenceInput.Tense">
-            <option>Select tense</option>
-            
-                <option value="past">past</option>
-                <option value="present">present</option>
-            
+                <option value="past">imperfekt</option>
+                <option value="present">presens</option>
         </InputSelect>
     </div>
     <div class="form-group">
-        <label for="statementOrQuestion">Statement or Question?</label>
+        <label for="statementOrQuestion">Välj struktur: påstående eller fråga</label>
         <InputSelect class="form-control" id="statementOrQuestion" @bind-Value="CreateSentenceInput.StatementOrQuestion">
-            <option>Select statement or question</option>
-                <option value="statement">Påstående</option>
-                <option value="question">Fråga</option>
+                <option value="statement">påstående</option>
+                <option value="question">fråga</option>
         </InputSelect>
     </div>
-    <div class="form-group">
-        <label for="verb">Verb</label>
+    <div class="form-group mb-2">
+        <label for="verb">Välj predikat</label>
         <InputSelect class="form-control" id="verb" @bind-Value="CreateSentenceInput.Predicate.Id">
-            <option>Select verb</option>
             @foreach (var item in Verbs)
             {
                 <option value="@item.Id">@item.PresentTense</option>
             }
         </InputSelect>
     </div>
-    <button class="btn btn-success" type="submit">Submit Request</button>
+    <button class="btn btn-success" type="submit">Visa resultat</button>
 </EditForm>
 
 <div class="mt-5">
