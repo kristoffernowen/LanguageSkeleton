@@ -20,6 +20,8 @@ namespace Application
                 services.AddScoped<INounService, NounService>();
                 services.AddScoped<IPresentTenseService, PresentTenseService>();
                 services.AddScoped<IPastTenseService, PastTenseService>();
+                services.AddScoped<IPerfectTenseService, PerfectTenseService>();
+                services.AddScoped<IFutureTenseService, FutureTenseService>();
                 services.AddScoped<IGrammaticalNumberService, GrammaticalNumberService>();
                 services.AddScoped<IDefinitenessService, DefinitenessService>();
                 services.AddScoped<IWordOrderService, WordOrderService>();

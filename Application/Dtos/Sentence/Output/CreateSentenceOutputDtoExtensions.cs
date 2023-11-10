@@ -17,6 +17,8 @@ public static class CreateSentenceOutputDtoExtensions
             {
                 Tense.Past => "past",
                 Tense.Present => "present",
+                Tense.Perfect => "perfect",
+                Tense.Future => "future",
                 _ => throw new InvalidEnumArgumentException()
             },
             StatementOrQuestion = model.StatementOrQuestion switch

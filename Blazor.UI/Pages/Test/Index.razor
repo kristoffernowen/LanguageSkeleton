@@ -30,15 +30,17 @@
     <div class="form-group">
         <label for="tense">Välj tempus</label>
         <InputSelect class="form-control" id="tense" @bind-Value="CreateSentenceInput.Tense">
-                <option value="past">imperfekt</option>
-                <option value="present">presens</option>
+            <option value="present">presens</option>
+            <option value="future">futurum</option>
+            <option value="perfect">perfekt</option>
+            <option value="past">imperfekt</option>
         </InputSelect>
     </div>
     <div class="form-group">
         <label for="statementOrQuestion">Välj struktur: påstående eller fråga</label>
         <InputSelect class="form-control" id="statementOrQuestion" @bind-Value="CreateSentenceInput.StatementOrQuestion">
-                <option value="statement">påstående</option>
-                <option value="question">fråga</option>
+            <option value="statement">påstående</option>
+            <option value="question">fråga</option>
         </InputSelect>
     </div>
     <div class="form-group mb-2">

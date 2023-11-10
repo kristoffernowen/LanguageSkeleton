@@ -3,5 +3,7 @@
 public enum Tense
 {
     Present,
-    Past
+    Past,
+    Perfect,
+    Future
 }

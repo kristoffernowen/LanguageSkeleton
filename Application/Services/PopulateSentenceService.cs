@@ -18,10 +18,13 @@ namespace Application.Services
         private readonly IWordOrderService _wordOrderService;
         private readonly IPastTenseService _pastTenseService;
         private readonly IPresentTenseService _presentTenseService;
+        private readonly IPerfectTenseService _perfectTenseService;
+        private readonly IFutureTenseService _futureTenseService;
 
         public PopulateSentenceService(IDefinitenessService definitenessService, IGrammaticalNumberService grammaticalNumberService,
             INounService nounService, IVerbService verbService, IWordOrderService wordOrderService,
-            IPastTenseService pastTenseService, IPresentTenseService presentTenseService)
+            IPastTenseService pastTenseService, IPresentTenseService presentTenseService, IPerfectTenseService perfectTenseService,
+            IFutureTenseService futureTenseService)
         {
             _definitenessService = definitenessService;
             _grammaticalNumberService = grammaticalNumberService;
@@ -30,6 +33,8 @@ namespace Application.Services
             _wordOrderService = wordOrderService;
             _pastTenseService = pastTenseService;
             _presentTenseService = presentTenseService;
+            _perfectTenseService = perfectTenseService;
+            _futureTenseService = futureTenseService;
         }
         
         public async Task<CreateSentenceOutputDto> CreateSentenceBaseAsync(CreateSentenceInputDto dto)
@@ -52,10 +57,29 @@ namespace Application.Services
             sentence.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
 
             sentence.Predicate = await _verbService.GetAsync(dto.Predicate.Id);
+
+
+            //Fix better please
+
+            sentence.Tense = dto.Tense switch
+            {
+                "present" => Tense.Present,
+                "perfect" => Tense.Perfect,
+                "future" => Tense.Future,
+                "past" => Tense.Past,
+                _ => throw new InvalidEnumArgumentException()
+            };
+
+            //
+
+
+
             sentence.Predicate = dto.Tense switch
             {
                 "present" => _presentTenseService.SetDisplayForm(sentence.Predicate),
-                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),
+                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),                     
+                "perfect" => _perfectTenseService.SetDisplayForm(sentence.Predicate),
+                "future" => _futureTenseService.SetDisplayForm(sentence.Predicate),
                 _ => throw new InvalidEnumArgumentException()
             };
             sentence.StatementOrQuestion = dto.StatementOrQuestion switch

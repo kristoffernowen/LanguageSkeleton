@@ -19,25 +19,59 @@ namespace Application.Services
         {
             sentence.DisplaySentence = sentence.StatementOrQuestion switch
             {
-                StatementOrQuestion.Statement => Statement(sentence),
-                StatementOrQuestion.Question => Question(sentence),
+                StatementOrQuestion.Statement => await Statement(sentence),
+                StatementOrQuestion.Question => await Question(sentence),
                 _ => throw new InvalidEnumArgumentException()
             };
 
             return sentence;
         }
 
-        private string Question(Sentence sentence)
+        private async Task<string> Question(Sentence sentence)
         {
             sentence.SubjectElement = _arrangeClauseElementService.Subject(sentence);
+            sentence.PredicateElement = await _arrangeClauseElementService.Predicate(sentence);
 
-            return $"{sentence.Predicate.DisplayForm} {sentence.SubjectElement.DisplayForm}?";
+            return sentence.Tense switch
+            {
+                Tense.Present or Tense.Past =>
+                    $"{sentence.Predicate.DisplayForm} {sentence.SubjectElement.DisplayForm}?",
+                Tense.Perfect or Tense.Future =>
+                    $"{sentence.PredicateElement.DictionaryOfWords["verb two"].DisplayForm}" +
+                    $" {sentence.SubjectElement.DisplayForm} {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}?",
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
-        private string Statement(Sentence sentence)
+        private async Task<string> Statement(Sentence sentence)
         {
-            sentence.SubjectElement = _arrangeClauseElementService.Subject(sentence);
+            try
+            {
+                sentence.SubjectElement = _arrangeClauseElementService.Subject(sentence);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("subject", e);
+                throw;
+            }
+            try
+            {
+                sentence.PredicateElement = await _arrangeClauseElementService.Predicate(sentence);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("predicate statement: ", e);
+                throw;
+            }
 
-            return $"{sentence.SubjectElement.DisplayForm} {sentence.Predicate.DisplayForm}.";
+            return sentence.Tense switch
+            {
+                Tense.Present or Tense.Past => $"{sentence.SubjectElement.DisplayForm} " +
+                                               $" {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}.",
+                Tense.Perfect or Tense.Future =>
+                    $"{sentence.SubjectElement.DisplayForm} {sentence.PredicateElement.DictionaryOfWords["verb two"].DisplayForm}" +
+                    $" {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}.",
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

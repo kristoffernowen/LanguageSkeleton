@@ -12,5 +12,6 @@ namespace Domain.Models.Sentence
         public StatementOrQuestion StatementOrQuestion { get; set; }
         public string DisplaySentence { get; set; } = "";
         public ClauseElement? SubjectElement { get; set; }
+        public ClauseElement? PredicateElement { get; set; }
     }
 }

@@ -15,6 +15,8 @@ public static class CreateSentenceInputDtoExtensions
             {
                 "past" => Tense.Past,
                 "present" => Tense.Present,
+                "perfect" => Tense.Perfect,
+                "future" => Tense.Future,
                 _ => throw new InvalidEnumArgumentException()
             },
             StatementOrQuestion = dto.StatementOrQuestion switch
