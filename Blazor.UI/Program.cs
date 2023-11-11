@@ -19,5 +19,6 @@ builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = n
 builder.Services.AddScoped<INounService, NounService>();
 builder.Services.AddScoped<IVerbService, VerbService>();
 builder.Services.AddScoped<ISentenceService, SentenceService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 await builder.Build().RunAsync();

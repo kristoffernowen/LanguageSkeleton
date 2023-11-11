@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Services.Noun;
+﻿using System.Reflection;
+using Application.Contracts.Services.Noun;
 using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
 using Application.Services;
@@ -26,6 +27,7 @@ namespace Application
                 services.AddScoped<IDefinitenessService, DefinitenessService>();
                 services.AddScoped<IWordOrderService, WordOrderService>();
                 services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
+                services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
                 return services;
             }

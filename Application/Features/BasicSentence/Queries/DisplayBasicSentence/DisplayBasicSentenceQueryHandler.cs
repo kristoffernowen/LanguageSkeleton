@@ -2,14 +2,13 @@
 using Application.Contracts.Services.Noun;
 using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
-using Application.Dtos.Sentence.Input;
-using Application.Dtos.Sentence.Output;
 using Domain.Enums;
 using Domain.Models.Sentence;
+using MediatR;
 
-namespace Application.Services
+namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
 {
-    public class PopulateSentenceService : IPopulateSentenceService
+    public class DisplayBasicSentenceQueryHandler : IRequestHandler<DisplayBasicSentenceQuery, DisplayBasicSentenceDto>
     {
         private readonly IDefinitenessService _definitenessService;
         private readonly INounService _nounService;
@@ -20,7 +19,7 @@ namespace Application.Services
         private readonly IPerfectTenseService _perfectTenseService;
         private readonly IFutureTenseService _futureTenseService;
 
-        public PopulateSentenceService(IDefinitenessService definitenessService,
+        public DisplayBasicSentenceQueryHandler(IDefinitenessService definitenessService,
             INounService nounService, IVerbService verbService, IWordOrderService wordOrderService,
             IPastTenseService pastTenseService, IPresentTenseService presentTenseService, IPerfectTenseService perfectTenseService,
             IFutureTenseService futureTenseService)
@@ -34,18 +33,18 @@ namespace Application.Services
             _perfectTenseService = perfectTenseService;
             _futureTenseService = futureTenseService;
         }
-        
-        public async Task<CreateSentenceOutputDto> CreateSentenceBaseAsync(CreateSentenceInputDto dto)
+        public async Task<DisplayBasicSentenceDto> Handle(DisplayBasicSentenceQuery request, CancellationToken cancellationToken)
         {
             var sentence = new Sentence();
-            sentence.SubjectNoun = await _nounService.GetAsync(dto.SubjectNounInput.Id);
-            sentence.SubjectNoun.GrammaticalNumber = dto.SubjectNounInput.GrammaticalNumber switch
+
+            sentence.SubjectNoun = await _nounService.GetAsync(request.SubjectId);
+            sentence.SubjectNoun.GrammaticalNumber = request.SubjectGrammaticalNumber switch
             {
                 "singular" => GrammaticalNumber.Singular,
                 "plural" => GrammaticalNumber.Plural,
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentence.SubjectNoun.Definiteness = dto.SubjectNounInput.Definiteness switch
+            sentence.SubjectNoun.Definiteness = request.SubjectDefiniteness switch
             {
                 "definite" => Definiteness.Definite,
                 "indefinite" => Definiteness.Indefinite,
@@ -54,12 +53,12 @@ namespace Application.Services
             sentence.SubjectNoun = _nounService.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
             sentence.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
 
-            sentence.Predicate = await _verbService.GetAsync(dto.Predicate.Id);
+            sentence.Predicate = await _verbService.GetAsync(request.PredicateId);
 
 
             //Fix better please
 
-            sentence.Tense = dto.Tense switch
+            sentence.Tense = request.Tense switch
             {
                 "present" => Tense.Present,
                 "perfect" => Tense.Perfect,
@@ -72,15 +71,15 @@ namespace Application.Services
 
 
 
-            sentence.Predicate = dto.Tense switch
+            sentence.Predicate = request.Tense switch
             {
                 "present" => _presentTenseService.SetDisplayForm(sentence.Predicate),
-                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),                     
+                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),
                 "perfect" => _perfectTenseService.SetDisplayForm(sentence.Predicate),
                 "future" => _futureTenseService.SetDisplayForm(sentence.Predicate),
                 _ => throw new InvalidEnumArgumentException()
             };
-            sentence.StatementOrQuestion = dto.StatementOrQuestion switch
+            sentence.StatementOrQuestion = request.StatementOrQuestion switch
             {
                 "statement" => StatementOrQuestion.Statement,
                 "question" => StatementOrQuestion.Question,
@@ -88,19 +87,9 @@ namespace Application.Services
             };
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
-                                            sentence.DisplaySentence[1..];
+                                       sentence.DisplaySentence[1..];
 
-            return sentence.ToCreateOutputDto();
-        }
-
-        public async Task<Sentence> AddObjectToSentence(Sentence sentence)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Sentence> RemoveObjectFromSentence(Sentence sentence)
-        {
-            throw new NotImplementedException();
+            return sentence.ToDto();
         }
     }
 }

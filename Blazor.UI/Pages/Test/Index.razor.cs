@@ -1,3 +1,5 @@
+using AutoMapper;
+using Blazor.UI.Models.BasicSentence;
 using global::Microsoft.AspNetCore.Components;
 using Blazor.UI.Services.Nouns;
 using Blazor.UI.Services.Sentence;
@@ -11,49 +13,63 @@ namespace Blazor.UI.Pages.Test
         [Inject] private INounService NounService { get; set; }
         [Inject] private IVerbService VerbService { get; set; }
         [Inject] private ISentenceService SentenceService { get; set; }
+        [Inject] private IMapper _mapper { get; set; }
         private List<GetAllNounsOutputDto> Nouns { get; set; } = new List<GetAllNounsOutputDto>();
         private List<GetAllVerbsOutputDto> Verbs { get; set; } = new List<GetAllVerbsOutputDto>();
-        private CreateSentenceInputDto CreateSentenceInput { get; } = new CreateSentenceInputDto()
+
+        private DisplayBasicSentenceVm DisplaySentence = new DisplayBasicSentenceVm()
         {
-            Predicate = new CreateSentenceVerbInputDto()
-            {
-                PresentTense = "",
-                Id = "",
-                VerbConjugation = ""
-            },
-            SubjectNounInput = new CreateSentenceNounInputDto()
-            {
-                Id = "",
-                Definiteness = "",
-                GrammaticalNumber = ""
-            },
-            StatementOrQuestion = "",
-            Tense = ""
-        };
-        private CreateSentenceOutputDto DisplayCreatedSentence { get; set; } = new CreateSentenceOutputDto()
-        {
-            SubjectNoun = new CreateSentenceNounOutputDto()
-            {
-                Definiteness = "definite",
-                GrammaticalNumber = "singular",
-                Id = "",
-                DisplayForm = ""
-            },
-            Predicate = new CreateSentenceVerbOutputDto()
-            {
-                DisplayForm = "",
-                Id = "",
-                PresentTense = "",
-                VerbConjugation = ""
-            } ,
-            StatementOrQuestion = "",
             Tense = "",
+            StatementOrQuestion = "",
+            SubjectId = "",
+            SubjectDefiniteness = "",
+            SubjectGrammaticalNumber = "",
+            PredicateId = "",
+            PredicatePresentTense = "",
+            PredicateVerbConjugation = "",
             DisplaySentence = ""
         };
+        // private CreateSentenceInputDto CreateSentenceInput { get; } = new CreateSentenceInputDto()
+        // {
+        //     Predicate = new CreateSentenceVerbInputDto()
+        //     {
+        //         PresentTense = "",
+        //         Id = "",
+        //         VerbConjugation = ""
+        //     },
+        //     SubjectNounInput = new CreateSentenceNounInputDto()
+        //     {
+        //         Id = "",
+        //         Definiteness = "",
+        //         GrammaticalNumber = ""
+        //     },
+        //     StatementOrQuestion = "",
+        //     Tense = ""
+        // };
+        // private CreateSentenceOutputDto DisplayCreatedSentence { get; set; } = new CreateSentenceOutputDto()
+        // {
+        //     SubjectNoun = new CreateSentenceNounOutputDto()
+        //     {
+        //         Definiteness = "definite",
+        //         GrammaticalNumber = "singular",
+        //         Id = "",
+        //         DisplayForm = ""
+        //     },
+        //     Predicate = new CreateSentenceVerbOutputDto()
+        //     {
+        //         DisplayForm = "",
+        //         Id = "",
+        //         PresentTense = "",
+        //         VerbConjugation = ""
+        //     } ,
+        //     StatementOrQuestion = "",
+        //     Tense = "",
+        //     DisplaySentence = ""
+        // };
 
         private async Task HandleSubmit()
         {
-            DisplayCreatedSentence = await SentenceService.Create(CreateSentenceInput);
+            DisplaySentence = await SentenceService.DisplayBasicSentence(_mapper.Map<DisplayBasicSentenceQuery>(DisplaySentence));
         }
 
         protected override async Task OnInitializedAsync()

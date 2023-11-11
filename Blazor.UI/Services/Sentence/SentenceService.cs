@@ -1,22 +1,33 @@
-﻿using Blazor.UI.Services.Base;
+﻿using AutoMapper;
+using Blazor.UI.Models.BasicSentence;
+using Blazor.UI.Services.Base;
 using LanguageSkeleton.Blazor.UI.Services.Base;
 
 namespace Blazor.UI.Services.Sentence
 {
     public interface ISentenceService
     {
-        public Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto);
+        public Task<DisplayBasicSentenceVm> DisplayBasicSentence(DisplayBasicSentenceQuery request);
     }
 
     public class SentenceService : BaseHttpService, ISentenceService
     {
-        public SentenceService(IClient client) : base(client)
+        private readonly IMapper _mapper;
+
+        public SentenceService(IClient client, IMapper mapper) : base(client)
         {
+            _mapper = mapper;
         }
 
-        public async Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto)
+        // public async Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto)
+        // {
+        //     return await _client.SentenceContentAsync(dto);
+        // }
+
+        public async Task<DisplayBasicSentenceVm> DisplayBasicSentence(DisplayBasicSentenceQuery request)
         {
-            return await _client.SentenceContentAsync(dto);
+            var dto = await _client.SentenceContentAsync(request);
+            return _mapper.Map<DisplayBasicSentenceVm>(dto);
         }
     }
 }

@@ -51,12 +51,12 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CreateSentenceOutputDto> SentenceContentAsync(CreateSentenceInputDto body);
+        System.Threading.Tasks.Task<DisplayBasicSentenceDto> SentenceContentAsync(DisplayBasicSentenceQuery body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CreateSentenceOutputDto> SentenceContentAsync(CreateSentenceInputDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<DisplayBasicSentenceDto> SentenceContentAsync(DisplayBasicSentenceQuery body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -340,7 +340,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CreateSentenceOutputDto> SentenceContentAsync(CreateSentenceInputDto body)
+        public virtual System.Threading.Tasks.Task<DisplayBasicSentenceDto> SentenceContentAsync(DisplayBasicSentenceQuery body)
         {
             return SentenceContentAsync(body, System.Threading.CancellationToken.None);
         }
@@ -348,7 +348,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CreateSentenceOutputDto> SentenceContentAsync(CreateSentenceInputDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<DisplayBasicSentenceDto> SentenceContentAsync(DisplayBasicSentenceQuery body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/SentenceContent");
@@ -389,7 +389,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<CreateSentenceOutputDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<DisplayBasicSentenceDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -767,167 +767,6 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceInputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("predicate")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceVerbInputDto Predicate { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("subjectNounInput")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceNounInputDto SubjectNounInput { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("objectNoun")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceNounInputDto ObjectNoun { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("tense")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Tense { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("statementOrQuestion")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string StatementOrQuestion { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceNounInputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Id { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("grammaticalNumber")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string GrammaticalNumber { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("definiteness")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Definiteness { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceNounOutputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Id { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("grammaticalNumber")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string GrammaticalNumber { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("definiteness")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Definiteness { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("displayForm")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string DisplayForm { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceOutputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("predicate")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceVerbOutputDto Predicate { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("subjectNoun")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceNounOutputDto SubjectNoun { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("objectNoun")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public CreateSentenceNounOutputDto ObjectNoun { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("tense")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Tense { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("statementOrQuestion")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string StatementOrQuestion { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("displaySentence")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string DisplaySentence { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceVerbInputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Id { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string PresentTense { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("verbConjugation")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string VerbConjugation { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateSentenceVerbOutputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Id { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string PresentTense { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("displayForm")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string DisplayForm { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("verbConjugation")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string VerbConjugation { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateVerbInputDto
     {
 
@@ -960,6 +799,143 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string VerbConjugation { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class DisplayBasicSentenceDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("tense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string Tense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("statementOrQuestion")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string StatementOrQuestion { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("displaySentence")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string DisplaySentence { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectGrammaticalNumber")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectGrammaticalNumber { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectDefiniteness")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectDefiniteness { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectDisplayForm")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectDisplayForm { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicateId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicateId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicatePresentTense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicatePresentTense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicateDisplayForm")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicateDisplayForm { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicateVerbConjugation")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicateVerbConjugation { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectGrammaticalNumber")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectGrammaticalNumber { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectDefiniteness")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectDefiniteness { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class DisplayBasicSentenceQuery
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("tense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string Tense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("statementOrQuestion")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string StatementOrQuestion { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectGrammaticalNumber")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectGrammaticalNumber { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("subjectDefiniteness")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string SubjectDefiniteness { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicateId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicateId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicatePresentTense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicatePresentTense { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("predicateVerbConjugation")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PredicateVerbConjugation { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectGrammaticalNumber")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectGrammaticalNumber { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("objectDefiniteness")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string ObjectDefiniteness { get; set; }
 
     }
 
