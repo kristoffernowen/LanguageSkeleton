@@ -19,29 +19,30 @@ namespace Application.Services.Clause
         {
             var clauseElement = new ClauseElement();
 
-            switch (sentence.SubjectNoun.Definiteness)
+            if (sentence.SubjectNoun.Definiteness == Definiteness.Indefinite)
             {
-                case Definiteness.Indefinite when sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Singular:
-                    clauseElement.DictionaryOfWords.Add("article", new Article(){DisplayForm = $"{sentence.SubjectNoun.NounArticle}", Id = "en"});
-                    break;
-                case Definiteness.Indefinite when
-                    sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Plural:
-                    clauseElement.DictionaryOfWords.Add("article", new Article() { DisplayForm = "några", Id = "några"});
-                    break;
+                clauseElement["article"] = sentence.SubjectNoun.Definiteness switch
+                {
+                    Definiteness.Indefinite when sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Singular =>
+                        new Article() { DisplayForm = $"{sentence.SubjectNoun.NounArticle}", Id = "en" },
+                    Definiteness.Indefinite when sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Plural =>
+                        new Article() { DisplayForm = "några", Id = "några" },
+                    _ => clauseElement["article"]
+                };
             }
 
-            clauseElement.DictionaryOfWords.Add("subject", sentence.SubjectNoun);
+            clauseElement["subject"] = sentence.SubjectNoun;
 
             if (sentence.SubjectNoun.Definiteness == Definiteness.Definite)
             {
-                clauseElement.DisplayForm = $"{clauseElement.DictionaryOfWords["subject"].DisplayForm}";
+                clauseElement.DisplayForm = $"{clauseElement["subject"].DisplayForm}";
             }
             else
             {
                 try
                 {
                     clauseElement.DisplayForm =
-                        $"{clauseElement.DictionaryOfWords["article"].DisplayForm} {clauseElement.DictionaryOfWords["subject"].DisplayForm}";
+                        $"{clauseElement["article"].DisplayForm} {clauseElement["subject"].DisplayForm}";
                 }
                 catch (Exception e)
                 {
@@ -57,7 +58,7 @@ namespace Application.Services.Clause
         {
             var clauseElement = new ClauseElement();
 
-            clauseElement.DictionaryOfWords.Add("verb one", sentence.Predicate);
+            clauseElement["verb one"] = sentence.Predicate;
 
             // var comes = await _verbService.GetAsync("72b8f2b2-5bce-463d-9393-dbb7939f4135"); // kommer
             // comes.DisplayForm = comes.PresentTense;
@@ -67,12 +68,12 @@ namespace Application.Services.Clause
                 case Tense.Perfect:
                     var have = await _verbService.GetAsync("5079b3c5-3404-4a0f-bb10-302d49deb62a");
                     have.DisplayForm = have.PresentTense;
-                    clauseElement.DictionaryOfWords.Add("verb two", have);
+                    clauseElement["verb two"] = have;
                     break;
                 case Tense.Future:
                     var shall = await _verbService.GetAsync("a2a39778-35ea-499a-b6d3-4b69ceaeaa52"); // ska
                     shall.DisplayForm = shall.PresentTense;
-                    clauseElement.DictionaryOfWords.Add("verb two", shall);
+                    clauseElement["verb two"] = shall;
                 break;
             }
 

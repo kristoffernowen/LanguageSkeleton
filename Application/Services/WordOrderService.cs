@@ -37,8 +37,8 @@ namespace Application.Services
                 Tense.Present or Tense.Past =>
                     $"{sentence.Predicate.DisplayForm} {sentence.SubjectElement.DisplayForm}?",
                 Tense.Perfect or Tense.Future =>
-                    $"{sentence.PredicateElement.DictionaryOfWords["verb two"].DisplayForm}" +
-                    $" {sentence.SubjectElement.DisplayForm} {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}?",
+                    $"{sentence.PredicateElement["verb two"].DisplayForm}" +
+                    $" {sentence.SubjectElement.DisplayForm} {sentence.PredicateElement["verb one"].DisplayForm}?",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -50,7 +50,7 @@ namespace Application.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine("subject", e);
+                Console.WriteLine("subject" + e);
                 throw;
             }
             try
@@ -59,17 +59,17 @@ namespace Application.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine("predicate statement: ", e);
+                Console.WriteLine("predicate statement: " + e);
                 throw;
             }
 
             return sentence.Tense switch
             {
                 Tense.Present or Tense.Past => $"{sentence.SubjectElement.DisplayForm} " +
-                                               $" {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}.",
+                                               $" {sentence.PredicateElement["verb one"].DisplayForm}.",
                 Tense.Perfect or Tense.Future =>
-                    $"{sentence.SubjectElement.DisplayForm} {sentence.PredicateElement.DictionaryOfWords["verb two"].DisplayForm}" +
-                    $" {sentence.PredicateElement.DictionaryOfWords["verb one"].DisplayForm}.",
+                    $"{sentence.SubjectElement.DisplayForm} {sentence.PredicateElement["verb two"].DisplayForm}" +
+                    $" {sentence.PredicateElement["verb one"].DisplayForm}.",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
