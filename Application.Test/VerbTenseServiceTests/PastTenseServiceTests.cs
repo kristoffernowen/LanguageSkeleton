@@ -55,4 +55,23 @@ public class PastTenseServiceTests
 
         Assert.Equal("bodde", live.DisplayForm);
     }
+
+    [Fact]
+    public async void ShouldReturnStrongErVerb()
+    {
+        var fly = await _mockRepo.Object.GetVerbAsync("601e8d14-6152-4a48-9065-0b6be35a8773");
+        fly = _pastTenseService.SetDisplayForm(fly);
+
+        Assert.Equal("flög", fly.DisplayForm);
+    }
+
+    [Fact]
+    public async void ShouldReturnIrregularVerb()
+    {
+        var verbDo = await _mockRepo.Object.GetVerbAsync("64d55fee-b1c5-42e6-b4ab-d8365dc5a83d");
+
+        verbDo = _pastTenseService.SetDisplayForm(verbDo);
+
+        Assert.Equal("gjorde", verbDo.DisplayForm);
+    }
 }

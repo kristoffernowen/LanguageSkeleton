@@ -14,7 +14,7 @@ public class MockNounRepo
             new()
             {
                 Id = "495a642f-c518-4b31-a91f-5586a0221694",
-                BaseForm = "flicka",
+                SingularForm = "flicka",
                 PluralForm = "flickor",
                 NounArticle = NounArticle.en,
                 NounDeclension = NounDeclension.One
@@ -22,7 +22,7 @@ public class MockNounRepo
             new()
             {
                 Id = "2c893003-26df-409d-b85f-15b2f251dd9d",
-                BaseForm = "hus",
+                SingularForm = "hus",
                 PluralForm = "hus",
                 NounArticle = NounArticle.ett,
                 NounDeclension = NounDeclension.Five
