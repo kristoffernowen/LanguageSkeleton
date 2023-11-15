@@ -56,22 +56,20 @@ namespace Application.Services.Clause
 
         public async Task<ClauseElement> Predicate(Sentence sentence)
         {
-            var clauseElement = new ClauseElement();
-
-            clauseElement["verb one"] = sentence.Predicate;
-
-            // var comes = await _verbService.GetAsync("72b8f2b2-5bce-463d-9393-dbb7939f4135"); // kommer
-            // comes.DisplayForm = comes.PresentTense;
+            var clauseElement = new ClauseElement
+            {
+                ["verb one"] = sentence.Predicate
+            };
 
             switch (sentence.Tense)
             {
                 case Tense.Perfect:
-                    var have = await _verbService.GetAsync("5079b3c5-3404-4a0f-bb10-302d49deb62a");
+                    var have = await _verbService.GetByPresentTense("har");
                     have.DisplayForm = have.PresentTense;
                     clauseElement["verb two"] = have;
                     break;
                 case Tense.Future:
-                    var shall = await _verbService.GetAsync("a2a39778-35ea-499a-b6d3-4b69ceaeaa52"); // ska
+                    var shall = await _verbService.GetByPresentTense("ska");
                     shall.DisplayForm = shall.PresentTense;
                     clauseElement["verb two"] = shall;
                 break;

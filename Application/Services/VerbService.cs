@@ -26,5 +26,10 @@ namespace Application.Services
         {
             return await _verbRepo.GetVerbAsync(id);
         }
+
+        public async Task<Verb> GetByPresentTense(string presentTense)
+        {
+            return await _verbRepo.GetVerbFromPresentTenseAsync(presentTense);
+        }
     }
 }

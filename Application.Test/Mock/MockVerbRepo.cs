@@ -9,7 +9,6 @@ namespace Application.Test.Mock
     {
         public static Mock<IVerbRepo> GetVerbMockVerbRepo()
         {
-           // var id = "";
             var verbs = new List<Verb>()
             {
                 new()
@@ -56,14 +55,35 @@ namespace Application.Test.Mock
                     Supine = "gjort",
                     Id = "64d55fee-b1c5-42e6-b4ab-d8365dc5a83d",
                     VerbConjugation = VerbConjugation.IrregularVerb
+                },
+                new()
+                {
+                    Imperative = "ska",
+                    Infinitive = "skola",
+                    PresentTense = "ska",
+                    PastTense = "skulle",
+                    Supine = "skolat",
+                    Id = "be14684a-263f-41ab-bb3b-7a36b47050ad",
+                    VerbConjugation = VerbConjugation.IrregularVerb
+                },
+                new()
+                {
+                    Imperative = "ha",
+                    Infinitive = "ha",
+                    PresentTense = "har",
+                    PastTense = "hade",
+                    Supine = "haft",
+                    Id = "159c8265-61a8-4709-8f03-b0b42eeff84f",
+                    VerbConjugation = VerbConjugation.IrregularVerb
                 }
             };
 
             var mockRepo = new Mock<IVerbRepo>();
-
             mockRepo.Setup(r => r.GetAllVerbAsync()).ReturnsAsync(verbs);
-
-            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>())).ReturnsAsync((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
+            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>()))
+                .ReturnsAsync((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
+            mockRepo.Setup(r => r.GetVerbFromPresentTenseAsync(It.IsAny<string>()))
+                .ReturnsAsync((string presentTense) => verbs.FirstOrDefault(x => x.PresentTense == presentTense)!);
 
             return mockRepo;
         }

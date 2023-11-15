@@ -49,9 +49,11 @@ namespace Data.Repos
             return _mapper.Map<Verb>(result);
         }
 
-        public Task<Verb> GetVerbFromPresentTenseAsync(string presentTense)
+        public async Task<Verb> GetVerbFromPresentTenseAsync(string presentTense)
         {
-            throw new NotImplementedException();
+            var result = await _context.BaseVerbs.FirstOrDefaultAsync(v=> v.PresentTense == presentTense);
+
+            return _mapper.Map<Verb>(result);
         }
 
 
