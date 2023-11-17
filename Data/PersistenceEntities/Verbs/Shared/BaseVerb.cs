@@ -1,6 +1,9 @@
-﻿namespace Data.PersistenceEntities.Verbs.Shared
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Data.PersistenceEntities.Verbs.Shared
 {
-    public class BaseVerb : IVerb
+    [Table("Verbs")]
+    public class BaseVerb 
     {
         public string Id { get; set; } = null!;
         public string Imperative { get; set; } = null!;

@@ -3,6 +3,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20231117153541_removeVerbTable")]
+    partial class removeVerbTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +71,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Verbs");
+                    b.ToTable("BaseVerbs");
 
                     b.HasDiscriminator<string>("verb_type").HasValue("BaseVerb");
 
@@ -91,16 +94,12 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Verbs");
-
                     b.HasDiscriminator().HasValue("Irregular");
                 });
 
             modelBuilder.Entity("Data.PersistenceEntities.Verbs.ShortVerb", b =>
                 {
                     b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
-
-                    b.ToTable("Verbs");
 
                     b.HasDiscriminator().HasValue("Short");
                 });
@@ -112,16 +111,12 @@ namespace Data.Migrations
                     b.Property<int>("VowelChangeGroup")
                         .HasColumnType("int");
 
-                    b.ToTable("Verbs");
-
                     b.HasDiscriminator().HasValue("Strong");
                 });
 
             modelBuilder.Entity("Data.PersistenceEntities.Verbs.WeakVerb", b =>
                 {
                     b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
-
-                    b.ToTable("Verbs");
 
                     b.HasDiscriminator().HasValue("Weak");
                 });
