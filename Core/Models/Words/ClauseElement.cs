@@ -3,7 +3,7 @@
     public class ClauseElement
     {
         public string DisplayForm { get; set; } = null!;
-        private Dictionary<string, Word> Words { get; set; } = new Dictionary<string, Word>();
+        private Dictionary<string, Word> Words { get; } = new();
 
         public Word this[string key]
         {
