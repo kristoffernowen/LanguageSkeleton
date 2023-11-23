@@ -8,8 +8,7 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
 {
     public class DisplayBasicSentenceQueryHandler : IRequestHandler<DisplayBasicSentenceQuery, DisplayBasicSentenceDto>
     {
-        private readonly IDefinitenessService _definitenessService;
-        private readonly INounService _nounService;
+        private readonly INounManager _nounManager;
         private readonly IVerbService _verbService;
         private readonly IWordOrderService _wordOrderService;
         private readonly IPastTenseService _pastTenseService;
@@ -17,13 +16,11 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
         private readonly IPerfectTenseService _perfectTenseService;
         private readonly IFutureTenseService _futureTenseService;
 
-        public DisplayBasicSentenceQueryHandler(IDefinitenessService definitenessService,
-            INounService nounService, IVerbService verbService, IWordOrderService wordOrderService,
+        public DisplayBasicSentenceQueryHandler(INounManager nounManager, IVerbService verbService, IWordOrderService wordOrderService,
             IPastTenseService pastTenseService, IPresentTenseService presentTenseService, IPerfectTenseService perfectTenseService,
             IFutureTenseService futureTenseService)
         {
-            _definitenessService = definitenessService;
-            _nounService = nounService;
+            _nounManager = nounManager;
             _verbService = verbService;
             _wordOrderService = wordOrderService;
             _pastTenseService = pastTenseService;
@@ -33,10 +30,10 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
         }
         public async Task<DisplayBasicSentenceDto> Handle(DisplayBasicSentenceQuery request, CancellationToken cancellationToken)
         {
-            var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
+            var sentence = request.ToSentence(await _nounManager.NounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
 
-            sentence.SubjectNoun = _nounService.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
-            sentence.SubjectNoun = _definitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun = _nounManager.NounService.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun = _nounManager.DefinitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
             sentence.Predicate = request.Tense switch
             {
                 "present" => _presentTenseService.SetDisplayForm(sentence.Predicate),

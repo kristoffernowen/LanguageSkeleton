@@ -28,6 +28,7 @@ namespace Application
                 services.AddScoped<IWordOrderService, WordOrderService>();
                 services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+                services.AddScoped<INounManager, NounManager>();
 
                 return services;
             }
