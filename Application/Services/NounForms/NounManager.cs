@@ -5,16 +5,16 @@ namespace Application.Services.NounForms
 {
     public class NounManager : INounManager
     {
-        private readonly Lazy<INounService> _nounService;
         private readonly Lazy<IDefinitenessService> _definitenessService;
+        private readonly Lazy<IGrammaticalNumberService> _grammaticalNumberService;
 
         public NounManager(INounRepo nounRepo)
         {
-            _nounService = new Lazy<INounService>(() => new NounService(nounRepo));
             _definitenessService = new Lazy<IDefinitenessService>(() => new DefinitenessService());
+            _grammaticalNumberService = new Lazy<IGrammaticalNumberService>(() => new GrammaticalNumberService());
         }
 
-        public INounService NounService => _nounService.Value;
+        public IGrammaticalNumberService GrammaticalNumber => _grammaticalNumberService.Value;
         public IDefinitenessService DefinitenessService => _definitenessService.Value;
     }
 }

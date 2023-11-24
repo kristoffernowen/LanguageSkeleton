@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Application.Contracts.Repos;
 using Application.Contracts.Services.Noun;
 using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
@@ -9,37 +10,32 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
     public class DisplayBasicSentenceQueryHandler : IRequestHandler<DisplayBasicSentenceQuery, DisplayBasicSentenceDto>
     {
         private readonly INounManager _nounManager;
-        private readonly IVerbService _verbService;
+        private readonly ITenseManager _tenseManager;
         private readonly IWordOrderService _wordOrderService;
-        private readonly IPastTenseService _pastTenseService;
-        private readonly IPresentTenseService _presentTenseService;
-        private readonly IPerfectTenseService _perfectTenseService;
-        private readonly IFutureTenseService _futureTenseService;
+        private readonly IVerbService _verbService;
+        private readonly INounService _nounService;
 
-        public DisplayBasicSentenceQueryHandler(INounManager nounManager, IVerbService verbService, IWordOrderService wordOrderService,
-            IPastTenseService pastTenseService, IPresentTenseService presentTenseService, IPerfectTenseService perfectTenseService,
-            IFutureTenseService futureTenseService)
+
+        public DisplayBasicSentenceQueryHandler(INounManager nounManager, ITenseManager tenseManager, IWordOrderService wordOrderService, IVerbService verbService, INounService nounService)
         {
             _nounManager = nounManager;
-            _verbService = verbService;
+            _tenseManager = tenseManager;
             _wordOrderService = wordOrderService;
-            _pastTenseService = pastTenseService;
-            _presentTenseService = presentTenseService;
-            _perfectTenseService = perfectTenseService;
-            _futureTenseService = futureTenseService;
+            _verbService = verbService;
+            _nounService = nounService;
         }
         public async Task<DisplayBasicSentenceDto> Handle(DisplayBasicSentenceQuery request, CancellationToken cancellationToken)
         {
-            var sentence = request.ToSentence(await _nounManager.NounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
+            var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
 
-            sentence.SubjectNoun = _nounManager.NounService.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun = _nounManager.GrammaticalNumber.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
             sentence.SubjectNoun = _nounManager.DefinitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
             sentence.Predicate = request.Tense switch
             {
-                "present" => _presentTenseService.SetDisplayForm(sentence.Predicate),
-                "past" => _pastTenseService.SetDisplayForm(sentence.Predicate),
-                "perfect" => _perfectTenseService.SetDisplayForm(sentence.Predicate),
-                "future" => _futureTenseService.SetDisplayForm(sentence.Predicate),
+                "present" => _tenseManager.PresentTenseService.SetDisplayForm(sentence.Predicate),
+                "past" => _tenseManager.PastTenseService.SetDisplayForm(sentence.Predicate),
+                "perfect" => _tenseManager.PerfectTenseService.SetDisplayForm(sentence.Predicate),
+                "future" => _tenseManager.FutureTenseService.SetDisplayForm(sentence.Predicate),
                 _ => throw new InvalidEnumArgumentException()
             };
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);

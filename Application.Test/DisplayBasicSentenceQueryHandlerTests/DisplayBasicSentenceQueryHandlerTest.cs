@@ -4,42 +4,28 @@ using Application.Contracts.Services.Verb;
 using Application.Features.BasicSentence.Queries.DisplayBasicSentence;
 using Application.Services;
 using Application.Services.Clause;
-using Application.Services.NounForms;
-using Application.Services.VerbTenses;
 using Application.Test.Mock;
 using System.Text.RegularExpressions;
+using Application.Contracts.Repos;
+using Moq;
 
 namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
 {
     public class DisplayBasicSentenceQueryHandlerTest
     {
-        private readonly IDefinitenessService _definitenessService;
-        private readonly INounService _nounService;
-        private readonly IVerbService _verbService;
-        private readonly IWordOrderService _wordOrderService;
-        private readonly IPastTenseService _pastTenseService;
-        private readonly IPresentTenseService _presentTenseService;
-        private readonly IPerfectTenseService _perfectTenseService;
-        private readonly IFutureTenseService _futureTenseService;
+        private readonly INounManager _nounManager = new NounManagerFake();
+        private readonly ITenseManager _tenseManager = new VerbManagerFake();
 
-        public DisplayBasicSentenceQueryHandlerTest()
-        {
-            _definitenessService = new DefinitenessService();
-            _nounService = new NounServiceFake();
-            _verbService = new VerbServiceFake();
-            _wordOrderService = new WordOrderService(new ArrangeClauseElementService(new VerbServiceFake()));
-            _pastTenseService = new PastTenseService();
-            _presentTenseService = new PresentTenseService();
-            _perfectTenseService = new PerfectTenseService();
-            _futureTenseService = new FutureTenseService();
-        }
+        private readonly IVerbService _verbService = new VerbServiceFake();
+        private readonly INounService _nounService = new NounServiceFake();
+        private readonly IWordOrderService _wordOrderService = new WordOrderService(new ArrangeClauseElementService(new VerbServiceFake()));
+
 
         [Fact]
         public async void ShouldReturnBasicSentencePresentTense()
         {
-            var handler = new DisplayBasicSentenceQueryHandler(_definitenessService, _nounService, _verbService,
-                _wordOrderService
-                , _pastTenseService, _presentTenseService, _perfectTenseService, _futureTenseService);
+            var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
+                _wordOrderService, _verbService, _nounService);
 
             var request = new DisplayBasicSentenceQuery()
             {
@@ -65,9 +51,8 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         [Fact]
         public async void ShouldReturnBasicSentencePerfectTenseAsQuestion()
         {
-            var handler = new DisplayBasicSentenceQueryHandler(_definitenessService, _nounService, _verbService,
-                _wordOrderService
-                , _pastTenseService, _presentTenseService, _perfectTenseService, _futureTenseService);
+            var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
+                _wordOrderService, _verbService, _nounService);
 
             var request = new DisplayBasicSentenceQuery()
             {

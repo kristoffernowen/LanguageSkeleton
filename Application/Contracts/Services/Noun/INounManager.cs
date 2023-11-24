@@ -1,8 +1,10 @@
-﻿namespace Application.Contracts.Services.Noun
+﻿using Application.Services.NounForms;
+
+namespace Application.Contracts.Services.Noun
 {
     public interface INounManager
     {
-        INounService NounService { get; }
+        IGrammaticalNumberService GrammaticalNumber { get; }
         IDefinitenessService DefinitenessService { get; }
 
     }

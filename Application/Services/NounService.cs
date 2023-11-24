@@ -27,17 +27,5 @@ namespace Application.Services
         {
             return await _nounRepo.GetNounAsync(id);
         }
-
-        public Noun GrammaticalNumberDisplayForm(Noun noun)
-        {
-            noun.DisplayForm = noun.GrammaticalNumber switch
-            {
-                Domain.Enums.GrammaticalNumber.Singular => noun.SingularForm,
-                Domain.Enums.GrammaticalNumber.Plural => noun.PluralForm,
-                _ => throw new InvalidEnumArgumentException()
-            };
-
-            return noun;
-        }
     }
 }

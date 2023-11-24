@@ -16,7 +16,6 @@ namespace Application
         
             public static IServiceCollection AddApplicationExtensions(this IServiceCollection services)
             {
-                services.AddScoped<IPopulateSentenceService, PopulateSentenceService>();
                 services.AddScoped<IVerbService, VerbService>();
                 services.AddScoped<INounService, NounService>();
                 services.AddScoped<IPresentTenseService, PresentTenseService>();
@@ -29,6 +28,7 @@ namespace Application
                 services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
                 services.AddScoped<INounManager, NounManager>();
+                services.AddScoped<ITenseManager, TenseManager>();
 
                 return services;
             }
