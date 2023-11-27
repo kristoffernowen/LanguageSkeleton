@@ -6,25 +6,25 @@ using Domain.Models.Words;
 
 namespace Application.Services.NounForms
 {
-    public class DefinitenessService : IDefinitenessService
+    public class Definiteness : IDefiniteness
     {
-        public Noun SetDefinitenessDisplayForm(Noun noun)
+        public Noun SetDisplayForm(Noun noun)
         {
             noun = noun.Definiteness switch
             {
-                Definiteness.Indefinite => Indefinite(noun),
-                Definiteness.Definite => Definite(noun),
+                Domain.Enums.Definiteness.Indefinite => Indefinite(noun),
+                Domain.Enums.Definiteness.Definite => Definite(noun),
                 _ => throw new InvalidEnumArgumentException()
             };
             return noun;
         }
         public Noun Definite(Noun noun)
         {
-            noun.Definiteness = Definiteness.Definite;
+            noun.Definiteness = Domain.Enums.Definiteness.Definite;
             noun.DisplayForm = noun.GrammaticalNumber switch
             {
-                GrammaticalNumber.Singular => Singular(noun),
-                GrammaticalNumber.Plural => Plural(noun),
+                Domain.Enums.GrammaticalNumber.Singular => Singular(noun),
+                Domain.Enums.GrammaticalNumber.Plural => Plural(noun),
                 _ => throw new InvalidEnumArgumentException()
             };
 
@@ -33,11 +33,11 @@ namespace Application.Services.NounForms
 
         public Noun Indefinite(Noun noun)
         {
-            noun.Definiteness = Definiteness.Indefinite;
+            noun.Definiteness = Domain.Enums.Definiteness.Indefinite;
             noun.DisplayForm = noun.GrammaticalNumber switch
             {
-                GrammaticalNumber.Singular => noun.SingularForm,
-                GrammaticalNumber.Plural => noun.PluralForm,
+                Domain.Enums.GrammaticalNumber.Singular => noun.SingularForm,
+                Domain.Enums.GrammaticalNumber.Plural => noun.PluralForm,
                 _ => throw new InvalidEnumArgumentException()
             };
 

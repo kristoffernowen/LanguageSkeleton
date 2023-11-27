@@ -1,20 +1,25 @@
-﻿using Application.Contracts.Repos;
-using Application.Contracts.Services.Noun;
+﻿using Application.Contracts.Services.Noun;
+using Domain.Models.Words;
 
 namespace Application.Services.NounForms
 {
     public class NounManager : INounManager
     {
-        private readonly Lazy<IDefinitenessService> _definitenessService;
-        private readonly Lazy<IGrammaticalNumberService> _grammaticalNumberService;
+        private readonly IGrammaticalNumber _grammaticalNumber;
+        private readonly IDefiniteness _definiteness;
 
-        public NounManager(INounRepo nounRepo)
+        public NounManager(IGrammaticalNumber grammaticalNumber, IDefiniteness definiteness)
         {
-            _definitenessService = new Lazy<IDefinitenessService>(() => new DefinitenessService());
-            _grammaticalNumberService = new Lazy<IGrammaticalNumberService>(() => new GrammaticalNumberService());
+            _grammaticalNumber = grammaticalNumber;
+            _definiteness = definiteness;
         }
 
-        public IGrammaticalNumberService GrammaticalNumber => _grammaticalNumberService.Value;
-        public IDefinitenessService DefinitenessService => _definitenessService.Value;
+        public Noun SetDisplayForm(Noun noun)
+        {
+            noun =  _grammaticalNumber.SetDisplayForm(noun);
+            noun = _definiteness.SetDisplayForm(noun);
+
+            return noun;
+        }
     }
 }

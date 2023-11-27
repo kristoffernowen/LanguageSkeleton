@@ -26,8 +26,7 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
         {
             var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
 
-            sentence.SubjectNoun = _nounManager.GrammaticalNumber.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
-            sentence.SubjectNoun = _nounManager.DefinitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun = _nounManager.SetDisplayForm(sentence.SubjectNoun);
             sentence.Predicate = _tenseManager.SetDisplayForm(sentence.Tense, sentence.Predicate);
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +

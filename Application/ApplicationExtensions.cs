@@ -8,6 +8,8 @@ using Application.Services.NounForms;
 using Application.Services.VerbTenses;
 using Domain.Enums;
 using Microsoft.Extensions.DependencyInjection;
+using Definiteness = Application.Services.NounForms.Definiteness;
+using GrammaticalNumber = Application.Services.NounForms.GrammaticalNumber;
 
 namespace Application
 {
@@ -22,8 +24,8 @@ namespace Application
                 services.AddScoped<IPastTenseService, PastTenseService>();
                 services.AddScoped<IPerfectTenseService, PerfectTenseService>();
                 services.AddScoped<IFutureTenseService, FutureTenseService>();
-                services.AddScoped<IGrammaticalNumberService, GrammaticalNumberService>();
-                services.AddScoped<IDefinitenessService, DefinitenessService>();
+                services.AddScoped<IGrammaticalNumber, GrammaticalNumber>();
+                services.AddScoped<IDefiniteness, Definiteness>();
                 services.AddScoped<IWordOrderService, WordOrderService>();
                 services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));

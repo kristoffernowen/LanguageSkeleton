@@ -6,20 +6,19 @@ using Application.Services;
 using Application.Services.Clause;
 using Application.Test.Mock;
 using System.Text.RegularExpressions;
-using Application.Contracts.Repos;
-using Moq;
+using Application.Services.NounForms;
 
 namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
 {
     public class DisplayBasicSentenceQueryHandlerTest
     {
-        private readonly INounManager _nounManager = new NounManagerFake();
+        private readonly INounManager _nounManager = new NounManager(new GrammaticalNumber(), new Definiteness());
+
         private readonly ITenseManager _tenseManager = new TenseManagerFake();
 
         private readonly IVerbService _verbService = new VerbServiceFake();
         private readonly INounService _nounService = new NounServiceFake();
         private readonly IWordOrderService _wordOrderService = new WordOrderService(new ArrangeClauseElementService(new VerbServiceFake()));
-
 
         [Fact]
         public async void ShouldReturnBasicSentencePresentTense()

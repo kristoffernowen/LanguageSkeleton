@@ -4,8 +4,6 @@ namespace Application.Contracts.Services.Noun
 {
     public interface INounManager
     {
-        IGrammaticalNumberService GrammaticalNumber { get; }
-        IDefinitenessService DefinitenessService { get; }
-
+        public Domain.Models.Words.Noun SetDisplayForm(Domain.Models.Words.Noun noun);
     }
 }
