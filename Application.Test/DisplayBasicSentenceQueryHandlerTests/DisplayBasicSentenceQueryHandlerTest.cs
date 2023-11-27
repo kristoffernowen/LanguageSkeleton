@@ -14,7 +14,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
     public class DisplayBasicSentenceQueryHandlerTest
     {
         private readonly INounManager _nounManager = new NounManagerFake();
-        private readonly ITenseManager _tenseManager = new VerbManagerFake();
+        private readonly ITenseManager _tenseManager = new TenseManagerFake();
 
         private readonly IVerbService _verbService = new VerbServiceFake();
         private readonly INounService _nounService = new NounServiceFake();

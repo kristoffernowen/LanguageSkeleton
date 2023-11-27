@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using Application.Contracts.Repos;
-using Application.Contracts.Services.Noun;
+﻿using Application.Contracts.Services.Noun;
 using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
 using MediatR;
@@ -30,14 +28,7 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
 
             sentence.SubjectNoun = _nounManager.GrammaticalNumber.GrammaticalNumberDisplayForm(sentence.SubjectNoun);
             sentence.SubjectNoun = _nounManager.DefinitenessService.SetDefinitenessDisplayForm(sentence.SubjectNoun);
-            sentence.Predicate = request.Tense switch
-            {
-                "present" => _tenseManager.PresentTenseService.SetDisplayForm(sentence.Predicate),
-                "past" => _tenseManager.PastTenseService.SetDisplayForm(sentence.Predicate),
-                "perfect" => _tenseManager.PerfectTenseService.SetDisplayForm(sentence.Predicate),
-                "future" => _tenseManager.FutureTenseService.SetDisplayForm(sentence.Predicate),
-                _ => throw new InvalidEnumArgumentException()
-            };
+            sentence.Predicate = _tenseManager.SetDisplayForm(sentence.Tense, sentence.Predicate);
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
                                        sentence.DisplaySentence[1..];

@@ -1,11 +1,12 @@
 ﻿using Application.Contracts.Services.Verb;
+using Application.Services.VerbTenses;
 using Domain.Enums;
 using Domain.Models.Words;
 using System.ComponentModel;
 
-namespace Application.Services.VerbTenses
+namespace Application.Test.Mock
 {
-    public class TenseManager : ITenseManager
+    public class TenseManagerFake : ITenseManager
     {
         private readonly Lazy<IPresentTenseService> _presentTenseService = new(() => new PresentTenseService());
         private readonly Lazy<IPastTenseService> _pastTenseService = new(() => new PastTenseService());
