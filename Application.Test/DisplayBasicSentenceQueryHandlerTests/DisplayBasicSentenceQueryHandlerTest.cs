@@ -13,9 +13,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
     public class DisplayBasicSentenceQueryHandlerTest
     {
         private readonly INounManager _nounManager = new NounManager(new GrammaticalNumber(), new Definiteness());
-
         private readonly ITenseManager _tenseManager = new TenseManagerFake();
-
         private readonly IVerbService _verbService = new VerbServiceFake();
         private readonly INounService _nounService = new NounServiceFake();
         private readonly IWordOrderService _wordOrderService = new WordOrderService(new ArrangeClauseElementService(new VerbServiceFake()));
