@@ -4,7 +4,6 @@ using Data.PersistenceEntities.Verbs;
 using Domain.Enums;
 using Domain.Models.Words;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Data.Repos
 {

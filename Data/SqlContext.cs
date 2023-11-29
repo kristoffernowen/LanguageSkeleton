@@ -1,10 +1,7 @@
-﻿
-using System.Diagnostics;
-using Data.PersistenceEntities;
-using Data.PersistenceEntities.Verbs;
+﻿using Data.PersistenceEntities;
+using Data.PersistenceEntities.EntityConfiguration;
 using Data.PersistenceEntities.Verbs.Shared;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Data
 {
@@ -19,12 +16,11 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BaseVerb>()
-                .HasDiscriminator<string>("verb_type")
-                .HasValue<WeakVerb>("Weak")
-                .HasValue<ShortVerb>("Short")
-                .HasValue<StrongVerb>("Strong")
-                .HasValue<IrregularVerb>("Irregular");
+            modelBuilder.ApplyConfiguration(new BaseVerbConfiguration());
+            modelBuilder.ApplyConfiguration(new WeakVerbConfiguration());
+            modelBuilder.ApplyConfiguration(new ShortVerbConfiguration());
+            modelBuilder.ApplyConfiguration(new IrregularVerbConfiguration());
+            modelBuilder.ApplyConfiguration(new NounEntityConfiguration());
         }
     }
 }
