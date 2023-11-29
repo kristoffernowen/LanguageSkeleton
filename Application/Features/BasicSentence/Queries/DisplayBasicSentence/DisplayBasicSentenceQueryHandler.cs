@@ -8,16 +8,14 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
     public class DisplayBasicSentenceQueryHandler : IRequestHandler<DisplayBasicSentenceQuery, DisplayBasicSentenceDto>
     {
         private readonly INounManager _nounManager;
-        private readonly ITenseManager _tenseManager;
         private readonly IWordOrderService _wordOrderService;
         private readonly IVerbService _verbService;
         private readonly INounService _nounService;
 
 
-        public DisplayBasicSentenceQueryHandler(INounManager nounManager, ITenseManager tenseManager, IWordOrderService wordOrderService, IVerbService verbService, INounService nounService)
+        public DisplayBasicSentenceQueryHandler(INounManager nounManager, IWordOrderService wordOrderService, IVerbService verbService, INounService nounService)
         {
             _nounManager = nounManager;
-            _tenseManager = tenseManager;
             _wordOrderService = wordOrderService;
             _verbService = verbService;
             _nounService = nounService;
@@ -27,7 +25,7 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
             var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
 
             sentence.SubjectNoun = _nounManager.SetDisplayForm(sentence.SubjectNoun);
-            sentence.Predicate = _tenseManager.SetDisplayForm(sentence.Tense, sentence.Predicate);
+            sentence.Predicate = sentence.TenseBehavior.SetDisplayForm(sentence.Predicate);
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
                                        sentence.DisplaySentence[1..];

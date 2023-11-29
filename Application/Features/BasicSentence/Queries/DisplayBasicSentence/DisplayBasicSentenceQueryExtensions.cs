@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Application.Services.VerbTenses;
 using Domain.Enums;
 using Domain.Models.Sentence;
 using Domain.Models.Words;
@@ -36,6 +37,14 @@ public static class DisplayBasicSentenceQueryExtensions
         {
             "statement" => StatementOrQuestion.Statement,
             "question" => StatementOrQuestion.Question,
+            _ => throw new InvalidEnumArgumentException()
+        };
+        sentence.TenseBehavior = request.Tense switch
+        {
+            "present" => new PresentTense(),
+            "perfect" => new PerfectTense(),
+            "future" => new FutureTense(),
+            "past" => new PastTense(),
             _ => throw new InvalidEnumArgumentException()
         };
 
