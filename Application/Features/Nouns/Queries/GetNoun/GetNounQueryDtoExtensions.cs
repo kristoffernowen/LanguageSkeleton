@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
 
-namespace LanguageSkeleton.Api.Dtos.Noun;
+namespace Application.Features.Nouns.Queries.GetNoun;
 
-public static class GetNounOutputDtoExtensions
+public static class GetNounQueryDtoExtensions
 {
-    public static GetNounOutputDto ToNounOutputDto(this Domain.Models.Words.Noun model)
+    public static GetNounQueryDto ToNounQueryDto(this Domain.Models.Words.Noun model)
     {
-        var dto = new GetNounOutputDto()
+        var dto = new GetNounQueryDto()
         {
             SingularForm = model.SingularForm,
             DisplayForm = model.DisplayForm!,
@@ -29,7 +29,8 @@ public static class GetNounOutputDtoExtensions
             dto.GrammaticalNumber = model.GrammaticalNumber switch
             {
                 GrammaticalNumber.Singular => "singular",
-                GrammaticalNumber.Plural => "plural"
+                GrammaticalNumber.Plural => "plural",
+                _ => throw new InvalidEnumArgumentException()
             };
         }
 

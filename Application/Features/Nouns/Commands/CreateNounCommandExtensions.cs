@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
 
-namespace LanguageSkeleton.Api.Dtos.Noun;
+namespace Application.Features.Nouns.Commands;
 
-public static class CreateNounInputDtoExtensions
+public static class CreateNounCommandExtensions
 {
-    public static Domain.Models.Words.Noun ToModel(this CreateNounInputDto dto)
+    public static Domain.Models.Words.Noun ToModel(this CreateNounCommand dto)
     {
         var noun = new Domain.Models.Words.Noun
         {

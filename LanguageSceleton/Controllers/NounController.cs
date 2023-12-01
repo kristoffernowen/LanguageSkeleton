@@ -1,5 +1,7 @@
-﻿using Application.Contracts.Services.Noun;
-using LanguageSkeleton.Api.Dtos.Noun;
+﻿using Application.Features.Nouns.Commands;
+using Application.Features.Nouns.Queries.GetAllNouns;
+using Application.Features.Nouns.Queries.GetNoun;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageSkeleton.Api.Controllers
@@ -8,33 +10,29 @@ namespace LanguageSkeleton.Api.Controllers
     [ApiController]
     public class NounController : ControllerBase
     {
-        private readonly INounService _nounService;
+        private readonly IMediator _mediator;
 
-        public NounController(INounService nounService)
+        public NounController(IMediator mediator)
         {
-            _nounService = nounService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task Create(CreateNounInputDto dto)
+        public async Task Create(CreateNounCommand command)
         {
-            await _nounService.CreateNounAsync(dto.ToModel());
+            await _mediator.Send(command);
         }
-
+        
         [HttpGet]
-        public async Task<List<GetAllNounsOutputDto>> GetNouns()
+        public async Task<List<GetAllNounsQueryDto>> GetNouns()
         {
-            var result = await _nounService.GetAllAsync();
-
-            return result.Select(n => n.ToDto()).ToList();
+            return await _mediator.Send(new GetAllNounsQuery());
         }
 
         [HttpGet("{id}")]
-        public async Task<GetNounOutputDto> GetNoun(string id)
+        public async Task<GetNounQueryDto> GetNoun(string id)
         {
-            var noun = await _nounService.GetAsync(id);
-
-            return noun.ToNounOutputDto();
+            return await _mediator.Send(new GetNounQuery(id));
         }
     }
 }

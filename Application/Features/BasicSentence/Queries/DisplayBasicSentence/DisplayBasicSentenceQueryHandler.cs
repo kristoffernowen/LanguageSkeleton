@@ -11,21 +11,21 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
         private readonly INounManager _nounManager;
         private readonly ITenseManager _tenseManager;
         private readonly IWordOrderService _wordOrderService;
-        private readonly INounService _nounService;
         private readonly IVerbRepo _verbRepo;
+        private readonly INounRepo _nounRepo;
 
 
-        public DisplayBasicSentenceQueryHandler(INounManager nounManager, ITenseManager tenseManager, IWordOrderService wordOrderService, INounService nounService, IVerbRepo verbRepo)
+        public DisplayBasicSentenceQueryHandler(INounManager nounManager, ITenseManager tenseManager, IWordOrderService wordOrderService, IVerbRepo verbRepo, INounRepo nounRepo)
         {
             _nounManager = nounManager;
             _tenseManager = tenseManager;
             _wordOrderService = wordOrderService;
-            _nounService = nounService;
             _verbRepo = verbRepo;
+            _nounRepo = nounRepo;
         }
         public async Task<DisplayBasicSentenceDto> Handle(DisplayBasicSentenceQuery request, CancellationToken cancellationToken)
         {
-            var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbRepo.GetVerbAsync(request.PredicateId));
+            var sentence = request.ToSentence(await _nounRepo.GetNounAsync(request.SubjectId), await _verbRepo.GetVerbAsync(request.PredicateId));
 
             sentence.SubjectNoun = _nounManager.SetDisplayForm(sentence.SubjectNoun);
             sentence.Predicate = _tenseManager.SetDisplayForm(sentence.Tense, sentence.Predicate);
