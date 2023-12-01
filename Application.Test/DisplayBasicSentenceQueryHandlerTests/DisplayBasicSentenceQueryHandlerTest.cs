@@ -6,7 +6,9 @@ using Application.Services;
 using Application.Services.Clause;
 using Application.Test.Mock;
 using System.Text.RegularExpressions;
+using Application.Contracts.Repos;
 using Application.Services.NounForms;
+using Moq;
 
 namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
 {
@@ -14,15 +16,22 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
     {
         private readonly INounManager _nounManager = new NounManager(new GrammaticalNumber(), new Definiteness());
         private readonly ITenseManager _tenseManager = new TenseManagerFake();
-        private readonly IVerbService _verbService = new VerbServiceFake();
-        private readonly INounService _nounService = new NounServiceFake();
-        private readonly IWordOrderService _wordOrderService = new WordOrderService(new ArrangeClauseElementService(new VerbServiceFake()));
+        private readonly Mock<IVerbRepo> _verbRepo;
+        private readonly Mock<INounRepo> _nounRepo;
+        private readonly IWordOrderService _wordOrderService = 
+            new WordOrderService(new ArrangeClauseElementService(MockVerbRepo.GetVerbMockVerbRepo().Object));
+
+        public DisplayBasicSentenceQueryHandlerTest()
+        {
+            _nounRepo = MockNounRepo.GetMockNounRepo();
+            _verbRepo = MockVerbRepo.GetVerbMockVerbRepo();
+        }
 
         [Fact]
         public async void ShouldReturnBasicSentencePresentTense()
         {
             var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
-                _wordOrderService, _verbService, _nounService);
+                _wordOrderService, _verbRepo.Object, _nounRepo.Object);
 
             var request = new DisplayBasicSentenceQuery()
             {
@@ -49,7 +58,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         public async void ShouldReturnBasicSentencePerfectTenseAsQuestion()
         {
             var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
-                _wordOrderService, _verbService, _nounService);
+                _wordOrderService, _verbRepo.Object, _nounRepo.Object);
 
             var request = new DisplayBasicSentenceQuery()
             {
