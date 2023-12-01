@@ -18,7 +18,6 @@ namespace Application
         
             public static IServiceCollection AddApplicationExtensions(this IServiceCollection services)
             {
-                services.AddScoped<IVerbService, VerbService>();
                 services.AddScoped<INounService, NounService>();
                 services.AddScoped<IPresentTenseService, PresentTenseService>();
                 services.AddScoped<IPastTenseService, PastTenseService>();

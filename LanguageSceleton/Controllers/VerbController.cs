@@ -1,5 +1,8 @@
-﻿using Application.Contracts.Services.Verb;
-using LanguageSkeleton.Api.Dtos.Verb;
+﻿using Application.Features.VerbActions.Commands.CreateVerb;
+using Application.Features.VerbActions.Queries.GetVerbById;
+using Application.Features.VerbActions.Queries.GetVerbs;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageSkeleton.Api.Controllers
@@ -8,32 +11,28 @@ namespace LanguageSkeleton.Api.Controllers
     [ApiController]
     public class VerbController : ControllerBase
     {
-        private readonly IVerbService _verbService;
+        private readonly IMediator _mediator;
 
-        public VerbController(IVerbService verbService)
+        public VerbController(IMediator mediator)
         {
-            _verbService = verbService;
+            _mediator = mediator;
         }
-
-        [HttpPost]
-        public async Task CreateVerb(CreateVerbInputDto dto)
-        {
-            await _verbService.CreateVerbAsync(dto.ToModel());
-        }
-
         [HttpGet]
-        public async Task<List<GetAllVerbsOutputDto>> GetAllVerbs()
+        public async Task<List<GetVerbQueryDto>> GetAllVerbs()
         {
-            var verbs = await _verbService.GetAllAsync();
-
-            return verbs.Select(v => v.ToDto()).ToList();
+            return await _mediator.Send(new GetVerbQuery());
         }
 
         [HttpGet("{id}")]
-        public async Task<GetVerbOutputDto> GetNoun(string id)
+        public async Task<GetVerbByIdDto> GetVerb(string id)
         {
-            var verb = await _verbService.GetAsync(id);
-            return verb.ToGetVerbOutputDto();
+            return await _mediator.Send(new GetVerbByIdQuery(id));
+        }
+
+        [HttpPost]
+        public async Task CreateVerb(CreateVerbCommand request)
+        {
+            await _mediator.Send(request);
         }
     }
 }

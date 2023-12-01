@@ -1,5 +1,5 @@
-﻿using Application.Contracts.Services.Noun;
-using Application.Contracts.Services.Verb;
+﻿using Application.Contracts.Repos;
+using Application.Contracts.Services.Noun;
 using Domain.Enums;
 using Domain.Models.Sentence;
 using Domain.Models.Words;
@@ -8,11 +8,11 @@ namespace Application.Services.Clause
 {
     public class ArrangeClauseElementService : IArrangeClauseElementService
     {
-        private readonly IVerbService _verbService;
+        private readonly IVerbRepo _verbRepo;
 
-        public ArrangeClauseElementService(IVerbService verbService)
+        public ArrangeClauseElementService(IVerbRepo verbRepo)
         {
-            _verbService = verbService;
+            _verbRepo = verbRepo;
         }
 
         public ClauseElement Subject(Sentence sentence)
@@ -64,12 +64,12 @@ namespace Application.Services.Clause
             switch (sentence.Tense)
             {
                 case Tense.Perfect:
-                    var have = await _verbService.GetByPresentTense("har");
+                    var have = await _verbRepo.GetVerbFromPresentTenseAsync("har");
                     have.DisplayForm = have.PresentTense;
                     clauseElement["verb two"] = have;
                     break;
                 case Tense.Future:
-                    var shall = await _verbService.GetByPresentTense("ska");
+                    var shall = await _verbRepo.GetVerbFromPresentTenseAsync("ska");
                     shall.DisplayForm = shall.PresentTense;
                     clauseElement["verb two"] = shall;
                 break;
