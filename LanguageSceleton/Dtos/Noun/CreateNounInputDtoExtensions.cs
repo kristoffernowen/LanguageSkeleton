@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Application.Services.NounForms;
 using Domain.Enums;
 
 namespace LanguageSkeleton.Api.Dtos.Noun;
@@ -7,7 +8,7 @@ public static class CreateNounInputDtoExtensions
 {
     public static Domain.Models.Words.Noun ToModel(this CreateNounInputDto dto)
     {
-        var noun = new Domain.Models.Words.Noun
+        var noun = new Domain.Models.Words.Noun(new NounDisplayFormSetter())
         {
             SingularForm = dto.SingularForm,
             PluralForm = dto.PluralForm,

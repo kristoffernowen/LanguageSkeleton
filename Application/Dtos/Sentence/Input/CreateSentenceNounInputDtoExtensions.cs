@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
-using Domain.Enums;
+using Application.Services.NounForms;
+using Definiteness = Domain.Enums.Definiteness;
+using GrammaticalNumber = Domain.Enums.GrammaticalNumber;
 
 namespace Application.Dtos.Sentence.Input;
 
@@ -7,7 +9,7 @@ public static class CreateSentenceNounInputDtoExtensions
 {
     public static Domain.Models.Words.Noun ToModel(this CreateSentenceNounInputDto inputDto)
     {
-        return new Domain.Models.Words.Noun()
+        return new Domain.Models.Words.Noun(new NounDisplayFormSetter())
         {
             Id = inputDto.Id,
             Definiteness = inputDto.Definiteness switch

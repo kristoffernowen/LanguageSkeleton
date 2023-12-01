@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.Repos;
 using AutoMapper;
 using Data.PersistenceEntities;
+using Data.PersistenceEntities.Extensions;
 using Domain.Models.Words;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,8 @@ namespace Data.Repos
         {
             var nounEntity = await _context.Nouns.FirstOrDefaultAsync(x => x.Id == id);
 
-            return _mapper.Map<Noun>(nounEntity);
+            // return _mapper.Map<Noun>(nounEntity);
+            return nounEntity.ToModel();
         }
 
         public async Task<List<Noun>> GetAllNounsAsync()

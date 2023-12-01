@@ -24,12 +24,16 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
         {
             var sentence = request.ToSentence(await _nounService.GetAsync(request.SubjectId), await _verbService.GetAsync(request.PredicateId));
 
-            sentence.SubjectNoun = _nounManager.SetDisplayForm(sentence.SubjectNoun);
+            // sentence.SubjectNoun = _nounManager.SetDisplayForm(sentence.SubjectNoun);
+            sentence.SubjectNoun.SetDisplayForm();
             sentence.Predicate = sentence.TenseBehavior.SetDisplayForm(sentence.Predicate);
+
+            
+
             sentence = await _wordOrderService.ToQuestionOrStatementAsync(sentence);
             sentence.DisplaySentence = char.ToUpper(sentence.DisplaySentence[0]) +
                                        sentence.DisplaySentence[1..];
-
+            
             return sentence.ToDto();
         }
     }

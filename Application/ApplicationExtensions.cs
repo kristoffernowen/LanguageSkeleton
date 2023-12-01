@@ -7,6 +7,7 @@ using Application.Services.Clause;
 using Application.Services.NounForms;
 using Application.Services.VerbTenses;
 using Domain.Enums;
+using Domain.Models.Words;
 using Microsoft.Extensions.DependencyInjection;
 using Definiteness = Application.Services.NounForms.Definiteness;
 using GrammaticalNumber = Application.Services.NounForms.GrammaticalNumber;
@@ -31,6 +32,7 @@ namespace Application
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
                 services.AddScoped<INounManager, NounManager>();
                 services.AddScoped<ITenseManager, TenseManager>();
+                services.AddScoped<INounDisplayFormSetter, NounDisplayFormSetter>();
 
                 return services;
             }
