@@ -5,8 +5,8 @@ namespace Blazor.UI.Services.Verbs
 {
     public interface IVerbService
     {
-        public Task<List<GetAllVerbsOutputDto>> Get();
-        public Task<GetVerbOutputDto> Get(string id);
+        public Task<List<GetVerbQueryDto>> Get();
+        public Task<GetVerbByIdDto> Get(string id);
     }
 
     public class VerbService : BaseHttpService, IVerbService
@@ -14,13 +14,13 @@ namespace Blazor.UI.Services.Verbs
         public VerbService(IClient client) : base(client)
         {
         }
-        public async Task<List<GetAllVerbsOutputDto>> Get()
+        public async Task<List<GetVerbQueryDto>> Get()
         {
             var verbs = await _client.VerbAllAsync();
             return verbs.ToList();
         }
 
-        public async Task<GetVerbOutputDto> Get(string id)
+        public async Task<GetVerbByIdDto> Get(string id)
         {
             return await _client.VerbGETAsync(id);
         }

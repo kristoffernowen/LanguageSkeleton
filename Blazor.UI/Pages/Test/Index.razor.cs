@@ -14,8 +14,8 @@ namespace Blazor.UI.Pages.Test
         [Inject] private IVerbService VerbService { get; set; }
         [Inject] private ISentenceService SentenceService { get; set; }
         [Inject] private IMapper _mapper { get; set; }
-        private List<GetAllNounsOutputDto> Nouns { get; set; } = new List<GetAllNounsOutputDto>();
-        private List<GetAllVerbsOutputDto> Verbs { get; set; } = new List<GetAllVerbsOutputDto>();
+        private List<GetAllNounsQueryDto> Nouns { get; set; } = new List<GetAllNounsQueryDto>();
+        private List<GetVerbQueryDto> Verbs { get; set; } = new List<GetVerbQueryDto>();
 
         private DisplayBasicSentenceVm DisplaySentence = new DisplayBasicSentenceVm()
         {
@@ -29,43 +29,6 @@ namespace Blazor.UI.Pages.Test
             PredicateVerbConjugation = "",
             DisplaySentence = ""
         };
-        // private CreateSentenceInputDto CreateSentenceInput { get; } = new CreateSentenceInputDto()
-        // {
-        //     Predicate = new CreateSentenceVerbInputDto()
-        //     {
-        //         PresentTense = "",
-        //         Id = "",
-        //         VerbConjugation = ""
-        //     },
-        //     SubjectNounInput = new CreateSentenceNounInputDto()
-        //     {
-        //         Id = "",
-        //         Definiteness = "",
-        //         GrammaticalNumber = ""
-        //     },
-        //     StatementOrQuestion = "",
-        //     Tense = ""
-        // };
-        // private CreateSentenceOutputDto DisplayCreatedSentence { get; set; } = new CreateSentenceOutputDto()
-        // {
-        //     SubjectNoun = new CreateSentenceNounOutputDto()
-        //     {
-        //         Definiteness = "definite",
-        //         GrammaticalNumber = "singular",
-        //         Id = "",
-        //         DisplayForm = ""
-        //     },
-        //     Predicate = new CreateSentenceVerbOutputDto()
-        //     {
-        //         DisplayForm = "",
-        //         Id = "",
-        //         PresentTense = "",
-        //         VerbConjugation = ""
-        //     } ,
-        //     StatementOrQuestion = "",
-        //     Tense = "",
-        //     DisplaySentence = ""
-        // };
 
         private async Task HandleSubmit()
         {

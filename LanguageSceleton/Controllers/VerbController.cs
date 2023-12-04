@@ -1,6 +1,6 @@
-﻿using Application.Features.VerbActions.Commands.CreateVerb;
-using Application.Features.VerbActions.Queries.GetVerbById;
-using Application.Features.VerbActions.Queries.GetVerbs;
+﻿using Application.Features.Verbs.Commands.CreateVerb;
+using Application.Features.Verbs.Queries.GetVerbById;
+using Application.Features.Verbs.Queries.GetVerbs;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

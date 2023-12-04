@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Features.VerbActions.Queries.GetVerbs
+namespace Application.Features.Verbs.Queries.GetVerbs
 {
     public class GetVerbQuery : IRequest<List<GetVerbQueryDto>>
     {

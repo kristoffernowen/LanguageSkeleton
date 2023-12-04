@@ -19,11 +19,6 @@ namespace Blazor.UI.Services.Sentence
             _mapper = mapper;
         }
 
-        // public async Task<CreateSentenceOutputDto> Create(CreateSentenceInputDto dto)
-        // {
-        //     return await _client.SentenceContentAsync(dto);
-        // }
-
         public async Task<DisplayBasicSentenceVm> DisplayBasicSentence(DisplayBasicSentenceQuery request)
         {
             var dto = await _client.SentenceContentAsync(request);

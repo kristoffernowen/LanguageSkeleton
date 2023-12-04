@@ -1,0 +1,10 @@
+﻿@page "/verbs/"
+
+<h3>Verb</h3>
+
+@{
+    foreach (var verb in Verbs)
+    {
+        <p>@verb.PresentTense</p>
+    }
+}

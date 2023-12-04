@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Repos;
 using MediatR;
 
-namespace Application.Features.VerbActions.Queries.GetVerbById
+namespace Application.Features.Verbs.Queries.GetVerbById
 {
     public class GetVerbByIdQueryHandler : IRequestHandler<GetVerbByIdQuery, GetVerbByIdDto>
     {

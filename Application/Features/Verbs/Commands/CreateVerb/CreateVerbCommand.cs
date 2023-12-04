@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Features.VerbActions.Commands.CreateVerb
+namespace Application.Features.Verbs.Commands.CreateVerb
 {
     public class CreateVerbCommand : IRequest<Unit>
     {

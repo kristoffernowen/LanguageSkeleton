@@ -24,30 +24,30 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     {
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task NounPOSTAsync(CreateNounInputDto body);
+        System.Threading.Tasks.Task NounPOSTAsync(CreateNounCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task NounPOSTAsync(CreateNounInputDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task NounPOSTAsync(CreateNounCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsOutputDto>> NounAllAsync();
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsOutputDto>> NounAllAsync(System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetNounOutputDto> NounGETAsync(string id);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsQueryDto>> NounAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetNounOutputDto> NounGETAsync(string id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsQueryDto>> NounAllAsync(System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<GetNounQueryDto> NounGETAsync(string id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<GetNounQueryDto> NounGETAsync(string id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -60,30 +60,30 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbInputDto body);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetVerbQueryDto>> VerbAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbInputDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetVerbQueryDto>> VerbAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllVerbsOutputDto>> VerbAllAsync();
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllVerbsOutputDto>> VerbAllAsync(System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetVerbOutputDto> VerbGETAsync(string id);
+        System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetVerbOutputDto> VerbGETAsync(string id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbCommand body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<GetVerbByIdDto> VerbGETAsync(string id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<GetVerbByIdDto> VerbGETAsync(string id, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -116,7 +116,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task NounPOSTAsync(CreateNounInputDto body)
+        public virtual System.Threading.Tasks.Task NounPOSTAsync(CreateNounCommand body)
         {
             return NounPOSTAsync(body, System.Threading.CancellationToken.None);
         }
@@ -124,7 +124,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task NounPOSTAsync(CreateNounInputDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task NounPOSTAsync(CreateNounCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Noun");
@@ -188,7 +188,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsOutputDto>> NounAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsQueryDto>> NounAllAsync()
         {
             return NounAllAsync(System.Threading.CancellationToken.None);
         }
@@ -196,7 +196,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsOutputDto>> NounAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllNounsQueryDto>> NounAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Noun");
@@ -233,7 +233,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetAllNounsOutputDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetAllNounsQueryDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -262,7 +262,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<GetNounOutputDto> NounGETAsync(string id)
+        public virtual System.Threading.Tasks.Task<GetNounQueryDto> NounGETAsync(string id)
         {
             return NounGETAsync(id, System.Threading.CancellationToken.None);
         }
@@ -270,7 +270,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<GetNounOutputDto> NounGETAsync(string id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<GetNounQueryDto> NounGETAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -311,7 +311,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetNounOutputDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<GetNounQueryDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -418,7 +418,81 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbInputDto body)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetVerbQueryDto>> VerbAllAsync()
+        {
+            return VerbAllAsync(System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetVerbQueryDto>> VerbAllAsync(System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("api/Verb");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetVerbQueryDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbCommand body)
         {
             return VerbPOSTAsync(body, System.Threading.CancellationToken.None);
         }
@@ -426,7 +500,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbInputDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task VerbPOSTAsync(CreateVerbCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/Verb");
@@ -490,81 +564,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllVerbsOutputDto>> VerbAllAsync()
-        {
-            return VerbAllAsync(System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetAllVerbsOutputDto>> VerbAllAsync(System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/Verb");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetAllVerbsOutputDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<GetVerbOutputDto> VerbGETAsync(string id)
+        public virtual System.Threading.Tasks.Task<GetVerbByIdDto> VerbGETAsync(string id)
         {
             return VerbGETAsync(id, System.Threading.CancellationToken.None);
         }
@@ -572,7 +572,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<GetVerbOutputDto> VerbGETAsync(string id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<GetVerbByIdDto> VerbGETAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -613,7 +613,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<GetVerbOutputDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<GetVerbByIdDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -741,7 +741,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateNounInputDto
+    public partial class CreateNounCommand
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("singularForm")]
@@ -767,7 +767,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CreateVerbInputDto
+    public partial class CreateVerbCommand
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("infinitive")]
@@ -940,7 +940,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetAllNounsOutputDto
+    public partial class GetAllNounsQueryDto
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("singularForm")]
@@ -956,23 +956,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetAllVerbsOutputDto
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string PresentTense { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string Id { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetNounOutputDto
+    public partial class GetNounQueryDto
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
@@ -1003,7 +987,7 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetVerbOutputDto
+    public partial class GetVerbByIdDto
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
@@ -1020,6 +1004,22 @@ namespace LanguageSkeleton.Blazor.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string DisplayForm { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class GetVerbQueryDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("presentTense")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string PresentTense { get; set; }
 
     }
 

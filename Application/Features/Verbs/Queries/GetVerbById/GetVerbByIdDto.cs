@@ -1,4 +1,4 @@
-﻿namespace Application.Features.VerbActions.Queries.GetVerbById;
+﻿namespace Application.Features.Verbs.Queries.GetVerbById;
 
 public record GetVerbByIdDto
 {
