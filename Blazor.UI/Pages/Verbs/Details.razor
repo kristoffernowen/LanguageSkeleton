@@ -1,0 +1,11 @@
+﻿@page "/details/{id}"
+@using Blazor.UI.Services.Verbs
+@using LanguageSkeleton.Blazor.UI.Services.Base
+
+<h3>@GetVerbQueryDto.PresentTense</h3>
+
+<div>
+    <p>@GetVerbQueryDto.Id</p>
+    <p>@GetVerbQueryDto.PresentTense</p>
+    <button class="btn btn-secondary" @onclick="ToIndex">Tillbaka till lista</button>
+</div>

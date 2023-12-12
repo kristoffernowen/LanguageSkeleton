@@ -15,3 +15,10 @@ namespace Domain.Models.Sentence
         public ClauseElement? PredicateElement { get; set; }
     }
 }
+
+// Rework. This will be main clause. Like this but maybe DisplayForm is a list<Word>.
+// Add prop Clauses as List<Clause>. Could different Clause be of different classes
+// that would be recognized and treated differently by service? Their words would be internally ordered 
+// in the Clause.DisplayForm list and displayed through index. Then the clauses could be put in order and displayed 
+// from index in DisplayForm.
+// probably easier if mainclause is a separate class that is put inside sentence DisplayForm in the right index

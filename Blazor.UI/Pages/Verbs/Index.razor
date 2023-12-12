@@ -2,9 +2,22 @@
 
 <h3>Verb</h3>
 
-@{
-    foreach (var verb in Verbs)
-    {
-        <p>@verb.PresentTense</p>
+<table>
+    <tr>
+        <th>Presens</th>
+        <th>Id</th>
+    </tr>
+    @{
+        foreach (var verb in Verbs)
+        {
+            <tr>
+                <td>@verb.PresentTense</td>
+                <td>@verb.Id</td>
+                <td>
+                    <button class="btn btn-secondary" @onclick="() =>ShowDetails(verb.Id)">Details</button>
+                </td>
+            </tr>
+        }
     }
-}
+</table>
+
