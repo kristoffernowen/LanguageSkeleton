@@ -1,5 +1,6 @@
 using Application;
 using Data;
+using DataInMemory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDataExtensions(builder.Configuration);
+//builder.Services.AddDataExtensions(builder.Configuration);
+builder.Services.AddDataInMemory();
 builder.Services.AddApplicationExtensions();
 
 var app = builder.Build();

@@ -20,7 +20,8 @@ namespace LanguageSkeleton.Api.Controllers
         [HttpGet]
         public async Task<List<GetVerbQueryDto>> GetAllVerbs()
         {
-            return await _mediator.Send(new GetVerbQuery());
+            var verbs = await _mediator.Send(new GetVerbQuery());
+            return verbs;
         }
 
         [HttpGet("{id}")]

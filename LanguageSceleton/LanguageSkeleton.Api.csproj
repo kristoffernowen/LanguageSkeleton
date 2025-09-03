@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataInMemory\DataInMemory.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
