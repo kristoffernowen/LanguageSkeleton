@@ -17,7 +17,7 @@ namespace Application.Test.VerbTenseServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnAr()
+        public async Task ShouldReturnAr()
         {
             var talk = await _mockRepo.Object.GetVerbAsync("9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad");
 
@@ -27,7 +27,7 @@ namespace Application.Test.VerbTenseServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnEr()
+        public async Task ShouldReturnEr()
         {
             var read = await _mockRepo.Object.GetVerbAsync("8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f");
 
@@ -37,7 +37,7 @@ namespace Application.Test.VerbTenseServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnStem()
+        public async Task ShouldReturnStem()
         {
             var drive = await _mockRepo.Object.GetVerbAsync("f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e");
 
@@ -47,7 +47,7 @@ namespace Application.Test.VerbTenseServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnR()
+        public async Task ShouldReturnR()
         {
             var live = await _mockRepo.Object.GetVerbAsync("b86e5e92 - 960c - 42bf - bda8 - 9339529dd951");
 

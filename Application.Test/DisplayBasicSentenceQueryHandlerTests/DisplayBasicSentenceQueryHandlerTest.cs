@@ -28,7 +28,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         }
 
         [Fact]
-        public async void ShouldReturnBasicSentencePresentTense()
+        public async Task ShouldReturnBasicSentencePresentTense()
         {
             var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
                 _wordOrderService, _verbRepo.Object, _nounRepo.Object);
@@ -55,7 +55,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         }
 
         [Fact]
-        public async void ShouldReturnBasicSentencePerfectTenseAsQuestion()
+        public async Task ShouldReturnBasicSentencePerfectTenseAsQuestion()
         {
             var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
                 _wordOrderService, _verbRepo.Object, _nounRepo.Object);

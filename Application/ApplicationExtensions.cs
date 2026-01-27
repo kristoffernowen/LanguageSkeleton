@@ -6,7 +6,7 @@ using Application.Services;
 using Application.Services.Clause;
 using Application.Services.NounForms;
 using Application.Services.VerbTenses;
-using Domain.Enums;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Definiteness = Application.Services.NounForms.Definiteness;
 using GrammaticalNumber = Application.Services.NounForms.GrammaticalNumber;
@@ -16,7 +16,7 @@ namespace Application
     public static class ApplicationExtensions
     {
         
-            public static IServiceCollection AddApplicationExtensions(this IServiceCollection services)
+            public static IServiceCollection AddApplicationExtensions(this IServiceCollection services, IConfiguration configuration)
             {
                 // services.AddScoped<INounService, NounService>();
                 services.AddScoped<IPresentTenseService, PresentTenseService>();
@@ -27,7 +27,11 @@ namespace Application
                 services.AddScoped<IDefiniteness, Definiteness>();
                 services.AddScoped<IWordOrderService, WordOrderService>();
                 services.AddScoped<IArrangeClauseElementService, ArrangeClauseElementService>();
-                services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+                services.AddMediatR(cfg => {
+                {
+                    cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+                    cfg.LicenseKey = configuration["LuckyPennyLicense"];
+                } });
                 services.AddScoped<INounManager, NounManager>();
                 services.AddScoped<ITenseManager, TenseManager>();
 

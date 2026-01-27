@@ -20,7 +20,7 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnDeclensionOneDefinitiveSingular()
+        public async Task ShouldReturnDeclensionOneDefinitiveSingular()
         {
             var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Singular;
@@ -30,7 +30,7 @@ namespace Application.Test.NounServiceTests
         }
         
         [Fact]
-        public async void ShouldReturnDeclensionOneIndefiniteSingular()
+        public async Task ShouldReturnDeclensionOneIndefiniteSingular()
         {
             var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Singular;
@@ -40,7 +40,7 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnDeclensionOneDefinitivePlural()
+        public async Task ShouldReturnDeclensionOneDefinitivePlural()
         {
             var girl = await _mockRepo.Object.GetNounAsync("495a642f-c518-4b31-a91f-5586a0221694");
             girl.GrammaticalNumber = GrammaticalNumber.Plural;
@@ -50,7 +50,7 @@ namespace Application.Test.NounServiceTests
         }
 
         [Fact]
-        public async void ShouldReturnDeclensionFiveDefinitiveSingular()
+        public async Task ShouldReturnDeclensionFiveDefinitiveSingular()
         {
             var house = await _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
             house.GrammaticalNumber = GrammaticalNumber.Singular;
@@ -59,7 +59,7 @@ namespace Application.Test.NounServiceTests
             Assert.Equal("huset", house.DisplayForm);
         }
         [Fact]
-        public async void ShouldReturnDeclensionFiveDefinitivePlural()
+        public async Task ShouldReturnDeclensionFiveDefinitivePlural()
         {
             var house = await _mockRepo.Object.GetNounAsync("2c893003-26df-409d-b85f-15b2f251dd9d");
             house.GrammaticalNumber = GrammaticalNumber.Plural;
