@@ -19,6 +19,11 @@ builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = n
 builder.Services.AddScoped<INounService, NounService>();
 builder.Services.AddScoped<IVerbService, VerbService>();
 builder.Services.AddScoped<ISentenceService, SentenceService>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(cfg =>
+{
+
+}, AppDomain.CurrentDomain.GetAssemblies());
+
+// If automapper license bothers me, change the log level and see if it matters: builder.Logging.AddFilter("LuckyPennySoftware.AutoMapper.License", LogLevel.None);
 
 await builder.Build().RunAsync();

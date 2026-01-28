@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Application.Contracts.Repos;
+﻿using Application.Contracts.Repos;
 using Data.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +8,17 @@ namespace Data
 {
     public static class DataExtensions
     {
-        public static IServiceCollection AddDataExtensions(this IServiceCollection services, IConfiguration builder)
+        public static IServiceCollection AddDataExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SqlContext>(x => x.UseSqlServer(builder.GetConnectionString("Sql")));
+            services.AddDbContext<SqlContext>(x => x.UseSqlServer(configuration.GetConnectionString("Sql")));
             services.AddScoped<IVerbRepo, VerbRepo>();
             services.AddScoped<INounRepo, NounRepo>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            var licenseKey = configuration["LuckyPennyLicense"];
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.LicenseKey = licenseKey;
+            }, 
+                AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }
