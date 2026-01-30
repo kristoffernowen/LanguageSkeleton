@@ -1,7 +1,7 @@
-﻿using Domain.Enums;
-using Domain.Models.Words;
+﻿using Domain.Models.Words;
 using System.ComponentModel;
 using Application.Contracts.Services.Verb;
+using Domain.Enums.Verb;
 
 namespace Application.Services.VerbTenses
 {

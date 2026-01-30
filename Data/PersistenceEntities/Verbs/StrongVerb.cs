@@ -1,5 +1,5 @@
 ﻿using Data.PersistenceEntities.Verbs.Shared;
-using Domain.Enums;
+using Domain.Enums.Verb;
 
 namespace Data.PersistenceEntities.Verbs;
 

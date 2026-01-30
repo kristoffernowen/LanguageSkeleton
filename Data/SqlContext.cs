@@ -16,6 +16,8 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new BaseVerbConfiguration());
             modelBuilder.ApplyConfiguration(new WeakVerbConfiguration());
             modelBuilder.ApplyConfiguration(new ShortVerbConfiguration());

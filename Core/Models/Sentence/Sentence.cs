@@ -1,4 +1,6 @@
 ﻿using Domain.Enums;
+using Domain.Enums.Verb;
+using Domain.Models.ValueObjects;
 using Domain.Models.Words;
 
 namespace Domain.Models.Sentence
@@ -7,6 +9,7 @@ namespace Domain.Models.Sentence
     {
         public Verb Predicate { get; set; } = null!;
         public Noun SubjectNoun { get; set; } = null!;
+        public NounForm SubjectForm { get; set; }
         public Noun? ObjectNoun { get; set; } = null!;
         public Tense Tense { get; set; }
         public StatementOrQuestion StatementOrQuestion { get; set; }

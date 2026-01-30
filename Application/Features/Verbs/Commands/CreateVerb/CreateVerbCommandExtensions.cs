@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Domain.Enums;
+using Domain.Enums.Verb;
 using Domain.Models.Words;
 
 namespace Application.Features.Verbs.Commands.CreateVerb;

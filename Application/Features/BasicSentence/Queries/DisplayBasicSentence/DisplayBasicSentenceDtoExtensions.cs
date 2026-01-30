@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
+using Domain.Enums.Noun;
+using Domain.Enums.Verb;
 using Domain.Models.Sentence;
 
 namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence;
@@ -27,13 +29,13 @@ public static class DisplayBasicSentenceDtoExtensions
             DisplaySentence = model.DisplaySentence,
             SubjectId = model.SubjectNoun.Id,
             SubjectDisplayForm = model.SubjectNoun.DisplayForm,
-            SubjectDefiniteness = model.SubjectNoun.Definiteness switch
+            SubjectDefiniteness = model.SubjectForm.Definiteness switch
             {
                 Definiteness.Definite => "definite",
                 Definiteness.Indefinite => "indefinite",
                 _ => throw new InvalidEnumArgumentException()
             },
-            SubjectGrammaticalNumber = model.SubjectNoun.GrammaticalNumber switch
+            SubjectGrammaticalNumber = model.SubjectForm.GrammaticalNumber switch
             {
                 GrammaticalNumber.Singular => "singular",
                 GrammaticalNumber.Plural => "plural",

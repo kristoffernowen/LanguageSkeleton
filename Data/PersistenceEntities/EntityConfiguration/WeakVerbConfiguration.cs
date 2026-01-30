@@ -1,5 +1,5 @@
 ﻿using Data.PersistenceEntities.Verbs;
-using Domain.Enums;
+using Domain.Enums.Verb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

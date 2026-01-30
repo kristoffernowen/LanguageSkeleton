@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Data.PersistenceEntities;
 using Data.PersistenceEntities.Verbs;
+using Domain.Models.ValueObjects;
 using Domain.Models.Words;
 
 namespace Data.MapperProfiles

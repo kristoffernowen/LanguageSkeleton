@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Repos;
 using AutoMapper;
 using Data.PersistenceEntities.Verbs;
-using Domain.Enums;
+using Domain.Enums.Verb;
 using Domain.Models.Words;
 using Microsoft.EntityFrameworkCore;
 

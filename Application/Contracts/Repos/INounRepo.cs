@@ -1,4 +1,4 @@
-﻿using Domain.Models.Words;
+﻿using Domain.Models.ValueObjects;
 
 namespace Application.Contracts.Repos;
 

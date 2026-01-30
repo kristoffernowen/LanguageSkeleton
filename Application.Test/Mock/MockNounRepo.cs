@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Repos;
-using Domain.Enums;
-using Domain.Models.Words;
+using Domain.Enums.Noun;
+using Domain.Models.ValueObjects;
 using Moq;
 
 namespace Application.Test.Mock;
@@ -17,7 +17,8 @@ public class MockNounRepo
                 SingularForm = "flicka",
                 PluralForm = "flickor",
                 NounArticle = NounArticle.en,
-                NounDeclension = NounDeclension.One
+                NounDeclension = NounDeclension.One,
+                GrammaticalGender = GrammaticalGender.Feminine
             },
             new()
             {
@@ -25,7 +26,8 @@ public class MockNounRepo
                 SingularForm = "hus",
                 PluralForm = "hus",
                 NounArticle = NounArticle.ett,
-                NounDeclension = NounDeclension.Five
+                NounDeclension = NounDeclension.Five,
+                GrammaticalGender = GrammaticalGender.Neuter
             }
         };
 

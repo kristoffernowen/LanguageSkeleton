@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
+using Domain.Enums.Verb;
 
 namespace Application.Dtos.Sentence.Output;
 

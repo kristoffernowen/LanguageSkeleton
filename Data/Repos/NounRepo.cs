@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Repos;
 using AutoMapper;
 using Data.PersistenceEntities;
-using Domain.Models.Words;
+using Domain.Models.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
