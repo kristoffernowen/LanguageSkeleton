@@ -46,11 +46,11 @@ public static class DisplayBasicSentenceDtoExtensions
             PredicatePresentTense = model.Predicate.PresentTense,
             PredicateVerbConjugation = model.Predicate.VerbConjugation switch
             {
-                VerbConjugation.ArVerb => "ArVerb",
-                VerbConjugation.ErVerb => "ErVerb",
-                VerbConjugation.RVerb => "RVerb",
-                VerbConjugation.StrongErVerb => "StrongErVerb",
-                VerbConjugation.IrregularVerb => "IrregularVerb",
+                VerbConjugation.WeakOne => "ArVerb",
+                VerbConjugation.WeakTwo => "ErVerb",
+                VerbConjugation.WeakThree => "RVerb",
+                VerbConjugation.StrongFour => "StrongErVerb",
+                VerbConjugation.Irregular => "IrregularVerb",
                 _ => throw new InvalidEnumArgumentException()
             },
 

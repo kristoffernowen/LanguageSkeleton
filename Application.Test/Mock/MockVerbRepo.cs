@@ -16,35 +16,35 @@ namespace Application.Test.Mock
                     Imperative = "prata",
                     PresentTense = "pratar",
                     Id = "9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad",
-                    VerbConjugation = VerbConjugation.ArVerb
+                    VerbConjugation = VerbConjugation.WeakOne
                 },
                 new()
                 {
                     Imperative = "läs",
                     PresentTense = "läser",
                     Id = "8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f",
-                    VerbConjugation = VerbConjugation.ErVerb
+                    VerbConjugation = VerbConjugation.WeakTwo
                 },
                 new()
                 {
                     Imperative = "kör",
                     PresentTense = "kör",
                     Id = "f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e",
-                    VerbConjugation = VerbConjugation.ErVerb
+                    VerbConjugation = VerbConjugation.WeakTwo
                 },
                 new()
                 {
                     Imperative = "bo",
                     PresentTense = "bor",
                     Id = "b86e5e92 - 960c - 42bf - bda8 - 9339529dd951",
-                    VerbConjugation = VerbConjugation.RVerb
+                    VerbConjugation = VerbConjugation.WeakThree
                 },
                 new()
                 {
                     Imperative = "flyg",
                     PresentTense = "flyger",
                     Id = "601e8d14-6152-4a48-9065-0b6be35a8773",
-                    VerbConjugation = VerbConjugation.StrongErVerb
+                    VerbConjugation = VerbConjugation.StrongFour
                 },
                 new()
                 {
@@ -54,7 +54,7 @@ namespace Application.Test.Mock
                     PastTense = "gjorde",
                     Supine = "gjort",
                     Id = "64d55fee-b1c5-42e6-b4ab-d8365dc5a83d",
-                    VerbConjugation = VerbConjugation.IrregularVerb
+                    VerbConjugation = VerbConjugation.Irregular
                 },
                 new()
                 {
@@ -64,7 +64,7 @@ namespace Application.Test.Mock
                     PastTense = "skulle",
                     Supine = "skolat",
                     Id = "be14684a-263f-41ab-bb3b-7a36b47050ad",
-                    VerbConjugation = VerbConjugation.IrregularVerb
+                    VerbConjugation = VerbConjugation.Irregular
                 },
                 new()
                 {
@@ -74,15 +74,15 @@ namespace Application.Test.Mock
                     PastTense = "hade",
                     Supine = "haft",
                     Id = "159c8265-61a8-4709-8f03-b0b42eeff84f",
-                    VerbConjugation = VerbConjugation.IrregularVerb
+                    VerbConjugation = VerbConjugation.Irregular
                 }
             };
 
             var mockRepo = new Mock<IVerbRepo>();
-            mockRepo.Setup(r => r.GetAllVerbAsync()).ReturnsAsync(verbs);
-            mockRepo.Setup(r => r.GetVerbAsync(It.IsAny<string>()))
+            mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(verbs);
+            mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<string>()))
                 .ReturnsAsync((string id) => verbs.FirstOrDefault(x => x.Id == id)!);
-            mockRepo.Setup(r => r.GetVerbFromPresentTenseAsync(It.IsAny<string>()))
+            mockRepo.Setup(r => r.GetFromPresentTenseAsync(It.IsAny<string>()))
                 .ReturnsAsync((string presentTense) => verbs.FirstOrDefault(x => x.PresentTense == presentTense)!);
 
             return mockRepo;

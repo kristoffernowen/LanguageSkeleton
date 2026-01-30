@@ -11,25 +11,25 @@ public class MockNounRepo
     {
         var nouns = new List<Noun>
         {
-            new()
-            {
-                Id = "495a642f-c518-4b31-a91f-5586a0221694",
-                SingularForm = "flicka",
-                PluralForm = "flickor",
-                NounArticle = NounArticle.en,
-                NounDeclension = NounDeclension.One,
-                GrammaticalGender = GrammaticalGender.Feminine
-            },
-            new()
-            {
-                Id = "2c893003-26df-409d-b85f-15b2f251dd9d",
-                SingularForm = "hus",
-                PluralForm = "hus",
-                NounArticle = NounArticle.ett,
-                NounDeclension = NounDeclension.Five,
-                GrammaticalGender = GrammaticalGender.Neuter
-            }
+            new
+            (
+                NounDeclension.One,
+                NounArticle.en,
+                GrammaticalGender.Feminine,
+                "flicka",
+                "flickor"
+            ),
+            new
+            (
+                NounDeclension.Five,
+                NounArticle.ett,
+                GrammaticalGender.Neuter,
+                "hus",
+                "hus"
+            )
         };
+        nouns[0].Id = "495a642f-c518-4b31-a91f-5586a0221694";
+        nouns[1].Id = "2c893003-26df-409d-b85f-15b2f251dd9d";
 
         var mockRepo = new Mock<INounRepo>();
         mockRepo.Setup (r =>  r.GetAllNounsAsync()).ReturnsAsync(nouns);

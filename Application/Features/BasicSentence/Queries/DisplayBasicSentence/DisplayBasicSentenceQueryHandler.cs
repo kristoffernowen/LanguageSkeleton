@@ -15,7 +15,7 @@ namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence
     {
         public async Task<DisplayBasicSentenceDto> Handle(DisplayBasicSentenceQuery request, CancellationToken cancellationToken)
         {
-            var sentence = request.ToSentence(await nounRepo.GetNounAsync(request.SubjectId), await verbRepo.GetVerbAsync(request.PredicateId));
+            var sentence = request.ToSentence(await nounRepo.GetNounAsync(request.SubjectId), await verbRepo.GetByIdAsync(request.PredicateId));
             sentence.SubjectForm = sentence.SubjectNoun.Inflect(
                 request.SubjectGrammaticalNumber switch{"singular" => GrammaticalNumber.Singular, "plural" => GrammaticalNumber.Plural, _ => throw new Exception("switch mess") },
                 request.SubjectDefiniteness switch{"indefinite" => Definiteness.Indefinite, "definite" => Definiteness.Definite, _ => throw new Exception("switch mess")},

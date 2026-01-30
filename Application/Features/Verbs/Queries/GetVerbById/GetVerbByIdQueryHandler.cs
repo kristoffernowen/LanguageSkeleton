@@ -13,7 +13,7 @@ namespace Application.Features.Verbs.Queries.GetVerbById
         }
         public async Task<GetVerbByIdDto> Handle(GetVerbByIdQuery request, CancellationToken cancellationToken)
         {
-            var verb = await _verbRepo.GetVerbAsync(request.Id);
+            var verb = await _verbRepo.GetByIdAsync(request.Id);
 
             return verb.ToGetVerbByIdDto();
         }

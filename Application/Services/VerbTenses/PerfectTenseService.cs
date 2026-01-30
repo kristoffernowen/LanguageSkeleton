@@ -12,11 +12,11 @@ namespace Application.Services.VerbTenses
         {
             verb.DisplayForm = verb.VerbConjugation switch
             {
-                VerbConjugation.ArVerb => ArVerb(verb),
-                VerbConjugation.ErVerb => ErVerb(verb),
-                VerbConjugation.RVerb => RVerb(verb),
-                VerbConjugation.StrongErVerb => StrongErVerb(verb),
-                VerbConjugation.IrregularVerb => verb.Supine,
+                VerbConjugation.WeakOne => ArVerb(verb),
+                VerbConjugation.WeakTwo => ErVerb(verb),
+                VerbConjugation.WeakThree => RVerb(verb),
+                VerbConjugation.StrongFour => StrongErVerb(verb),
+                VerbConjugation.Irregular => verb.Supine,
                 _ => throw new InvalidEnumArgumentException()
             };
 
@@ -30,13 +30,6 @@ namespace Application.Services.VerbTenses
 
         private string ErVerb(Verb verb)
         {
-            // if (verb.Imperative.EndsWith("s") || verb.Imperative.EndsWith("p")
-            //                                    || verb.Imperative.EndsWith("t") || verb.Imperative.EndsWith("k")
-            //                                    || verb.Imperative.EndsWith("x"))
-            // {
-            //     return verb.Imperative + "t";
-            //
-            // }
             return verb.Imperative + "t";
         }
 
@@ -45,9 +38,9 @@ namespace Application.Services.VerbTenses
             return verb.Imperative + "tt";
         }
 
-        private string StrongErVerb(Verb verb)
+        private string StrongErVerb(Verb verb) // will miss to change bära/bär to burit and kommer/kom to kommit, but nevermind. I will refactor to use forms persisted to db, not derived like here, when I refactor Verb Domain model
         {
-            if (verb.Imperative[^3] is 'i' or 'ä')
+            if (verb.Imperative.Length > 2 && verb.Imperative[^3] is 'i' or 'ä') 
             {
                 verb.DisplayForm = ChangeShortStemVowelTo(verb.Imperative, "u");
                 return verb.DisplayForm + "it";

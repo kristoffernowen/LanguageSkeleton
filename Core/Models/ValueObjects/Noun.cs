@@ -7,11 +7,6 @@ namespace Domain.Models.ValueObjects;
 
 public class Noun : Word
 {
-    public Noun()
-    {
-        
-    }
-
     public Noun(NounDeclension nounDeclension, NounArticle nounArticle, GrammaticalGender grammaticalGender, string singularForm, string pluralForm)
     {
         NounDeclension = nounDeclension;
@@ -23,7 +18,7 @@ public class Noun : Word
 
     public NounDeclension NounDeclension { get; set; }
     public NounArticle NounArticle { get; set; }
-    public GrammaticalGender GrammaticalGender { get; set; } //should replace article eventually
+    public GrammaticalGender GrammaticalGender { get; set; }
     public string SingularForm { get; set; } = null!;
     public string PluralForm { get; set; } = null!;
     

@@ -2,10 +2,10 @@
 {
     public enum VerbConjugation
     {
-        ArVerb,
-        ErVerb,
-        RVerb,
-        StrongErVerb,
-        IrregularVerb
+        WeakOne,
+        WeakTwo,
+        WeakThree,
+        StrongFour,
+        Irregular
     }
 }

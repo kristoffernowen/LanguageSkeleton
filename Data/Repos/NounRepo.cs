@@ -7,37 +7,33 @@ using Microsoft.Extensions.Logging;
 
 namespace Data.Repos
 {
-    public class NounRepo : INounRepo
+    public class NounRepo(
+        SqlContext context, 
+        IMapper mapper, 
+        ILogger<NounRepo> logger)
+        : INounRepo
     {
-        private readonly SqlContext _context;
-        private readonly IMapper _mapper;
-        private readonly ILogger<NounRepo> _logger;
+        private readonly ILogger<NounRepo> _logger = logger;
 
-        public NounRepo(SqlContext context, IMapper mapper, ILogger<NounRepo> logger)
-        {
-            _context = context;
-            _mapper = mapper;
-            _logger = logger;
-        }
         public async Task CreateNounAsync(Noun noun)
         {
             noun.Id = Guid.NewGuid().ToString();
 
-            _context.Nouns.Add(_mapper.Map<NounEntity>(noun));
-            await _context.SaveChangesAsync();
+            context.Nouns.Add(mapper.Map<NounEntity>(noun));
+            await context.SaveChangesAsync();
             
         }
 
         public async Task<Noun> GetNounAsync(string id)
         {
-            var nounEntity = await _context.Nouns.FirstOrDefaultAsync(x => x.Id == id);
+            var nounEntity = await context.Nouns.FirstOrDefaultAsync(x => x.Id == id);
 
-            return _mapper.Map<Noun>(nounEntity);
+            return mapper.Map<Noun>(nounEntity);
         }
 
         public async Task<List<Noun>> GetAllNounsAsync()
         {
-            return await _context.Nouns.Select(n => _mapper.Map<Noun>(n)).ToListAsync();
+            return await context.Nouns.Select(n => mapper.Map<Noun>(n)).ToListAsync();
         }
     }
 }

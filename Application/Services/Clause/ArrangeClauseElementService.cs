@@ -59,12 +59,12 @@ namespace Application.Services.Clause
             switch (sentence.Tense) // only need to handle perfect and future here, present and past are covered by verb one
             {
                 case Tense.Perfect:
-                    var have = await verbRepo.GetVerbFromPresentTenseAsync("har");
+                    var have = await verbRepo.GetFromPresentTenseAsync("har");
                     have.DisplayForm = have.PresentTense;
                     clauseElement["verb two"] = have;
                     break;
                 case Tense.Future:
-                    var shall = await verbRepo.GetVerbFromPresentTenseAsync("ska");
+                    var shall = await verbRepo.GetFromPresentTenseAsync("ska");
                     shall.DisplayForm = shall.PresentTense;
                     clauseElement["verb two"] = shall;
                 break;

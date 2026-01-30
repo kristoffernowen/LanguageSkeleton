@@ -13,11 +13,11 @@ public static class CreateSentenceVerbOutputDtoExtensions
             PresentTense = model.PresentTense,
             VerbConjugation = model.VerbConjugation switch
             {
-                VerbConjugation.ArVerb => "ArVerb",
-                VerbConjugation.ErVerb => "ErVerb",
-                VerbConjugation.RVerb => "RVerb",
-                VerbConjugation.StrongErVerb => "StrongErVerb",
-                VerbConjugation.IrregularVerb => "IrregularVerb",
+                VerbConjugation.WeakOne => "ArVerb",
+                VerbConjugation.WeakTwo => "ErVerb",
+                VerbConjugation.WeakThree => "RVerb",
+                VerbConjugation.StrongFour => "StrongErVerb",
+                VerbConjugation.Irregular => "IrregularVerb",
                 _ => throw new InvalidEnumArgumentException()
             },
             DisplayForm = model.DisplayForm
