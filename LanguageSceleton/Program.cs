@@ -2,6 +2,7 @@ using Application;
 using AutoMapper;
 using Data;
 using Data.SeedData;
+using LanguageSkeleton.Api.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataExtensions(builder.Configuration);
 builder.Services.AddApplicationExtensions(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy
+            .WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>()!)
+            .AllowAnyMethod()
+            .WithHeaders("Content-Type", "x-api-key");
+    });
+});
+
 
 var app = builder.Build();
 
@@ -41,12 +53,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-
-
 // !!!!!!!!!!!!!!!!!!!! fix cors
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());    
+app.UseCors("FrontendPolicy");
+
+app.UseApiKeyValidation();
+
 app.UseAuthorization();
 
 app.MapControllers();
