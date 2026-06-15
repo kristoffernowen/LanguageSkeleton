@@ -26,7 +26,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var app = builder.Build();
 
 // Initialize database and seed data
@@ -52,8 +51,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// !!!!!!!!!!!!!!!!!!!! fix cors
 
 app.UseCors("FrontendPolicy");
 
