@@ -52,9 +52,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
 app.UseCors("FrontendPolicy");
 
-app.UseApiKeyValidation();
+app.UseWhen(
+    ctx => ctx.Request.Path.StartsWithSegments("/api"),
+    appBuilder => appBuilder.UseApiKeyValidation()
+);
 
 app.UseAuthorization();
 
