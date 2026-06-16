@@ -19,7 +19,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnAr()
     {
-        var talk = await _mockRepo.Object.GetVerbAsync("9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad");
+        var talk = await _mockRepo.Object.GetByIdAsync("9bd47607 - 3e7d - 4780 - b4c4 - 0cf03e9167ad");
 
         talk = _pastTenseService.SetDisplayForm(talk);
 
@@ -29,7 +29,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnEr()
     {
-        var read = await _mockRepo.Object.GetVerbAsync("8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f");
+        var read = await _mockRepo.Object.GetByIdAsync("8de87010 - 3a43 - 4a4e - 9361 - b15ee46bc62f");
 
         read = _pastTenseService.SetDisplayForm(read);
 
@@ -39,7 +39,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnStem()
     {
-        var drive = await _mockRepo.Object.GetVerbAsync("f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e");
+        var drive = await _mockRepo.Object.GetByIdAsync("f30412a7 - 2a41 - 42f5 - 8194 - 831d5183043e");
 
         drive = _pastTenseService.SetDisplayForm(drive);
 
@@ -49,7 +49,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnR()
     {
-        var live = await _mockRepo.Object.GetVerbAsync("b86e5e92 - 960c - 42bf - bda8 - 9339529dd951");
+        var live = await _mockRepo.Object.GetByIdAsync("b86e5e92 - 960c - 42bf - bda8 - 9339529dd951");
 
         live = _pastTenseService.SetDisplayForm(live);
 
@@ -59,7 +59,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnStrongErVerb()
     {
-        var fly = await _mockRepo.Object.GetVerbAsync("601e8d14-6152-4a48-9065-0b6be35a8773");
+        var fly = await _mockRepo.Object.GetByIdAsync("601e8d14-6152-4a48-9065-0b6be35a8773");
         fly = _pastTenseService.SetDisplayForm(fly);
 
         Assert.Equal("flög", fly.DisplayForm);
@@ -68,7 +68,7 @@ public class PastTenseServiceTests
     [Fact]
     public async Task ShouldReturnIrregularVerb()
     {
-        var verbDo = await _mockRepo.Object.GetVerbAsync("64d55fee-b1c5-42e6-b4ab-d8365dc5a83d");
+        var verbDo = await _mockRepo.Object.GetByIdAsync("64d55fee-b1c5-42e6-b4ab-d8365dc5a83d");
 
         verbDo = _pastTenseService.SetDisplayForm(verbDo);
 

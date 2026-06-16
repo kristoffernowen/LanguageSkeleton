@@ -14,7 +14,7 @@ namespace Application.Features.Verbs.Queries.GetVerbs
 
         public async Task<List<GetVerbQueryDto>> Handle(GetVerbQuery request, CancellationToken cancellationToken)
         {
-            var verbs = await _verbRepo.GetAllVerbAsync();
+            var verbs = await _verbRepo.GetAsync();
 
             return verbs.Select(v => v.ToGetVerbQueryDto()).ToList();
         }

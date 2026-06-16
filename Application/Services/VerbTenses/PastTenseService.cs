@@ -1,7 +1,7 @@
-﻿using Domain.Enums;
-using Domain.Models.Words;
+﻿using Domain.Models.Words;
 using System.ComponentModel;
 using Application.Contracts.Services.Verb;
+using Domain.Enums.Verb;
 
 namespace Application.Services.VerbTenses
 {
@@ -11,11 +11,11 @@ namespace Application.Services.VerbTenses
         {
             verb.DisplayForm = verb.VerbConjugation switch
             {
-                VerbConjugation.ArVerb => ArVerb(verb),
-                VerbConjugation.ErVerb => ErVerb(verb),
-                VerbConjugation.RVerb => RVerb(verb),
-                VerbConjugation.StrongErVerb => StrongErVerb(verb),
-                VerbConjugation.IrregularVerb => verb.PastTense,
+                VerbConjugation.WeakOne => ArVerb(verb),
+                VerbConjugation.WeakTwo => ErVerb(verb),
+                VerbConjugation.WeakThree => RVerb(verb),
+                VerbConjugation.StrongFour => StrongErVerb(verb),
+                VerbConjugation.Irregular => verb.PastTense,
                 _ => throw new InvalidEnumArgumentException()
             };
 
@@ -44,9 +44,9 @@ namespace Application.Services.VerbTenses
             return verb.Imperative + "dde";
         }
 
-        private string StrongErVerb(Verb verb)
+        private string StrongErVerb(Verb verb) //does not handle sjung, sov, slå correctly, but refactoring domain model with logic that gets forms directly from db will fix that
         {
-            if (verb.Imperative[^3] is 'i' or 'ä')
+            if (verb.Imperative.Length > 2 && verb.Imperative[^3] is 'i' or 'ä') 
             {
                 verb.DisplayForm = ChangeShortStemVowelTo(verb.Imperative, "a");
             }
@@ -57,6 +57,7 @@ namespace Application.Services.VerbTenses
                     'u' => ChangeLongStemVowelTo(verb.Imperative, "ö"),
                     'y' => ChangeLongStemVowelTo(verb.Imperative, "ö"),
                     'a' => ChangeLongStemVowelTo(verb.Imperative, "o"),
+                    'ä' => ChangeLongStemVowelTo(verb.Imperative, "a"),
                     'å' => ChangeLongStemVowelTo(verb.Imperative, "ä"),
                     _ => throw new ApplicationException("aktiverade ingen förväntad verbregel för starka er verb")
                 };

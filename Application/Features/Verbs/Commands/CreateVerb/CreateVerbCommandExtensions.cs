@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Domain.Enums;
+using Domain.Enums.Verb;
 using Domain.Models.Words;
 
 namespace Application.Features.Verbs.Commands.CreateVerb;
@@ -8,34 +8,24 @@ public static class CreateVerbCommandExtensions
 {
     public static Verb ToModel(this CreateVerbCommand request)
     {
-        var verb = new Domain.Models.Words.Verb
+        var verb = new Verb
         {
             Infinitive = request.Infinitive,
             VerbConjugation = request.VerbConjugation switch
             {
-                "ArVerb" => VerbConjugation.ArVerb,
-                "ErVerb" => VerbConjugation.ErVerb,
-                "StrongErVerb" => VerbConjugation.StrongErVerb,
-                "RVerb" => VerbConjugation.RVerb,
-                "IrregularVerb" => VerbConjugation.IrregularVerb,
+                "One" => VerbConjugation.WeakOne,
+                "Two" => VerbConjugation.WeakTwo,
+                "Three" => VerbConjugation.WeakThree,
+                "Four" => VerbConjugation.StrongFour,
+                "Irregular" => VerbConjugation.Irregular,
                 _ => throw new InvalidEnumArgumentException()
             },
             Imperative = request.Imperative,
-            PresentTense = request.PresentTense
+            PresentTense = request.PresentTense,
+            PastTense = request.PastTense,
+            Supine = request.Supine
         };
 
-        switch (request.VerbConjugation)
-        {
-            case "StrongErVerb":
-                verb.VowelChangeGroup = VowelChangeGroup.Five;
-                break;
-            case "IrregularVerb":
-                verb.PastTense = request.PastTense;
-                verb.Supine = request.Supine;
-                break;
-        }
-
         return verb;
-            
     }
 }

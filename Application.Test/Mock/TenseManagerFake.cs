@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Services.Verb;
 using Application.Services.VerbTenses;
-using Domain.Enums;
+using Domain.Enums.Verb;
 using Domain.Models.Words;
 using System.ComponentModel;
 

@@ -1,8 +1,10 @@
-﻿namespace Application.Features.Nouns.Queries.GetAllNouns;
+﻿using Domain.Models.ValueObjects;
+
+namespace Application.Features.Nouns.Queries.GetAllNouns;
 
 public static class GetAllNounsQueryExtensions
 {
-    public static GetAllNounsQueryDto ToGetAllNounsQueryDto(this Domain.Models.Words.Noun noun)
+    public static GetAllNounsQueryDto ToGetAllNounsQueryDto(this Noun noun)
     {
         return new GetAllNounsQueryDto()
         {

@@ -10,7 +10,7 @@ namespace Data
     {
         public static IServiceCollection AddDataExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SqlContext>(x => x.UseSqlServer(configuration.GetConnectionString("Sql")));
+            services.AddDbContext<SqlContext>(x => x.UseSqlite(configuration.GetConnectionString("Sql")));
             services.AddScoped<IVerbRepo, VerbRepo>();
             services.AddScoped<INounRepo, NounRepo>();
             var licenseKey = configuration["LuckyPennyLicense"];

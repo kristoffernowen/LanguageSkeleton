@@ -2,6 +2,7 @@
 using Application.Contracts.Services.Noun;
 using Application.Contracts.Services.Sentence;
 using Domain.Enums;
+using Domain.Enums.Verb;
 using Domain.Models.Sentence;
 
 namespace Application.Services

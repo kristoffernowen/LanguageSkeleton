@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel;
 using Domain.Enums;
+using Domain.Enums.Noun;
+using Domain.Enums.Verb;
 using Domain.Models.Sentence;
+using Domain.Models.ValueObjects;
 using Domain.Models.Words;
 
 namespace Application.Features.BasicSentence.Queries.DisplayBasicSentence;
@@ -10,18 +13,18 @@ public static class DisplayBasicSentenceQueryExtensions
     public static Sentence ToSentence(this DisplayBasicSentenceQuery request, Noun subjectNoun, Verb predicate)
     {
         var sentence = new Sentence();
-        subjectNoun.GrammaticalNumber = request.SubjectGrammaticalNumber switch
-        {
-            "singular" => GrammaticalNumber.Singular,
-            "plural" => GrammaticalNumber.Plural,
-            _ => throw new InvalidEnumArgumentException()
-        };
-        subjectNoun.Definiteness = request.SubjectDefiniteness switch
-        {
-            "definite" => Definiteness.Definite,
-            "indefinite" => Definiteness.Indefinite,
-            _ => throw new InvalidEnumArgumentException()
-        };
+        // subjectNoun.GrammaticalNumber = request.SubjectGrammaticalNumber switch
+        // {
+        //     "singular" => GrammaticalNumber.Singular,
+        //     "plural" => GrammaticalNumber.Plural,
+        //     _ => throw new InvalidEnumArgumentException()
+        // };
+        // subjectNoun.Definiteness = request.SubjectDefiniteness switch
+        // {
+        //     "definite" => Definiteness.Definite,
+        //     "indefinite" => Definiteness.Indefinite,
+        //     _ => throw new InvalidEnumArgumentException()
+        // };
         sentence.SubjectNoun = subjectNoun;
         sentence.Tense = request.Tense switch
         {

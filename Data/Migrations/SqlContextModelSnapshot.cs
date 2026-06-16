@@ -2,7 +2,6 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -15,214 +14,103 @@ namespace Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.12")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.2");
 
             modelBuilder.Entity("Data.PersistenceEntities.NounEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(36)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
 
-                    b.Property<int>("NounArticle")
-                        .HasColumnType("int");
+                    b.Property<string>("GrammaticalGender")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("NounDeclension")
-                        .HasColumnType("int");
+                    b.Property<string>("NounArticle")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NounDeclension")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PluralForm")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SingularForm")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Nouns");
+                    b.HasIndex("GrammaticalGender");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "b73f8789-958b-4752-9f70-6d1a73794b03",
-                            NounArticle = 0,
-                            NounDeclension = 1,
-                            PluralForm = "pojkar",
-                            SingularForm = "pojke"
-                        },
-                        new
-                        {
-                            Id = "a163d3d1-70c1-4dbf-872c-8ebad193d3ef",
-                            NounArticle = 0,
-                            NounDeclension = 0,
-                            PluralForm = "flickor",
-                            SingularForm = "flicka"
-                        },
-                        new
-                        {
-                            Id = "cca1e103-c140-4acf-a7bf-32b14adab539",
-                            NounArticle = 0,
-                            NounDeclension = 1,
-                            PluralForm = "bilar",
-                            SingularForm = "bil"
-                        },
-                        new
-                        {
-                            Id = "7357f66f-f38e-4f15-b949-3caa228d0b1f",
-                            NounArticle = 0,
-                            NounDeclension = 1,
-                            PluralForm = "fiskar",
-                            SingularForm = "fisk"
-                        },
-                        new
-                        {
-                            Id = "d42ae057-05ce-4f93-9b17-75d2689c06e7",
-                            NounArticle = 0,
-                            NounDeclension = 1,
-                            PluralForm = "böcker",
-                            SingularForm = "bok"
-                        });
+                    b.HasIndex("NounDeclension");
+
+                    b.HasIndex("SingularForm");
+
+                    b.HasIndex("SingularForm", "PluralForm")
+                        .IsUnique();
+
+                    b.ToTable("Nouns", (string)null);
                 });
 
-            modelBuilder.Entity("Data.PersistenceEntities.Verbs.Shared.BaseVerb", b =>
+            modelBuilder.Entity("Data.PersistenceEntities.VerbEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(36)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
 
                     b.Property<string>("Imperative")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PresentTense")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VerbConjugation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("verb_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Verbs");
-
-                    b.HasDiscriminator<string>("verb_type").HasValue("BaseVerb");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("Data.PersistenceEntities.Verbs.IrregularVerb", b =>
-                {
-                    b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Infinitive")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PastTense")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PresentTense")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Supine")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Verbs");
+                    b.Property<string>("VerbConjugation")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("Irregular");
+                    b.HasKey("Id");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "fe7fc830-0d37-4f0f-a96d-be258253cee0",
-                            Imperative = "ska",
-                            PresentTense = "ska",
-                            VerbConjugation = "IrregularVerb",
-                            Infinitive = "skola",
-                            PastTense = "skulle",
-                            Supine = "skolat"
-                        },
-                        new
-                        {
-                            Id = "99eaf871-c042-4fec-9440-384f00e3f54d",
-                            Imperative = "var",
-                            PresentTense = "är",
-                            VerbConjugation = "IrregularVerb",
-                            Infinitive = "vara",
-                            PastTense = "var",
-                            Supine = "varit"
-                        },
-                        new
-                        {
-                            Id = "cfc483f6-ce2b-49cf-bc8b-d092dcc83027",
-                            Imperative = "ha",
-                            PresentTense = "har",
-                            VerbConjugation = "IrregularVerb",
-                            Infinitive = "ha",
-                            PastTense = "hade",
-                            Supine = "haft"
-                        });
-                });
+                    b.HasIndex("Infinitive");
 
-            modelBuilder.Entity("Data.PersistenceEntities.Verbs.ShortVerb", b =>
-                {
-                    b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
-
-                    b.ToTable("Verbs");
-
-                    b.HasDiscriminator().HasValue("Short");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "81fbd7fb-0bff-4905-9ede-98290b3e0485",
-                            Imperative = "bo",
-                            PresentTense = "bor",
-                            VerbConjugation = "RVerb"
-                        });
-                });
-
-            modelBuilder.Entity("Data.PersistenceEntities.Verbs.StrongVerb", b =>
-                {
-                    b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
-
-                    b.Property<int>("VowelChangeGroup")
-                        .HasColumnType("int");
-
-                    b.ToTable("Verbs");
-
-                    b.HasDiscriminator().HasValue("Strong");
-                });
-
-            modelBuilder.Entity("Data.PersistenceEntities.Verbs.WeakVerb", b =>
-                {
-                    b.HasBaseType("Data.PersistenceEntities.Verbs.Shared.BaseVerb");
-
-                    b.ToTable("Verbs");
-
-                    b.HasDiscriminator().HasValue("Weak");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5d4385e4-39ab-458f-bad9-f217c08bdb86",
-                            Imperative = "prata",
-                            PresentTense = "pratar",
-                            VerbConjugation = "ArVerb"
-                        },
-                        new
-                        {
-                            Id = "f61fa1fa-b3ea-4c02-ad5f-9da466c07d11",
-                            Imperative = "läs",
-                            PresentTense = "läser",
-                            VerbConjugation = "ErVerb"
-                        });
+                    b.ToTable("Verbs", (string)null);
                 });
 #pragma warning restore 612, 618
         }

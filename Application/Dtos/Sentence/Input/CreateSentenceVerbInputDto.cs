@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Domain.Enums;
+using Domain.Enums.Verb;
 
 namespace Application.Dtos.Sentence.Input
 {
@@ -22,10 +22,10 @@ namespace Application.Dtos.Sentence.Input
                 PresentTense = inputDto.PresentTense,
                 VerbConjugation = inputDto.VerbConjugation switch
                 {
-                    "ArVerb" => VerbConjugation.ArVerb,
-                    "ErVerb" => VerbConjugation.ErVerb,
-                    "RVerb" => VerbConjugation.RVerb,
-                    "StrongErVerb" => VerbConjugation.StrongErVerb,
+                    "ArVerb" => VerbConjugation.WeakOne,
+                    "ErVerb" => VerbConjugation.WeakTwo,
+                    "RVerb" => VerbConjugation.WeakThree,
+                    "StrongErVerb" => VerbConjugation.StrongFour,
                     _ => throw new InvalidEnumArgumentException()
                 }
             };

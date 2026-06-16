@@ -1,5 +1,4 @@
-﻿using Domain.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.PersistenceEntities.EntityConfiguration
@@ -8,49 +7,48 @@ namespace Data.PersistenceEntities.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<NounEntity> builder)
         {
-            builder.HasData
-            (
-                new NounEntity
-                {
-                    Id = "b73f8789-958b-4752-9f70-6d1a73794b03",
-                    SingularForm = "pojke",
-                    PluralForm = "pojkar",
-                    NounArticle = NounArticle.en,
-                    NounDeclension = NounDeclension.Two
-                },
-                new NounEntity
-                {
-                    Id = "a163d3d1-70c1-4dbf-872c-8ebad193d3ef",
-                    SingularForm = "flicka",
-                    PluralForm = "flickor",
-                    NounArticle = NounArticle.en,
-                    NounDeclension = NounDeclension.One
-                },
-                new NounEntity
-                {
-                    Id = "cca1e103-c140-4acf-a7bf-32b14adab539",
-                    SingularForm = "bil",
-                    PluralForm = "bilar",
-                    NounArticle = NounArticle.en,
-                    NounDeclension = NounDeclension.Two
-                },
-                new NounEntity
-                {
-                    Id = "7357f66f-f38e-4f15-b949-3caa228d0b1f",
-                    SingularForm = "fisk",
-                    PluralForm = "fiskar",
-                    NounArticle = NounArticle.en,
-                    NounDeclension = NounDeclension.Two
-                },
-                new NounEntity
-                {
-                    Id = "d42ae057-05ce-4f93-9b17-75d2689c06e7",
-                    SingularForm = "bok",
-                    PluralForm = "böcker",
-                    NounArticle = NounArticle.en,
-                    NounDeclension = NounDeclension.Two
-                }
-            );
+            builder.ToTable("Nouns");
+
+            builder.HasKey(n => n.Id);
+
+            builder.Property(n => n.Id)
+                .IsRequired()
+                .HasMaxLength(36)
+                .IsFixedLength();
+
+            builder.Property(n => n.NounArticle)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
+            builder.Property(n => n.SingularForm)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode();
+
+            builder.Property(n => n.PluralForm)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode();
+
+            builder.Property(n => n.NounDeclension)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
+            builder.Property(n => n.GrammaticalGender)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
+            builder.HasIndex(n => n.SingularForm);
+            
+            builder.HasIndex(n => new { n.SingularForm, n.PluralForm })
+                .IsUnique();
+
+            builder.HasIndex(n => n.NounDeclension);
+
+            builder.HasIndex(n => n.GrammaticalGender);
         }
     }
 }

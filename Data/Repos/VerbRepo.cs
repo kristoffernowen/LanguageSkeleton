@@ -1,66 +1,40 @@
 ﻿using Application.Contracts.Repos;
 using AutoMapper;
-using Data.PersistenceEntities.Verbs;
-using Domain.Enums;
+using Data.PersistenceEntities;
 using Domain.Models.Words;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repos
 {
-    public class VerbRepo : IVerbRepo
+    public class VerbRepo(SqlContext context, IMapper mapper) : IVerbRepo
     {
-        private readonly SqlContext _context;
-        private readonly IMapper _mapper;
-
-        public VerbRepo(SqlContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-        public async Task CreateVerbAsync(Verb verb)
+        public async Task CreateAsync(Verb verb)
         {
             verb.Id = Guid.NewGuid().ToString();
-            
-                switch (verb.VerbConjugation)
-                {
-                    case VerbConjugation.ArVerb or VerbConjugation.ErVerb:
-                        _context.Verbs.Add(_mapper.Map<WeakVerb>(verb));
-                        await _context.SaveChangesAsync();
-                        break;
-                    case VerbConjugation.RVerb:
-                        _context.Verbs.Add(_mapper.Map<ShortVerb>(verb));
-                        await _context.SaveChangesAsync();
-                        break;
-                    case VerbConjugation.StrongErVerb:
-                        _context.Verbs.Add(_mapper.Map<StrongVerb>(verb));
-                        await _context.SaveChangesAsync();
-                        break;
-                    case VerbConjugation.IrregularVerb:
-                        _context.Verbs.Add(_mapper.Map<IrregularVerb>(verb));
-                        await _context.SaveChangesAsync();
-                        break;
-                }
+
+            context.Verbs.Add(mapper.Map<VerbEntity>(verb));
+            await context.SaveChangesAsync();
         }
 
-        public async Task<Verb> GetVerbAsync(string id)
+        public async Task<Verb> GetByIdAsync(string id)
         {
-            var result = await _context.Verbs.FirstOrDefaultAsync(x => x.Id == id);
-            return _mapper.Map<Verb>(result);
+            var result = await context.Verbs.FirstOrDefaultAsync(x => x.Id == id);
+            return mapper.Map<Verb>(result);
         }
 
-        public async Task<Verb> GetVerbFromPresentTenseAsync(string presentTense)
+        public async Task<Verb> GetFromPresentTenseAsync(string presentTense)
         {
-            var result = await _context.Verbs.FirstOrDefaultAsync(v=> v.PresentTense == presentTense);
+            var result = await context.Verbs.FirstOrDefaultAsync(v => v.PresentTense == presentTense);
 
-            return _mapper.Map<Verb>(result);
+            return mapper.Map<Verb>(result);
         }
 
 
-        public async Task<List<Verb>> GetAllVerbAsync()
+        public async Task<List<Verb>> GetAsync()
         {
-            var result = await _context.Verbs.ToListAsync();
+            var result = await context.Verbs.ToListAsync();
 
-            return result.Select(v => _mapper.Map<Verb>(v)).ToList();
+            return result.Select(mapper.Map<Verb>).ToList();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Domain.Enums;
+﻿using Domain.Enums.Verb;
 
 namespace Domain.Models.Words;
 
@@ -7,8 +7,7 @@ public class Verb : Word
     public string Infinitive { get; set; } = null!;
     public string Imperative { get; set; } = null!;
     public string PresentTense { get; set; } = null!;
-    public string? PastTense { get; set; } = null!;
-    public string? Supine { get; set; } = null!;
+    public string PastTense { get; set; } = null!;
+    public string Supine { get; set; } = null!;
     public VerbConjugation VerbConjugation { get; set; }
-    public VowelChangeGroup VowelChangeGroup { get; set; }
 }

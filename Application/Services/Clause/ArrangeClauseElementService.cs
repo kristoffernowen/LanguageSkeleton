@@ -1,48 +1,43 @@
 ﻿using Application.Contracts.Repos;
 using Application.Contracts.Services.Noun;
-using Domain.Enums;
+using Domain.Enums.Noun;
+using Domain.Enums.Verb;
 using Domain.Models.Sentence;
+using Domain.Models.ValueObjects;
 using Domain.Models.Words;
 
 namespace Application.Services.Clause
 {
-    public class ArrangeClauseElementService : IArrangeClauseElementService
+    public class ArrangeClauseElementService(IVerbRepo verbRepo) : IArrangeClauseElementService
     {
-        private readonly IVerbRepo _verbRepo;
-
-        public ArrangeClauseElementService(IVerbRepo verbRepo)
-        {
-            _verbRepo = verbRepo;
-        }
-
         public ClauseElement Subject(Sentence sentence)
         {
             var clauseElement = new ClauseElement();
 
-            if (sentence.SubjectNoun.Definiteness == Definiteness.Indefinite)
+            if (sentence.SubjectForm.Definiteness == Definiteness.Indefinite)
             {
-                clauseElement["article"] = sentence.SubjectNoun.Definiteness switch
+                clauseElement["article"] = sentence.SubjectForm.Definiteness switch
                 {
-                    Definiteness.Indefinite when sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Singular =>
-                        new Article() { DisplayForm = $"{sentence.SubjectNoun.NounArticle}", Id = "en" },
-                    Definiteness.Indefinite when sentence.SubjectNoun.GrammaticalNumber == GrammaticalNumber.Plural =>
+                    Definiteness.Indefinite when sentence.SubjectForm.GrammaticalNumber == GrammaticalNumber.Singular =>
+                        new Article() { DisplayForm = $"{sentence.SubjectForm.Lexem.NounArticle switch {NounArticle.en => "en", NounArticle.ett => "ett", _ => "Blä" } }", Id = "en" },
+                    Definiteness.Indefinite when sentence.SubjectForm.GrammaticalNumber == GrammaticalNumber.Plural =>
                         new Article() { DisplayForm = "några", Id = "några" },
                     _ => clauseElement["article"]
                 };
             }
 
-            clauseElement["subject"] = sentence.SubjectNoun;
+            clauseElement["subject"] = sentence.SubjectForm;
 
-            if (sentence.SubjectNoun.Definiteness == Definiteness.Definite)
+            if (sentence.SubjectForm.Definiteness == Definiteness.Definite)
             {
-                clauseElement.DisplayForm = $"{clauseElement["subject"].DisplayForm}";
+                clauseElement.DisplayForm = $"{(clauseElement["subject"] as NounForm)!.SurfaceForm}";
             }
             else
             {
                 try
                 {
                     clauseElement.DisplayForm =
-                        $"{clauseElement["article"].DisplayForm} {clauseElement["subject"].DisplayForm}";
+                        $"{clauseElement["article"].DisplayForm} {(clauseElement["subject"] as NounForm)!.SurfaceForm}";
                 }
                 catch (Exception e)
                 {
@@ -61,15 +56,15 @@ namespace Application.Services.Clause
                 ["verb one"] = sentence.Predicate
             };
 
-            switch (sentence.Tense)
+            switch (sentence.Tense) // only need to handle perfect and future here, present and past are covered by verb one
             {
                 case Tense.Perfect:
-                    var have = await _verbRepo.GetVerbFromPresentTenseAsync("har");
+                    var have = await verbRepo.GetFromPresentTenseAsync("har");
                     have.DisplayForm = have.PresentTense;
                     clauseElement["verb two"] = have;
                     break;
                 case Tense.Future:
-                    var shall = await _verbRepo.GetVerbFromPresentTenseAsync("ska");
+                    var shall = await verbRepo.GetFromPresentTenseAsync("ska");
                     shall.DisplayForm = shall.PresentTense;
                     clauseElement["verb two"] = shall;
                 break;

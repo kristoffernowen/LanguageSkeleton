@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Services.Noun;
-using Application.Contracts.Services.Sentence;
+﻿using Application.Contracts.Services.Sentence;
 using Application.Contracts.Services.Verb;
 using Application.Features.BasicSentence.Queries.DisplayBasicSentence;
 using Application.Services;
@@ -7,14 +6,12 @@ using Application.Services.Clause;
 using Application.Test.Mock;
 using System.Text.RegularExpressions;
 using Application.Contracts.Repos;
-using Application.Services.NounForms;
 using Moq;
 
 namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
 {
     public class DisplayBasicSentenceQueryHandlerTest
     {
-        private readonly INounManager _nounManager = new NounManager(new GrammaticalNumber(), new Definiteness());
         private readonly ITenseManager _tenseManager = new TenseManagerFake();
         private readonly Mock<IVerbRepo> _verbRepo;
         private readonly Mock<INounRepo> _nounRepo;
@@ -30,7 +27,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         [Fact]
         public async Task ShouldReturnBasicSentencePresentTense()
         {
-            var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
+            var handler = new DisplayBasicSentenceQueryHandler(_tenseManager,
                 _wordOrderService, _verbRepo.Object, _nounRepo.Object);
 
             var request = new DisplayBasicSentenceQuery()
@@ -57,7 +54,7 @@ namespace Application.Test.DisplayBasicSentenceQueryHandlerTests
         [Fact]
         public async Task ShouldReturnBasicSentencePerfectTenseAsQuestion()
         {
-            var handler = new DisplayBasicSentenceQueryHandler(_nounManager, _tenseManager,
+            var handler = new DisplayBasicSentenceQueryHandler(_tenseManager,
                 _wordOrderService, _verbRepo.Object, _nounRepo.Object);
 
             var request = new DisplayBasicSentenceQuery()
