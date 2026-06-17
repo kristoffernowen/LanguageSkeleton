@@ -35,8 +35,8 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<SqlContext>();
     var mapper = services.GetRequiredService<IMapper>();
 
-    // Apply migrations automatically
-    context.Database.Migrate();
+    // Let's try ensureCreated instead of Migrate for now, since it seems Migrations might not be working correctly in the current setup on azure. It's just for demo.
+    context.Database.EnsureCreated();
 
     // Seed data if database is empty
     DatabaseSeeder.SeedVerbs(context, mapper);
