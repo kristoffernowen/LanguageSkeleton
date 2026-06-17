@@ -13,6 +13,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+Console.WriteLine("### ACTUAL CONNECTION STRING ###");
+Console.WriteLine(builder.Configuration.GetConnectionString("Sql"));
+Console.WriteLine("CONN via indexer: " + builder.Configuration["ConnectionStrings:Sql"]);
+Console.WriteLine("################################");
+
 builder.Services.AddDataExtensions(builder.Configuration);
 builder.Services.AddApplicationExtensions(builder.Configuration);
 builder.Services.AddCors(options =>
